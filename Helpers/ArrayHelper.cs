@@ -37,5 +37,21 @@ namespace Helpers
             }
             return result;
         }
+
+        public static string UnicodeToString(this byte[] bytes)
+        {
+            string result = Encoding.Unicode.GetString(bytes);
+            return result;
+        }
+
+        public static byte[] ToByteArray(string[] str)
+        {
+            byte[] result = new byte[str.Length];
+            for (int i = 0; i < str.Length; i++)
+            {
+                result[i] = byte.Parse(str[i]);
+            }
+            return result;
+        }
     }
 }
