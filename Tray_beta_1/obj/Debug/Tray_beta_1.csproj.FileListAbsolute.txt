@@ -1,0 +1,7 @@
+D:\Fuhai\MyDemo\Helpers\Tray_beta_1\bin\Debug\Tray_beta_1.exe.config
+D:\Fuhai\MyDemo\Helpers\Tray_beta_1\bin\Debug\Tray_beta_1.exe
+D:\Fuhai\MyDemo\Helpers\Tray_beta_1\bin\Debug\Tray_beta_1.pdb
+D:\Fuhai\MyDemo\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.exe
+D:\Fuhai\MyDemo\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.pdb
+D:\Fuhai\MyDemo\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.Properties.Resource1.resources
+D:\Fuhai\MyDemo\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.csproj.GenerateResource.Cache

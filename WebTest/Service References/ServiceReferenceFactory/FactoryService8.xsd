@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/TTBEMS.Framework.WebExtension.KType.Report" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/TTBEMS.Framework.WebExtension.KType.Report" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/TTBEMS.Framework.WebExtension.KType.WEB001.Controls" />
+  <xs:complexType name="R2014">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TTBEMS.Framework.WebExtension.KType.WEB001.Controls" minOccurs="0" name="Charts" nillable="true" type="q1:ArrayOfPageChart" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RM2014" nillable="true" type="tns:R2014Metadata" />
+      <xs:element minOccurs="0" name="RP2014" nillable="true" type="tns:R2014Panel" />
+      <xs:element minOccurs="0" name="ReportAuthor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportWriteTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="R2014" nillable="true" type="tns:R2014" />
+  <xs:complexType name="R2014Metadata">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="F_BuildID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_ContentType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_ReportIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="F_Tag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_Time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="R2014Metadata" nillable="true" type="tns:R2014Metadata" />
+  <xs:complexType name="R2014Panel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AW" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HB" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MaxH" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MaxT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinH" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TB" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="R2014Panel" nillable="true" type="tns:R2014Panel" />
+</xs:schema>

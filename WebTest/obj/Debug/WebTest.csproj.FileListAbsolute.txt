@@ -1,0 +1,8 @@
+D:\Fuhai\MyDemo\Helpers\WebTest\bin\WebTest.dll
+D:\Fuhai\MyDemo\Helpers\WebTest\bin\WebTest.pdb
+D:\Fuhai\MyDemo\Helpers\WebTest\obj\Debug\WebTest.csprojResolveAssemblyReference.cache
+D:\Fuhai\MyDemo\Helpers\WebTest\obj\Debug\WebTest.dll
+D:\Fuhai\MyDemo\Helpers\WebTest\obj\Debug\WebTest.pdb
+D:\Fuhai\MyDemo\Helpers\WebTest\bin\TTBEMS.Framework.dll
+D:\Fuhai\MyDemo\Helpers\WebTest\bin\Helpers.dll
+D:\Fuhai\MyDemo\Helpers\WebTest\bin\Helpers.pdb

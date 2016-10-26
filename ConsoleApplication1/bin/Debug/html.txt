@@ -1,0 +1,77 @@
+<article class="article-content">
+            
+                <div class="alert alert-info">
+                   摘要：我的天哪，可怜的搜索框要被玩儿坏了！！！早知道就不贴代码了，不就是前后台没做validate校验吗？？？乱输入！！！
+                </div>
+
+            
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这就是贴代码的坏处之一：搜索框快被网友玩儿坏了！！！有故意输入空格的，有输入or 1=1的，有alert的，有html乱入的.......而且好像还在玩儿，随他们去吧，只要开心就好。<img src="http://img.baidu.com/hi/tsj/t_0009.gif       " data-bd-imgshare-binded="1"></p><p><img style="width: 358px; height: 337px;  " src="http://o82pwjziv.bkt.clouddn.com/Archives/Images/20160625/6360246303679708197442095.jpg   " title="  " border="0      " height="337      " vspace="0      " width="358      " data-bd-imgshare-binded="1"></p><p>&nbsp;&nbsp;&nbsp; 在项目中，经常会用到输入框的自动补全功能，就像百度、淘宝等搜索框一样：当用户输入首字母、关键词时，后台会迅速将与此相关的条目返回并显示到前台，以便用户选择，提升用户体验。当然本项目的补全功能和这些大厂的技术是没有可比性的，但用于站内搜索也是绰绰有余了。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;接触到的自动补全插件主要有两个：autocomplete和typeahead。本站使用的是typeahead.</p><p>&nbsp; <a textvalue="jQueryUI-Autocomplete&nbsp;              " target="_blank             " href="https://jqueryui.com/autocomplete/             ">jQueryUI-Autocomplete&nbsp; </a></p><p><a textvalue="自动补全插件-bootstrap-3-typeahead            " title="自动补全插件-typeahead            " target="_blank            " href="http://v2.bootcss.com/assets/js/bootstrap-typeahead.js            ">自动补全插件-bootstrap-3-typeahead</a><br></p><p><strong><img alt="火狐截图_2016-06-19T10-16-37.045Z.png           " src="http://o82pwjziv.bkt.clouddn.com/Archives/Images/20160619/6360195735082262032957164.png                 " title="火狐截图_2016-06-19T10-16-37.045Z.png           " data-bd-imgshare-binded="1"></strong></p><p><strong><strong>相关参数说明：</strong></strong></p><p>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="color: #800000                   ">source：</span></strong>function(query,process){}。query表示当前文本输入框中的字符串，可在该方法中通过ajax向后台请求数据（数组形式的json对象），然后将返回的对象作为process的参数；<br><span style="color: #800000                   "><strong>&nbsp;&nbsp;&nbsp;&nbsp;formatItem：</strong></span>function(item){}。对返回数据的具体某个json对象转化为字符串格式，用以显示在提示列表中，返回值：字符串；<br><span style="color: #800000                   "><strong>&nbsp;&nbsp;&nbsp;&nbsp;setValue：</strong></span>function(item) &nbsp;{}。选中提示列表某项时，设置文本输入框中显示的值以及实际需要获取的值。返回值格式：{'data-value':item["输入框显示值的 &nbsp;item属性"],'real-value':item["实际需要获取值的item属性"]}，后期可通过文本输入框的real-value属性获取该 &nbsp;值；<br><span style="color: #800000                   "><strong>&nbsp;&nbsp;&nbsp;&nbsp;items：</strong></span>自动完成提示的最大结果集数量，默认：8；<br><span style="color: #800000                   "><strong>&nbsp;&nbsp;&nbsp;&nbsp;minLength：</strong></span>当前文本输入框中字符串达到该属性值时才进行匹配处理，默认：1；<br><span style="color: #800000                   "><strong>&nbsp;&nbsp;&nbsp;&nbsp;delay：</strong></span>指定延时毫秒数后，才正真向后台请求数据，以防止输入过快导致频繁向后台请求，默认：500</p><p><strong>具体代码如下：</strong></p><p>首先引入js文件</p><pre class="brush:html;toolbar:false;                   ">&lt;script&nbsp;src="~/Scripts/jquery-1.9.0.js"&gt;&lt;/script&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;script&nbsp;src="~/Scripts/bootstrap.js"&gt;&lt;/script&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;script&nbsp;src="~/Content/js/bootstrap3-typeahead.js"&gt;&lt;/script&gt;</pre><p>Html代码：</p><pre class="brush:html;toolbar:false                   ">&lt;form&nbsp;id="searchform"&nbsp;class="navbar-form&nbsp;navbar-right"&nbsp;role="search"&nbsp;target="_blank"&nbsp;method="get"&nbsp;action="/Search/Index"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="form-group"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type="text"&nbsp;id="searchWords"&nbsp;name="searchWords"&nbsp;class="form-control"&nbsp;data-provide="typeahead"&nbsp;autocomplete="off"&nbsp;placeholder="请输入要搜索关键词"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button&nbsp;type="submit"&nbsp;class="btn"&nbsp;&nbsp;id="searchbtn"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;搜索
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;
+&lt;/form&gt;</pre><p>&nbsp;处理相关搜索词的js：</p><pre class="brush:js;toolbar:false                   ">&nbsp;&nbsp;&nbsp;&nbsp;//搜索自动补全;给搜索框注册自动联想完成事件
+&nbsp;&nbsp;&nbsp;&nbsp;autoComplete:&nbsp;function&nbsp;()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery('#searchWords').typeahead({
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;function&nbsp;(query,&nbsp;process)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//query是输入值
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery.getJSON('/Search/GetHotSearchItems',&nbsp;{&nbsp;"query":&nbsp;query&nbsp;},&nbsp;function&nbsp;(data)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process(data);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;updater:&nbsp;function&nbsp;(item)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;item.replace(/&lt;a(.+?)&lt;\/a&gt;/,&nbsp;"");&nbsp;//这里一定要return，否则选中不显示
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;afterSelect:&nbsp;function&nbsp;(item)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//选择项之后的时间，item是当前选中的项
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(item);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;8,&nbsp;&nbsp;&nbsp;//显示8条
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delay:&nbsp;500&nbsp;&nbsp;//延迟时间
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;},</pre><p>后台处理 /Search/GetHotSearchItems:</p><pre class="brush:c#;toolbar:false           ">#region&nbsp;2.0&nbsp;jquery&nbsp;typeahead插件异步获取搜索热词、自动补全搜索框;&nbsp;ActionResult&nbsp;GetHotSearchItems()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&lt;summary&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;2.0&nbsp;jquery&nbsp;typeahead插件异步获取搜索热词、自动补全搜索框&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每搜索一次就将此次用户搜索的详情入库&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定时任务每隔10分钟统计一次各搜索词的次数、将统计信息更新到SearchRank表
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&lt;/summary&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&lt;returns&gt;JSON&lt;/returns&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;ActionResult&nbsp;GetHotSearchItems()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//2.1&nbsp;先获取当前搜索词"query"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;query&nbsp;=&nbsp;Request["query"];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//2.2&nbsp;从数据库中查询此字段的热词集合
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IBLL.ISearchRankService&nbsp;hotService&nbsp;=&nbsp;OperateHelper.Current.serviceSession.SearchRankService;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//2.3&nbsp;从数据库中检索出包含此搜索词的热词集合，并按搜索次数排序,将数据返回给typeahead.js
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;SearchRank&gt;&nbsp;hotList&nbsp;=&nbsp;hotService.GetDataListBy(s&nbsp;=&gt;&nbsp;s.KeyWord.Contains(query),&nbsp;s&nbsp;=&gt;&nbsp;s.SearchTimes);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(hotList&nbsp;!=&nbsp;null)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;list1&nbsp;=&nbsp;hotList.Select(h&nbsp;=&gt;&nbsp;new
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;h.KeyWord,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;times&nbsp;=&nbsp;h.SearchTimes
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).ToList();
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&nbsp;list2&nbsp;=&nbsp;new&nbsp;ArrayList();
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;i&nbsp;=&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(var&nbsp;item&nbsp;in&nbsp;list1)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list2.Add(string.Format("&lt;a&nbsp;class=\"cat\"&nbsp;href=\"#\"&gt;{0}&lt;/a&gt;{1}",&nbsp;i,&nbsp;item.name));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i++;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Json(list2,&nbsp;JsonRequestBehavior.AllowGet);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Json("",&nbsp;JsonRequestBehavior.AllowGet);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;
+&nbsp;#endregion</pre><p>就先这样吧。<br></p>
+        </article>

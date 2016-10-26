@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="jquery.min.js"></script>
+    <script src="tools.js"></script>
+</head>
+<body>
+<script>
+    var randonData=[];
+    $(function(){
+        GetRandonData();
+        SetRandonData();
+    })
+    setInterval("SetRandonData()", 30000)
+    function SetRandonData()
+    {
+        var time=new Date();
+        for (var i in randonData)
+        {
+            if (timeJson2Date(randonData[i].time).Format("yyyy/MM/dd HH:mm:ss") == time.Format("yyyy/MM/dd HH:mm:ss"))
+            {
+                $("#time").html(randonData[i].value);
+                if (i > randonData.length - 65)
+                {
+                    GetRandonData();
+                }
+            }
+        }
+    }
+    function GetRandonData()
+    {
+        $.ajax({
+            type: 'post',
+            url: 'Handler1.ashx',
+            async: false,
+            dataType: 'json',
+            data: { Action: 'GetRandomValue' },
+            success: function (result) {
+                randonData = result;
+            },
+            error: function (xhr) {
+                $("#info").html(xhr.responseText);
+                alert('发生了错误\r\n' + xhr.responseText);
+            }
+        });
+    }
+</script>
+    <h1 id="time"></h1>
+</body>
+</html>
