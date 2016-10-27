@@ -11,6 +11,11 @@ namespace Helpers
 {
     public static class SecurityHelper
     {
+        /// <summary>
+        /// 获取string的MD5
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public static string ToMD5(this string t)
         {
             string result = "";
