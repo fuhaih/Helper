@@ -10,3 +10,6 @@ D:\Fuhai\MyDemo\Helpers\ConsoleApplication1\bin\Debug\TTBEMS.Framework.dll
 E:\project\Demo\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
 E:\project\Demo\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 E:\project\Demo\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
