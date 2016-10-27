@@ -43,7 +43,13 @@ namespace Helpers
             }
             return dt;
         }
-
+        /// <summary>
+        /// 匿名类集合转换为table
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="Captions">table的Captions（一一对应，否则报错）</param>
+        /// <returns></returns>
         public static DataTable AnonymousCopyToTable<T>(this IEnumerable<T> collection, string[] Captions)
         {
             DataTable result = collection.AnonymousCopyToTable();
@@ -53,7 +59,13 @@ namespace Helpers
             }
             return result;
         }
-
+        /// <summary>
+        /// 随机获取集合的成员
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="random">多次随机时需要传入相同random</param>
+        /// <returns>返回集合的随机成员</returns>
         public static T RandomEnumerableValue<T>(this IEnumerable<T> source, Random random)
         {
             if (source is ICollection)

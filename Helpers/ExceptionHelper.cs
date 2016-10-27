@@ -11,11 +11,21 @@ namespace Helpers
 {
     public static class ExceptionHelper
     {
+        /// <summary>
+        /// 获取异常详细信息(包括方法名，异常信息等)
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
         public static string GetMessageDetail(this Exception ex)
         {
                return GetMessageDetail(ex, 0);
         }
-
+        /// <summary>
+        /// 获取异常详细信息(包括方法名，异常信息等)
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="deep">异常堆栈深度，0为最里层异常信息，也就是抛出异常的地方，以此类推</param>
+        /// <returns></returns>
         public static string GetMessageDetail(this Exception ex, int deep)
         {
             string result="";
@@ -33,11 +43,18 @@ namespace Helpers
             end:
             return result;
         }
-
+        /// <summary>
+        /// 把错误信息写到程序基目录中
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="deep">深度，1指当前函数信息，2指调用当前函数的函数信息，以此类推</param>
         public static void WriteMessageToLocal(this Exception ex, int deep)
         {
             string basepath = AppDomain.CurrentDomain.BaseDirectory;
-            string path = basepath + "errorInfo.txt";
+        
+            /*Works differently on different os versions and/or different .NET versions
+            最好不用‘+’连接地址，用Path.Combine，不然在不同版本的系统或环境中容易出错*/
+            string path =Path.Combine( basepath,"errorInfo.txt");
             StackTrace st = new StackTrace(true);
             string methodName = st.GetFrame(deep).GetMethod().Name;
             string fileName = st.GetFrame(deep).GetFileName();

@@ -11,10 +11,15 @@ namespace Helpers
 {
     public static class SecurityHelper
     {
+        /// <summary>
+        /// 获取string的MD5
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public static string ToMD5(this string t)
         {
             string result = "";
-            byte[] buffer= Encoding.Default.GetBytes(t as string);
+            byte[] buffer= Encoding.Default.GetBytes(t);
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] retVal = md5.ComputeHash(buffer);
             StringBuilder sb = new StringBuilder();
