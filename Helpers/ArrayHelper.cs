@@ -53,10 +53,5 @@ namespace Helpers
             }
             return result;
         }
-
-        public static byte[] getByte()
-        {
-            return null;
-        }
     }
 }
