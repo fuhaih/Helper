@@ -28,3 +28,11 @@ README.md和LICENSE文件
 这时候要从远程仓库中先把这两个文件下到本地
 用git pull
 git pull --rebase/git pull --rebase origin master
+
+--------------------------------------------------------------------------------------
+
+技巧：
+1、从远程仓库获取最新版本到本地（获取本地没有的内容）
+git fetch github master
+2、然后合并远程分支origin/master到本地
+git merge origin/master
