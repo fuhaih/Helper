@@ -36,3 +36,30 @@ git pull --rebase/git pull --rebase origin master
 git fetch github master
 2、然后合并远程分支origin/master到本地
 git merge origin/master
+
+------------------------------------------------------------------------------------------
+Meger
+ 
+$ git fetch origin master:temp
+git fetch origin master:temp 这句命令的意思是：从远程的origin仓库的master分支下载到本地并新建一个分支temp
+
+$ git diff temp
+命令的意思是：比较master分支和temp分支的不同
+
+$ git merge temp
+合并分支
+
+$ git branch -d temp
+删除temp临时分区
+
+合并分区时会出现
+Please enter a commit message to explain why this merge is necessary.
+git 在pull或者合并分支的时候有时会遇到这个界面。可以不管(直接下面3,4步)，如果要输入解释的话就需要:
+
+1.按键盘字母 i 进入insert模式
+
+2.修改最上面那行黄色合并信息,可以不修改
+
+3.按键盘左上角"Esc"
+
+4.输入":wq",注意是冒号+wq,按回车键即可
