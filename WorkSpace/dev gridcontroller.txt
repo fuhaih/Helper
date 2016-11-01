@@ -1,0 +1,139 @@
+一、是否可编辑
+1某列
+gridViewCurrent.Columns["F_State"].OptionsColumn.AllowEdit = true;
+2全部
+gridViewCurrent.OptionsBehavior.Editable = false;
+3某行或某列不可编辑
+ShowingEditor方法
+
+        private void gridViewCurrent_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            string colName = gridViewCurrent.FocusedColumn.FieldName;
+            if (colName != "F_State")
+            {
+                e.Cancel = true;
+            }
+        }
+或
+	DataRow row = this.gvD.GetDataRow(this.gvD.FocusedRowHandle);
+        if (row != null)
+        {
+            e.Cancel = true;
+        }
+二、时间格式
+gridView1.Columns["F_Time"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+gridView1.Columns["F_Time"].DisplayFormat.FormatString = "yyyy/MM/dd hh:mm:ss";
+
+三、符合条件行变色
+        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.RowHandle >= 0)
+            {
+                e.Appearance.BackColor = Color.Red;
+            }
+        }
+
+四、textEdit写正则表达式
+            textEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            textEdit1.Properties.Mask.EditMask="\\d";
+
+五
+//在顶部显示添加新行
+gridViewServiceConfig.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+//不显示分组面板
+gridViewServiceConfig.OptionsView.ShowGroupPanel = false;
+
+//ValidateRow方法来验证添加的新的行的数据
+        private void gridViewServiceConfig_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            DataRow row = ((DataRowView)e.Row).Row;
+            string name =row["ServiceName"].ToString();
+            string url = row["ServiceUrl"].ToString();
+            if (name == "" || url == "")
+            {
+                e.Valid = false;
+                e.ErrorText = "字段不能有空";
+            }
+            else {
+                if (!ServicePort.IsUrl.IsMatch(url))
+                {
+                    e.Valid = false;
+                    e.ErrorText = "地址格式错误";
+                }
+            }
+        }
+
+
+//RowUpdated处理新添加的行
+        private void gridViewServiceConfig_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            DataTable source = gridControlServiceConfig.DataSource as DataTable;
+            backgroundWorkerSave.RunWorkerAsync(source);
+        }
+
+六 
+GridView实现多选
+GridView.OptionsSelection.MultiSelect = true;
+
+七
+GridView实现分组
+view.Columns["time"].Group();
+view.Columns["time"].GroupFormat.FormatType=FormatType.DateTime;
+view.Columns["time"].GroupFormat.FormatString = "yyyy/MM/dd";
+
+八
+chartControl示例
+	    chartControlPreditShow.Series.Clear();
+            Series Series1 = new Series("基线预测", ViewType.SplineArea);
+            Series1.ArgumentScaleType = ScaleType.DateTime;
+            Series1.LegendText = "基线预测";
+            Series1.ShowInLegend = true;
+            Series1.ValueScaleType = ScaleType.Numerical;//数字类型
+            Series1.DataSource = value;
+            Series1.ArgumentDataMember = "time";
+            Series1.ValueDataMembers[0] = "basedata";
+
+            chartControlPreditShow.Series.Add(Series1);
+
+            Series Series2 = new Series("温度线性回归", ViewType.SplineArea);
+            Series2.ArgumentScaleType = ScaleType.DateTime;
+            Series2.LegendText = "温度线性回归";
+            Series2.ShowInLegend = true;
+            Series2.ValueScaleType = ScaleType.Numerical;//数字类型
+            //Series2.ArgumentScaleType = ScaleType.DateTime;
+            Series2.DataSource = value;
+            Series2.ArgumentDataMember = "time";
+            Series2.ValueDataMembers[0] = "tempdata";
+            chartControlPreditShow.Series.Add(Series2);
+
+            chartControlPreditShow.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            chartControlPreditShow.Titles.Clear();
+            ChartTitle title = new ChartTitle();
+            title.Text = "预测能耗曲线图";
+            title.Dock = ChartTitleDockStyle.Top;
+            title.Alignment = StringAlignment.Center;
+            title.Font = new Font("Tahoma", 12);
+            chartControlPreditShow.Titles.Add(title);
+            DevExpress.XtraCharts.XYDiagram diagram = (DevExpress.XtraCharts.XYDiagram)chartControlPreditShow.Diagram; ;
+            diagram.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Hour;
+            diagram.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Hour;
+
+九
+chartControl自定义x/y轴lable显示
+        private void chartControlPreditShow_CustomDrawAxisLabel(object sender, CustomDrawAxisLabelEventArgs e)
+        {
+            //画x轴时指定x轴的lable
+            if (e.Item.Axis is AxisX)
+            {
+                DateTime Time = (DateTime)e.Item.AxisValue;
+                e.Item.Text = Time.ToString("yyyy/MM/dd HH");
+            }
+            
+        }
+chartControl自定义数据点lable显示
+        private void chartControlPreditShow_CustomDrawSeriesPoint(object sender, CustomDrawSeriesPointEventArgs e)
+        {
+
+        }
