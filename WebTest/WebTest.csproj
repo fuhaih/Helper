@@ -64,6 +64,12 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="jquery.min.js" />
+    <Content Include="Plug\PlugTest.html" />
+    <Content Include="Plug\plugTest.js" />
+    <Content Include="react\browser.min.js" />
+    <Content Include="react\react-dom.js" />
+    <Content Include="react\react.js" />
+    <Content Include="react\reactTest.html" />
     <Content Include="regexTest.html" />
     <Content Include="regexTest.js" />
     <Content Include="Service References\ServiceReferenceFactory\FactoryService.disco" />
