@@ -137,3 +137,99 @@ chartControl自定义数据点lable显示
         {
 
         }
+
+十
+gridControl允许拖拽
+gridControl.AllowDrop=true;
+
+十一
+gridView显示查找面板
+view.ShowFindPanel();
+如果是动态生成，则要把gridView绑定到gridControl后再执行函数
+
+十二
+gridView中对数据进行统计
+简单统计：
+//显示表格的页脚，一般统计信息都显示在页脚
+view.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
+view.OptionsView.ShowFooter = true;
+
+//F_U2000列的页脚显示统计信息
+view.Columns["F_U2000"].SummaryItem.DisplayFormat = "总:{0}";//统计信息格式
+view.Columns["F_U2000"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;//统计信息类型，这里是求和
+view.Columns["F_U2000"].SummaryItem.FieldName = "F_U0000";//要进行信息统计的列
+
+自定义统计信息：
+//F_U3000列的页脚显示统计信息
+view.Columns["F_U3000"].SummaryItem.DisplayFormat = "分:{0}";
+//这里要先设置Tag再设置SummaryType
+view.Columns["F_U3000"].SummaryItem.Tag = "subValue";
+view.Columns["F_U3000"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Custom;//统计类型为自定义
+view.Columns["F_U3000"].SummaryItem.FieldName = "F_U4000";//随便指定一个FieldName，不然gridView1_CustomSummaryCalculate不会执行Calculate
+这只是自定义统计设置，然后还要通过gridView1_CustomSummaryCalculate方法把自定义统计规则写出来
+CustomSummaryCalculate方法有三个状态，CustomSummaryProcess.Start，CustomSummaryProcess.Calculate和CustomSummaryProcess.Calculate
+一般在CustomSummaryProcess.Calculate中进行自定义统计，然后在CustomSummaryProcess.Calculate设置统计结果
+summaryItem.Tag是上面view.Columns["F_U3000"].SummaryItem.Tag = "subValue"设置的Tag
+	private void gridView1_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            GridView gridView = sender as GridView;  
+            GridSummaryItem summaryItem = e.Item as GridSummaryItem;
+            if (summaryItem.Tag!=null&&summaryItem.Tag.ToString() == "subValue")
+            {
+                if (e.SummaryProcess == CustomSummaryProcess.Start)
+                {
+                    return;
+                }
+                else if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+                {
+                    DataRow row= gridView.GetDataRow(e.RowHandle);
+                    double F_U1000 = double.Parse(row["F_U1000"].ToString());
+                    double F_U2000 = double.Parse(row["F_U2000"].ToString());
+                    double F_U3000 = double.Parse(row["F_U3000"].ToString());
+                    double F_U4000 = double.Parse(row["F_U4000"].ToString());
+                    e.TotalValue = (e.TotalValue == null ? 0 : (double)e.TotalValue)+ F_U1000 + F_U2000 + F_U3000 + F_U4000;
+                }
+            }
+            else if (summaryItem.Tag != null && summaryItem.Tag.ToString() == "deviation")
+            {
+                if (e.SummaryProcess == CustomSummaryProcess.Start)
+                {
+                    return;
+                }
+                else if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+                {
+                    DataRow row = gridView.GetDataRow(e.RowHandle);
+                    totalValue = totalValue + double.Parse(row["F_U0000"].ToString());
+                    double F_U1000 = double.Parse(row["F_U1000"].ToString());
+                    double F_U2000 = double.Parse(row["F_U2000"].ToString());
+                    double F_U3000 = double.Parse(row["F_U3000"].ToString());
+                    double F_U4000 = double.Parse(row["F_U4000"].ToString());
+                    subValue = subValue + F_U1000 + F_U2000 + F_U3000 + F_U4000;
+                }
+                else if (e.SummaryProcess == CustomSummaryProcess.Finalize)
+                {
+                    e.TotalValue = Math.Round(((totalValue - subValue) / totalValue) * 100, 2) + "%";
+                    subValue = 0;
+                    totalValue = 0;
+                }
+            }
+        }
+
+分组统计：
+//对day列进行分组
+view.Columns["day"].GroupFormat.FormatType = FormatType.DateTime;
+view.Columns["day"].GroupFormat.FormatString = "yyyy/MM/dd";
+view.Columns["day"].Group();
+
+//创建一个分组统计
+GridGroupSummaryItem total = new GridGroupSummaryItem();
+//设置统计类型
+total.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+//设置统计显示格式
+total.DisplayFormat = "总:{0}";
+//设置统计的列
+total.FieldName = "F_U0000";
+//设置统计结果显示的页脚，如果不设置，会显示在分组面板中
+total.ShowInGroupColumnFooter = view.Columns["F_U2000"];
+//把分组统计添加到分组统计中
+view.GroupSummary.Add(total);
