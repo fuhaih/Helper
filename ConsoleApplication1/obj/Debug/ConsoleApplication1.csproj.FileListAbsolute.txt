@@ -13,3 +13,9 @@ E:\project\Demo\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Helpers.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\TTBEMS.Framework.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Helpers.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache

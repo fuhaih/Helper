@@ -24,28 +24,13 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            int a = 3999;
-            int num=100000000;
-            DateTime time1=DateTime.Now;
-            for (int i = 0; i < num; i++)
-            { 
-                
-            }
-            DateTime time2 = DateTime.Now;
-            for (int i = 0; i < num; i++)
-            {
-                bool bl=(a&1)==0;
-                
-            }
-            DateTime time3 = DateTime.Now;
-            for (int i = 0; i < num; i++)
-            {
-                bool bl = a % 2 == 0;
-            }
-            DateTime time4 = DateTime.Now;
-            Console.WriteLine(time2 - time1);
-            Console.WriteLine(time3 - time2);
-            Console.WriteLine(time4 - time3);
+            DataTable test = new DataTable();
+            test.Columns.Add("name");
+            test.Columns.Add("value");
+            test.Rows.Add("fuhai", "88");
+            test.Rows.Add("fuhai", "88");
+            test.Rows.Add("fuhai", "88");
+            string result = test.ToJsJson();
             Console.ReadKey();
         }
         static int abs( int x ) 

@@ -70,6 +70,11 @@ namespace Helpers
             return serialize.Serialize(t);
         }
 
+        /// <summary>
+        /// 将Table转换为json格式
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <returns></returns>
         public static string ToJsJson(this DataTable tb)
         {
             JsonTable table = new JsonTable();
@@ -94,6 +99,19 @@ namespace Helpers
                 table.Rows.Add(dict);
             }
             return table.ToJsJson();
+        }
+
+        /// <summary>
+        /// 把Table的指定列转换为json格式
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <param name="columnsNames">列名</param>
+        /// <returns></returns>
+        public static string ToJsJson(this DataTable tb, params string[] columnsNames)
+        {
+            DataView view = tb.DefaultView;
+            DataTable data = view.ToTable(false, columnsNames);
+            return data.ToJsJson();
         }
 
         /// <summary>
