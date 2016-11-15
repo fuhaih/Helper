@@ -107,7 +107,7 @@ namespace Helpers
         /// <param name="tb"></param>
         /// <param name="columnsNames">列名</param>
         /// <returns></returns>
-        public static string ToJsJson(this DataTable tb, params string[] columnsNames)
+        public static string ToJsJson(this DataTable tb,string[] columnsNames)
         {
             DataView view = tb.DefaultView;
             DataTable data = view.ToTable(false, columnsNames);

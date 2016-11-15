@@ -24,13 +24,11 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            DataTable test = new DataTable();
-            test.Columns.Add("name");
-            test.Columns.Add("value");
-            test.Rows.Add("fuhai", "88");
-            test.Rows.Add("fuhai", "88");
-            test.Rows.Add("fuhai", "88");
-            string result = test.ToJsJson();
+            TTBEMS.Framework.DataBase.FilterText ft=new TTBEMS.Framework.DataBase.FilterText();
+            ft.where_text="F_State=1";
+            byte[] buildBaseInfo= ServicePort.Factory.Select_T_BD_BuildBaseInfo_Custom(ft, ServicePort.Key);
+            DataTable builBase = TTBEMS.Framework.Adapter.UnBoxing(buildBaseInfo).Tables[0];
+            string result = builBase.ToJsJson(new string[] { "F_BuildID", "F_BuildName","F_BuildAddr","F_BuildYear","F_TotalArea" });
             Console.ReadKey();
         }
         static int abs( int x ) 
@@ -39,7 +37,20 @@ namespace ConsoleApplication1
             y = x >> 31;
             return (x ^ y) - y;  //or: (x+y)^y
         }
+
+        static string GetDescValue(string desc,string key)
+        {
+            string result = "";
+            Regex reg = new Regex("{"+key+":(.*?)}");
+            Match match = reg.Match(desc);
+            if (match != null)
+            {
+                result = match.Groups[1].Value;
+            }
+            return result;
+        }
     }
+
 
 
     public class myservice

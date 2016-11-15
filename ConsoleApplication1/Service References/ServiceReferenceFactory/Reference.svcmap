@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cc19a9b7-a62b-4f07-8d7c-3ba3240b155c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://www.ttbems.com/Core/FactoryService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FactoryService.xsd" MetadataType="Schema" ID="cd3e353b-87d1-4b5e-ac00-7c4aaefefd7e" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd6" />
+    <MetadataFile FileName="FactoryService.wsdl" MetadataType="Wsdl" ID="66154b50-5959-4360-be70-346b97cca9c4" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?wsdl" />
+    <MetadataFile FileName="FactoryService1.xsd" MetadataType="Schema" ID="96f1079d-e25f-4455-9209-d34b00969f53" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd0" />
+    <MetadataFile FileName="FactoryService2.xsd" MetadataType="Schema" ID="fbf57ce3-18e9-41df-96cd-bfd7ead0e329" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd3" />
+    <MetadataFile FileName="FactoryService3.xsd" MetadataType="Schema" ID="a3085746-6979-4308-9ece-541646ceaa99" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd2" />
+    <MetadataFile FileName="FactoryService.disco" MetadataType="Disco" ID="9108ddd0-10f5-4a91-8e65-384f19ae6250" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?disco" />
+    <MetadataFile FileName="FactoryService4.xsd" MetadataType="Schema" ID="8be34947-f95f-49c9-bef7-78a50988d7a3" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd9" />
+    <MetadataFile FileName="FactoryService5.xsd" MetadataType="Schema" ID="8a1f3204-9637-4111-b64a-963774410332" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd8" />
+    <MetadataFile FileName="FactoryService6.xsd" MetadataType="Schema" ID="8d7c4480-8b55-47ce-a151-f885c3351f5d" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd1" />
+    <MetadataFile FileName="FactoryService7.xsd" MetadataType="Schema" ID="4420aa0c-1891-47c5-932f-67137a453b8e" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd5" />
+    <MetadataFile FileName="FactoryService8.xsd" MetadataType="Schema" ID="db18e7e0-e865-4626-857e-d783b1ea6f3c" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd4" />
+    <MetadataFile FileName="FactoryService9.xsd" MetadataType="Schema" ID="0ca7d167-7e93-47f5-87c0-9ac3a732709a" SourceId="1" SourceUrl="http://www.ttbems.com/Core/FactoryService.svc?xsd=xsd7" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

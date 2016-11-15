@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/TTBEMS.Framework.DataBase.TTBEMS_Exhibition" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/TTBEMS.Framework.DataBase.TTBEMS_Exhibition" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="CheckResultType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="District" />
+      <xs:enumeration value="Building" />
+      <xs:enumeration value="Collect" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CheckResultType" nillable="true" type="tns:CheckResultType" />
+</xs:schema>

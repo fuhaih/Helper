@@ -233,3 +233,34 @@ total.FieldName = "F_U0000";
 total.ShowInGroupColumnFooter = view.Columns["F_U2000"];
 //把分组统计添加到分组统计中
 view.GroupSummary.Add(total);
+
+-------------------------------------------------------------------------------------------------------------------
+十三
+给GridView和TreeList添加行号
+首先要设置好IndicatorWidth 属性，设置宽度（在可视化窗体中设置无效，原因未明，需手动设置）
+GridView
+private void gridView1_CustomDrawRowIndicator(object sender, 
+RowIndicatorCustomDrawEventArgs e) {
+    GridView view = (GridView)sender;
+    //Check whether the indicator cell belongs to a data row
+    if(e.Info.IsRowIndicator && e.RowHandle >= 0) {
+        e.Info.DisplayText = "Row " + e.RowHandle.ToString();
+        if(!indicatorIcon) 
+            e.Info.ImageIndex = -1;
+    }
+}
+
+TreeList
+private void treeListBuilds_CustomDrawNodeIndicator(object sender, CustomDrawNodeIndicatorEventArgs e)
+        {
+            if (e.IsNodeIndicator && e.Node!=null)
+            {
+                string IndexStr = e.Node.GetValue("F_Index").ToString();
+                DevExpress.Utils.Drawing.IndicatorObjectInfoArgs args = e.ObjectArgs as DevExpress.Utils.Drawing.IndicatorObjectInfoArgs;  
+                if (IndexStr != "")
+                {
+                    args.DisplayText = IndexStr;
+                }
+            }
+            
+        }
