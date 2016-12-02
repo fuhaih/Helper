@@ -3,7 +3,6 @@ using System.Data;
 using System.Xml;
 using System.Data.SqlClient;
 using System.Collections;
-
 namespace Helpers
 {
     /// <summary>
@@ -2585,5 +2584,75 @@ namespace Helpers
 
         #endregion Parameter Discovery Functions
 
+    }
+
+    public sealed class SqlHelperExtend
+    {
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="strTableName"></param>
+        /// <param name="dtData"></param>
+        public static void SqlBulkCopyInsert(string connectStr,string strTableName, DataTable dtData)
+        { 
+            try
+            {
+                //SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.CheckConstraints表示触发触发器和约束
+                using (SqlBulkCopy sqlRevdBulkCopy = new SqlBulkCopy(connectStr, SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.CheckConstraints))//引用SqlBulkCopy  
+                {
+                    sqlRevdBulkCopy.DestinationTableName = strTableName;//数据库中对应的表名  
+
+                    sqlRevdBulkCopy.NotifyAfter = dtData.Rows.Count;//有几行数据  
+
+                    sqlRevdBulkCopy.WriteToServer(dtData);//数据导入数据库  
+
+                    sqlRevdBulkCopy.Close();//关闭连接  
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.WriteErrorStackToLocal();
+            }
+        }
+
+        /// <summary>
+        /// 批量插入数据，使用事务，当一条信息出错时会回滚
+        /// </summary>
+        /// <param name="strTableName"></param>
+        /// <param name="dataTable"></param>
+        public static void SqlBulkCopyInsertWithTransaction(string connectStr,string strTableName, DataTable dataTable)
+        {
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = connectStr;
+            conn.Open();
+
+            SqlTransaction sqlbulkTransaction = conn.BeginTransaction();
+
+            //请在插入数据的同时检查约束，如果发生错误调用sqlbulkTransaction事务  
+            SqlBulkCopy copy = new SqlBulkCopy(conn, SqlBulkCopyOptions.CheckConstraints, sqlbulkTransaction);
+
+
+            copy.DestinationTableName = strTableName;
+            foreach (DataColumn dc in dataTable.Columns)
+            {
+                copy.ColumnMappings.Add(dc.ColumnName, dc.ColumnName);
+
+            }
+            try
+            {
+                copy.WriteToServer(dataTable);
+                sqlbulkTransaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                sqlbulkTransaction.Rollback();
+                ex.WriteErrorStackToLocal();
+            }
+            finally
+            {
+                copy.Close();
+                conn.Close();
+            }
+        }
     }
 }

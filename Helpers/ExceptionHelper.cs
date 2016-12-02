@@ -69,6 +69,60 @@ namespace Helpers
                 sw.WriteLine("----------------------------------------------------------------");
             }        
         }
-
+        /// <summary>
+        /// 获取异常的堆栈信息，适合在异常的最外围调用
+        /// </summary>
+        /// <param name="ex"></param>
+        public static void WriteErrorStackToLocal(this Exception ex)
+        {
+            ex.WriteErrorStackToLocal("errorStackInfo.txt");
+        }
+        /// <summary>
+        /// 获取异常的堆栈信息，适合在异常的最外围调用
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="pathStr">路径，如：项目路径/error/text.txt,则pathStr是"error","text.txt"</param>
+        public static void WriteErrorStackToLocal(this Exception ex, params string[] pathStr)
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            foreach (string str in pathStr)
+            {
+                path = Path.Combine(path, str);
+            }
+            using (StreamWriter sw = new StreamWriter(path, true, Encoding.UTF8))
+            {
+                sw.WriteLine("发生错误：" + DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分ss秒"));
+                sw.WriteLine("错误信息：" + ex.Message);
+                sw.WriteLine("错误堆栈：" + ex.StackTrace);
+                sw.WriteLine("----------------------------------------------------------------");
+            }
+        }
+        /// <summary>
+        /// 自定义提示信息存储到本地
+        /// </summary>
+        /// <param name="Message"></param>
+        public static void WritCustomInfoToLocal(string Message)
+        {
+            WritCustomInfoToLocal(Message, "CustomInfo.txt");
+        }
+        /// <summary>
+        /// 自定义提示信息存储到本地，路径可以自定义，但是要在项目路径中
+        /// </summary>
+        /// <param name="Message"></param>
+        /// <param name="pathStr">路径，如：项目路径/error/text.txt,则pathStr是"error","text.txt"</param>
+        public static void WritCustomInfoToLocal(string Message, params string[] pathStr)
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            foreach (string str in pathStr)
+            {
+                path = Path.Combine(path, str);
+            }
+            using (StreamWriter sw = new StreamWriter(path, true, Encoding.UTF8))
+            {
+                sw.WriteLine("信息记录：" + DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分ss秒"));
+                sw.WriteLine("信息：" + Message);
+                sw.WriteLine("----------------------------------------------------------------");
+            }
+        }
     }
 }

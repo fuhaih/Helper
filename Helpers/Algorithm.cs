@@ -8,6 +8,7 @@ namespace Helpers
 {
     public class Algorithm
     {
+        #region 求两个数最大公约数
         /// <summary>
         /// 求两个数最大公约数
         /// </summary>
@@ -24,7 +25,6 @@ namespace Helpers
             }
             return result;
         }
-
         private static int gcd(int a,int b)
         {
             if (a == b)
@@ -51,8 +51,10 @@ namespace Helpers
                     return gcd(b, a - b);
                 }
             }
-            
+
         }
+        #endregion
+
 
     }
 }
