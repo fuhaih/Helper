@@ -25,6 +25,12 @@ namespace Helpers
 
         #region json序列化
 
+        /* 原生方法ToJson
+         * 程序集：System.Runtime.Serialization
+         * 命名空间：using System.Runtime.Serialization.Json;
+         * 常用特性[DataContract][DataMember][IgnoreDataMember]
+         */
+
         /// <summary>
         /// Json序列化
         /// 注标记有[Serializable]特性的对象需要标记[DataContract]特性
@@ -43,6 +49,12 @@ namespace Helpers
 
             }
         }
+
+        /*方法ToJsJson
+         * 命名控件：System.Web.Script.Serialization;
+         * 程序集：System.Web.Extensions
+         * 忽略某个字段[ScriptIgnore]
+         */
 
         /// <summary>
         /// Json序列化

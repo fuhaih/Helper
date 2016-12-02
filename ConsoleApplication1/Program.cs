@@ -9,9 +9,14 @@ using System.Threading.Tasks;
 using Helpers;
 using System.Threading;
 using System.Security;
+using System.Web.Script.Serialization;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Runtime.CompilerServices;
+using System.Web;
+using System.Net;
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -24,11 +29,8 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            TTBEMS.Framework.DataBase.FilterText ft=new TTBEMS.Framework.DataBase.FilterText();
-            ft.where_text="F_State=1";
-            byte[] buildBaseInfo= ServicePort.Factory.Select_T_BD_BuildBaseInfo_Custom(ft, ServicePort.Key);
-            DataTable builBase = TTBEMS.Framework.Adapter.UnBoxing(buildBaseInfo).Tables[0];
-            string result = builBase.ToJsJson(new string[] { "F_BuildID", "F_BuildName","F_BuildAddr","F_BuildYear","F_TotalArea" });
+            Console.WriteLine("\\&amp");
+
             Console.ReadKey();
         }
         static int abs( int x ) 
@@ -50,8 +52,6 @@ namespace ConsoleApplication1
             return result;
         }
     }
-
-
 
     public class myservice
     {
@@ -96,6 +96,25 @@ namespace ConsoleApplication1
         public DateTime birth { get; set; }
 
     }
-
-   
+    [Serializable]
+    public class TokenParams
+    {
+        public string OperatorID { get; set; }
+        public string OperatorSecret { get; set; }
+        public DateTime Time { get; set; }
+        public string ToMD5()
+        {
+            string result = "";
+            byte[] buffer = this.BinarySerialize(); ;
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] retVal = md5.ComputeHash(buffer);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < retVal.Length; i++)
+            {
+                sb.Append(retVal[i].ToString("x2"));
+            }
+            result = sb.ToString();
+            return result;
+        }
+    }
 }
