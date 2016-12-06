@@ -1,0 +1,6 @@
+1.javascript对象属性个数
+Object.getOwnPropertyNames(obj).length
+Object.keys(obj).length
+2、jquery对对象进行深拷贝
+var arrY={};
+$.extend(true,arrY , arrX)
