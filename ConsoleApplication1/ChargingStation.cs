@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-using Helpers;
 namespace ConsoleApplication1
 {
     class ChargingStation

@@ -50,5 +50,54 @@ namespace Helpers
             string result = sb.ToString();
             return result;
         }
+
+        /// <summary>
+        /// Aes加密
+        /// </summary>
+        /// <param name="source">源字符串</param>
+        /// <param name="key">aes密钥，长度必须32位</param>
+        /// <returns>加密后的字符串</returns>
+        public static string EncryptAes(string source, string key, string iv)
+        {
+            using (AesCryptoServiceProvider aesProvider = new AesCryptoServiceProvider())
+            {
+                aesProvider.Key = Encoding.UTF8.GetBytes(key);
+                aesProvider.Mode = CipherMode.CBC;
+                aesProvider.IV = Encoding.UTF8.GetBytes(iv);
+                aesProvider.Padding = PaddingMode.PKCS7;
+                using (ICryptoTransform cryptoTransform = aesProvider.CreateEncryptor())
+                {
+                    byte[] inputBuffers = Encoding.UTF8.GetBytes(source);
+                    byte[] results = cryptoTransform.TransformFinalBlock(inputBuffers, 0, inputBuffers.Length);
+                    aesProvider.Clear();
+                    aesProvider.Dispose();
+                    return Convert.ToBase64String(results, 0, results.Length);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Aes解密
+        /// </summary>
+        /// <param name="source">源字符串</param>
+        /// <param name="key">aes密钥，长度必须32位</param>
+        /// <returns>解密后的字符串</returns>
+        public static string DecryptAes(string source, string key, string iv)
+        {
+            using (AesCryptoServiceProvider aesProvider = new AesCryptoServiceProvider())
+            {
+                aesProvider.Key = Encoding.UTF8.GetBytes(key);
+                aesProvider.IV = Encoding.UTF8.GetBytes(iv);
+                aesProvider.Mode = CipherMode.CBC;
+                aesProvider.Padding = PaddingMode.PKCS7;
+                using (ICryptoTransform cryptoTransform = aesProvider.CreateDecryptor())
+                {
+                    byte[] inputBuffers = Convert.FromBase64String(source);
+                    byte[] results = cryptoTransform.TransformFinalBlock(inputBuffers, 0, inputBuffers.Length);
+                    aesProvider.Clear();
+                    return Encoding.UTF8.GetString(results);
+                }
+            }
+        }
     }
 }

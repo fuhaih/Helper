@@ -7,3 +7,4 @@ D:\Fuhai\GitWorkSpace\Helpers\Helpers\bin\Debug\Helpers.dll
 D:\Fuhai\GitWorkSpace\Helpers\Helpers\bin\Debug\Helpers.pdb
 D:\Fuhai\GitWorkSpace\Helpers\Helpers\obj\Debug\Helpers.dll
 D:\Fuhai\GitWorkSpace\Helpers\Helpers\obj\Debug\Helpers.pdb
+D:\Fuhai\GitWorkSpace\Helpers\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache

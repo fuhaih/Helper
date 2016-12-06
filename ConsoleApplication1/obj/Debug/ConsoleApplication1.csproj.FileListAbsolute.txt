@@ -15,7 +15,10 @@ D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
-D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Helpers.dll
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\TTBEMS.Framework.dll
-D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Helpers.pdb
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ChargingStation.Console.exe
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\EntityFramework.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ChargingStation.Console.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\EntityFramework.xml
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\TTBEMS.Framework.pdb
