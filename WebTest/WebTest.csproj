@@ -62,16 +62,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="even\evenTest.html" />
+    <Content Include="even\evenTest.js" />
+    <Content Include="even\jsEven.js" />
     <Content Include="index.html" />
     <Content Include="jquery.min.js" />
+    <Content Include="resize\resizeEven.html" />
+    <Content Include="resize\jsResize.js" />
     <Content Include="Plug\PlugTest.html" />
     <Content Include="Plug\plugTest.js" />
     <Content Include="react\browser.min.js" />
     <Content Include="react\react-dom.js" />
     <Content Include="react\react.js" />
     <Content Include="react\reactTest.html" />
+    <Content Include="regex\jquery-1.11.1.min.js" />
     <Content Include="regex\regexTest.html" />
     <Content Include="regex\regexTest.js" />
+    <Content Include="resize\resizeEven.js" />
     <Content Include="Service References\ServiceReferenceFactory\FactoryService.disco" />
     <Content Include="Service References\ServiceReferenceFactory\configuration91.svcinfo" />
     <Content Include="Service References\ServiceReferenceFactory\configuration.svcinfo" />
@@ -109,7 +116,6 @@
   <ItemGroup>
     <Content Include="Handler1.ashx" />
     <Content Include="Service References\ServiceReferenceFactory\FactoryService.wsdl" />
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Service References\ServiceReferenceFactory\FactoryService.xsd">
       <SubType>Designer</SubType>
     </None>

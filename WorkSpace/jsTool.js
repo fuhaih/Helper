@@ -1,4 +1,15 @@
-﻿function getQueryString(name) {
+﻿/*
+*json格式的datetime转为js格式的datetime
+*/
+function timeJson2Date(time) {
+    if (time != null) {
+        var date = new Date(parseInt(time.replace("/Date(", "").replace(")/", ""), 10));
+        return date;
+    }
+    return null;
+}
+
+function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
     if (r != null)
@@ -46,4 +57,100 @@ var getRandomColor = function () {
             //然后判断这个新字符串的长度是否到6,因为16进制的颜色是由6个字符组成的,如果到6了,就返回这6个字符拼成的字符串,如果没有就执行arguments.callee(color)也就是函数本身.
             && (color.length == 6) ? color : arguments.callee(color); //将''字符串传给color
     })('');
+}
+
+/*
+* 把字符串转换为适用于.net的unicode编码
+*/
+String.prototype.ToUnicodeBytes = function () {
+    var ch, re = [];
+    for (var i = 0; i < this.length; i++) {
+        ch = this.charCodeAt(i);  // get char   
+        if (ch > 255)// set up "stack"  
+        {
+            re.push(ch & 0xFF);  // push byte to stack  
+            ch = ch >> 8;          // shift value down by 1 byte  
+            re.push(ch & 0xFF);
+        }
+        else {
+            re.push(ch & 0xFF);
+            re.push(0);
+        }
+    }
+    // return an array of bytes  
+    return re;
+}
+
+/*
+* 把unicode编码转换为字符串
+*/
+UnicodeToString = function (array) {
+    if (array.length & 1 == 1) return;
+    var charCode = [];
+    for (var i = 0; i < array.length; i = i + 2) {
+        var code = array[i + 1];
+        code = code << 8;
+        code = code | array[i];
+        var str = String.fromCharCode(code)
+        charCode.push(str);
+    }
+    var res = charCode.join('');
+    return res;
+}
+
+/** 
+*@param {string} url 完整的URL地址 
+*@returns {object} 自定义的对象 
+*@description 用法示例：var myURL = parseURL('http://abc.com:8080/dir/index.html?id=255&m=hello#top'); 
+
+myURL.file='index.html' 
+
+myURL.hash= 'top' 
+
+myURL.host= 'abc.com:8081' 
+
+myURL.hostname= 'abc.com' 
+
+myURL.query= '?id=255&m=hello' 
+
+myURL.params= Object = { id: 255, m: hello } 
+
+myURL.path= '/dir/index.html' 
+
+myURL.segments= Array = ['dir', 'index.html'] 
+
+myURL.port= '8081' 
+
+myURL.protocol= 'http' 
+
+myURL.source= 'http://abc.com:8080/dir/index.html?id=255&m=hello#top' 
+
+*/
+function parseURL(url) {
+    var a = document.createElement('a');
+    a.href = url;
+    return {
+        source: url,
+        protocol: a.protocol.replace(':', ''),
+        hostname: a.hostname,
+        host: a.host,
+        port: a.port,
+        query: a.search,
+        params: (function () {
+            var ret = {},
+                seg = a.search.replace(/^\?/, '').split('&'),
+                len = seg.length, i = 0, s;
+            for (; i < len; i++) {
+                if (!seg[i]) { continue; }
+                s = seg[i].split('=');
+                ret[s[0]] = s[1];
+            }
+            return ret;
+        })(),
+        file: (a.pathname.match(/\/([^\/?#]+)$/i) || [, ''])[1],
+        hash: a.hash.replace('#', ''),
+        path: a.pathname.replace(/^([^\/])/, '/$1'),
+        relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
+        segments: a.pathname.replace(/^\//, '').split('/')
+    };
 }

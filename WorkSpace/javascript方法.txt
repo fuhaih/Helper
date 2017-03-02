@@ -4,3 +4,6 @@ Object.keys(obj).length
 2、jquery对对象进行深拷贝
 var arrY={};
 $.extend(true,arrY , arrX)
+
+2、JavaScript中isNaN方法
+isNaN在处理空字符串""的时候会返回false

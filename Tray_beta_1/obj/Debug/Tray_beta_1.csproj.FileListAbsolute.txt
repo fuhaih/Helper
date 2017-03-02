@@ -12,3 +12,4 @@ D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.Properties.Resou
 D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.csproj.GenerateResource.Cache
 D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.exe
 D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.pdb
+D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.csprojResolveAssemblyReference.cache

@@ -101,10 +101,6 @@
       <Project>{a327428a-7cf0-43b4-bd00-c059e9c83590}</Project>
       <Name>TTBEMS.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MyDemo\ChargingStation.Interface\ChargingStation.Console\ChargingStation.Console.csproj">
-      <Project>{6d3beb9c-7811-41c9-8a10-fcb66b40e625}</Project>
-      <Name>ChargingStation.Console</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceReferenceFactory\" />

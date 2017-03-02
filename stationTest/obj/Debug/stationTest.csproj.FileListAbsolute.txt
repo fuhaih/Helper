@@ -1,0 +1,15 @@
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\stationTest.exe
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\stationTest.pdb
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\ChargingStation.Console.exe
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\TTBEMS.Framework.dll
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\ChargingStation.Console.pdb
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\TTBEMS.Framework.pdb
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\obj\Debug\stationTest.csprojResolveAssemblyReference.cache
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\obj\Debug\stationTest.Form1.resources
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\obj\Debug\stationTest.Properties.Resources.resources
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\obj\Debug\stationTest.csproj.GenerateResource.Cache
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\obj\Debug\stationTest.exe
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\obj\Debug\stationTest.pdb
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\stationTest.exe.config
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\MonitorConsole.exe
+D:\Fuhai\GitWorkSpace\Helpers\stationTest\bin\Debug\MonitorConsole.pdb
