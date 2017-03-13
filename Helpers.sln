@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHORM", "FHORM\FHORM.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTBEMS.Framework", "..\..\..\TFS2015\TTBEMS2016\TTBEMS.Framework\TTBEMS.Framework.csproj", "{A327428A-7CF0-43B4-BD00-C059E9C83590}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stationTest", "stationTest\stationTest.csproj", "{DFB2A7DC-C831-4E5B-AB01-1987BF9DE28F}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 1
@@ -55,10 +53,6 @@ Global
 		{A327428A-7CF0-43B4-BD00-C059E9C83590}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A327428A-7CF0-43B4-BD00-C059E9C83590}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A327428A-7CF0-43B4-BD00-C059E9C83590}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFB2A7DC-C831-4E5B-AB01-1987BF9DE28F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFB2A7DC-C831-4E5B-AB01-1987BF9DE28F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFB2A7DC-C831-4E5B-AB01-1987BF9DE28F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFB2A7DC-C831-4E5B-AB01-1987BF9DE28F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
