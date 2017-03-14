@@ -97,12 +97,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\TFS2015\TTBEMS2016\TTBEMS.Framework\TTBEMS.Framework.csproj">
-      <Project>{a327428a-7cf0-43b4-bd00-c059e9c83590}</Project>
-      <Name>TTBEMS.Framework</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceReferenceFactory\" />
   </ItemGroup>
   <ItemGroup>

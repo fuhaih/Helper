@@ -11,19 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tray_beta_1", "Tray_beta_1\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHORM", "FHORM\FHORM.csproj", "{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTBEMS.Framework", "..\..\..\TFS2015\TTBEMS2016\TTBEMS.Framework\TTBEMS.Framework.csproj", "{A327428A-7CF0-43B4-BD00-C059E9C83590}"
-EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 1
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://192.168.68.34:8080/tfs/ttbemscollection
-		SccProjectUniqueName0 = ..\\..\\..\\TFS2015\\TTBEMS2016\\TTBEMS.Framework\\TTBEMS.Framework.csproj
-		SccProjectName0 = $/TTBEMS2016/TTBEMS.Framework
-		SccAuxPath0 = http://192.168.68.34:8080/tfs/ttbemscollection
-		SccLocalPath0 = ..\\..\\..\\TFS2015\\TTBEMS2016\\TTBEMS.Framework
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -49,10 +37,6 @@ Global
 		{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A327428A-7CF0-43B4-BD00-C059E9C83590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A327428A-7CF0-43B4-BD00-C059E9C83590}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A327428A-7CF0-43B4-BD00-C059E9C83590}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A327428A-7CF0-43B4-BD00-C059E9C83590}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
