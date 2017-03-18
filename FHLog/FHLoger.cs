@@ -10,7 +10,7 @@ namespace FHLog
     {
         void IFHLoger.Info()
         {
-
+            Console.Write("info");
         }
 
 
