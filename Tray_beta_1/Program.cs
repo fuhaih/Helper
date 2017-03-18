@@ -61,6 +61,7 @@ namespace Tray_beta_1
             menu.MenuItems.Add(item);
             _NotifyIcon.ContextMenu = menu;
 
+
             _NotifyIcon.MouseDoubleClick += new MouseEventHandler(_NotifyIcon_MouseDoubleClick);
 
         }
