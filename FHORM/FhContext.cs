@@ -14,6 +14,7 @@ namespace FHORM
     public class FhTB<T> where T : FhContext
     {
         private string where_text = "";
+
         private string select_text = "";
     }
 }
