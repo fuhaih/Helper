@@ -13,6 +13,7 @@ namespace FHLog
 
         }
 
+
         void IFHLoger.Warn()
         {
 
