@@ -1,0 +1,266 @@
+一、是否可编辑
+1某列
+gridViewCurrent.Columns["F_State"].OptionsColumn.AllowEdit = true;
+2全部
+gridViewCurrent.OptionsBehavior.Editable = false;
+3某行或某列不可编辑
+ShowingEditor方法
+
+        private void gridViewCurrent_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            string colName = gridViewCurrent.FocusedColumn.FieldName;
+            if (colName != "F_State")
+            {
+                e.Cancel = true;
+            }
+        }
+或
+	DataRow row = this.gvD.GetDataRow(this.gvD.FocusedRowHandle);
+        if (row != null)
+        {
+            e.Cancel = true;
+        }
+二、时间格式
+gridView1.Columns["F_Time"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+gridView1.Columns["F_Time"].DisplayFormat.FormatString = "yyyy/MM/dd hh:mm:ss";
+
+三、符合条件行变色
+        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.RowHandle >= 0)
+            {
+                e.Appearance.BackColor = Color.Red;
+            }
+        }
+
+四、textEdit写正则表达式
+            textEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            textEdit1.Properties.Mask.EditMask="\\d";
+
+五
+//在顶部显示添加新行
+gridViewServiceConfig.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+//不显示分组面板
+gridViewServiceConfig.OptionsView.ShowGroupPanel = false;
+
+//ValidateRow方法来验证添加的新的行的数据
+        private void gridViewServiceConfig_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            DataRow row = ((DataRowView)e.Row).Row;
+            string name =row["ServiceName"].ToString();
+            string url = row["ServiceUrl"].ToString();
+            if (name == "" || url == "")
+            {
+                e.Valid = false;
+                e.ErrorText = "字段不能有空";
+            }
+            else {
+                if (!ServicePort.IsUrl.IsMatch(url))
+                {
+                    e.Valid = false;
+                    e.ErrorText = "地址格式错误";
+                }
+            }
+        }
+
+
+//RowUpdated处理新添加的行
+        private void gridViewServiceConfig_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            DataTable source = gridControlServiceConfig.DataSource as DataTable;
+            backgroundWorkerSave.RunWorkerAsync(source);
+        }
+
+六 
+GridView实现多选
+GridView.OptionsSelection.MultiSelect = true;
+
+七
+GridView实现分组
+view.Columns["time"].Group();
+view.Columns["time"].GroupFormat.FormatType=FormatType.DateTime;
+view.Columns["time"].GroupFormat.FormatString = "yyyy/MM/dd";
+
+八
+chartControl示例
+	    chartControlPreditShow.Series.Clear();
+            Series Series1 = new Series("基线预测", ViewType.SplineArea);
+            Series1.ArgumentScaleType = ScaleType.DateTime;
+            Series1.LegendText = "基线预测";
+            Series1.ShowInLegend = true;
+            Series1.ValueScaleType = ScaleType.Numerical;//数字类型
+            Series1.DataSource = value;
+            Series1.ArgumentDataMember = "time";
+            Series1.ValueDataMembers[0] = "basedata";
+
+            chartControlPreditShow.Series.Add(Series1);
+
+            Series Series2 = new Series("温度线性回归", ViewType.SplineArea);
+            Series2.ArgumentScaleType = ScaleType.DateTime;
+            Series2.LegendText = "温度线性回归";
+            Series2.ShowInLegend = true;
+            Series2.ValueScaleType = ScaleType.Numerical;//数字类型
+            //Series2.ArgumentScaleType = ScaleType.DateTime;
+            Series2.DataSource = value;
+            Series2.ArgumentDataMember = "time";
+            Series2.ValueDataMembers[0] = "tempdata";
+            chartControlPreditShow.Series.Add(Series2);
+
+            chartControlPreditShow.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            chartControlPreditShow.Titles.Clear();
+            ChartTitle title = new ChartTitle();
+            title.Text = "预测能耗曲线图";
+            title.Dock = ChartTitleDockStyle.Top;
+            title.Alignment = StringAlignment.Center;
+            title.Font = new Font("Tahoma", 12);
+            chartControlPreditShow.Titles.Add(title);
+            DevExpress.XtraCharts.XYDiagram diagram = (DevExpress.XtraCharts.XYDiagram)chartControlPreditShow.Diagram; ;
+            diagram.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Hour;
+            diagram.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Hour;
+
+九
+chartControl自定义x/y轴lable显示
+        private void chartControlPreditShow_CustomDrawAxisLabel(object sender, CustomDrawAxisLabelEventArgs e)
+        {
+            //画x轴时指定x轴的lable
+            if (e.Item.Axis is AxisX)
+            {
+                DateTime Time = (DateTime)e.Item.AxisValue;
+                e.Item.Text = Time.ToString("yyyy/MM/dd HH");
+            }
+            
+        }
+chartControl自定义数据点lable显示
+        private void chartControlPreditShow_CustomDrawSeriesPoint(object sender, CustomDrawSeriesPointEventArgs e)
+        {
+
+        }
+
+十
+gridControl允许拖拽
+gridControl.AllowDrop=true;
+
+十一
+gridView显示查找面板
+view.ShowFindPanel();
+如果是动态生成，则要把gridView绑定到gridControl后再执行函数
+
+十二
+gridView中对数据进行统计
+简单统计：
+//显示表格的页脚，一般统计信息都显示在页脚
+view.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
+view.OptionsView.ShowFooter = true;
+
+//F_U2000列的页脚显示统计信息
+view.Columns["F_U2000"].SummaryItem.DisplayFormat = "总:{0}";//统计信息格式
+view.Columns["F_U2000"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;//统计信息类型，这里是求和
+view.Columns["F_U2000"].SummaryItem.FieldName = "F_U0000";//要进行信息统计的列
+
+自定义统计信息：
+//F_U3000列的页脚显示统计信息
+view.Columns["F_U3000"].SummaryItem.DisplayFormat = "分:{0}";
+//这里要先设置Tag再设置SummaryType
+view.Columns["F_U3000"].SummaryItem.Tag = "subValue";
+view.Columns["F_U3000"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Custom;//统计类型为自定义
+view.Columns["F_U3000"].SummaryItem.FieldName = "F_U4000";//随便指定一个FieldName，不然gridView1_CustomSummaryCalculate不会执行Calculate
+这只是自定义统计设置，然后还要通过gridView1_CustomSummaryCalculate方法把自定义统计规则写出来
+CustomSummaryCalculate方法有三个状态，CustomSummaryProcess.Start，CustomSummaryProcess.Calculate和CustomSummaryProcess.Calculate
+一般在CustomSummaryProcess.Calculate中进行自定义统计，然后在CustomSummaryProcess.Calculate设置统计结果
+summaryItem.Tag是上面view.Columns["F_U3000"].SummaryItem.Tag = "subValue"设置的Tag
+	private void gridView1_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            GridView gridView = sender as GridView;  
+            GridSummaryItem summaryItem = e.Item as GridSummaryItem;
+            if (summaryItem.Tag!=null&&summaryItem.Tag.ToString() == "subValue")
+            {
+                if (e.SummaryProcess == CustomSummaryProcess.Start)
+                {
+                    return;
+                }
+                else if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+                {
+                    DataRow row= gridView.GetDataRow(e.RowHandle);
+                    double F_U1000 = double.Parse(row["F_U1000"].ToString());
+                    double F_U2000 = double.Parse(row["F_U2000"].ToString());
+                    double F_U3000 = double.Parse(row["F_U3000"].ToString());
+                    double F_U4000 = double.Parse(row["F_U4000"].ToString());
+                    e.TotalValue = (e.TotalValue == null ? 0 : (double)e.TotalValue)+ F_U1000 + F_U2000 + F_U3000 + F_U4000;
+                }
+            }
+            else if (summaryItem.Tag != null && summaryItem.Tag.ToString() == "deviation")
+            {
+                if (e.SummaryProcess == CustomSummaryProcess.Start)
+                {
+                    return;
+                }
+                else if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+                {
+                    DataRow row = gridView.GetDataRow(e.RowHandle);
+                    totalValue = totalValue + double.Parse(row["F_U0000"].ToString());
+                    double F_U1000 = double.Parse(row["F_U1000"].ToString());
+                    double F_U2000 = double.Parse(row["F_U2000"].ToString());
+                    double F_U3000 = double.Parse(row["F_U3000"].ToString());
+                    double F_U4000 = double.Parse(row["F_U4000"].ToString());
+                    subValue = subValue + F_U1000 + F_U2000 + F_U3000 + F_U4000;
+                }
+                else if (e.SummaryProcess == CustomSummaryProcess.Finalize)
+                {
+                    e.TotalValue = Math.Round(((totalValue - subValue) / totalValue) * 100, 2) + "%";
+                    subValue = 0;
+                    totalValue = 0;
+                }
+            }
+        }
+
+分组统计：
+//对day列进行分组
+view.Columns["day"].GroupFormat.FormatType = FormatType.DateTime;
+view.Columns["day"].GroupFormat.FormatString = "yyyy/MM/dd";
+view.Columns["day"].Group();
+
+//创建一个分组统计
+GridGroupSummaryItem total = new GridGroupSummaryItem();
+//设置统计类型
+total.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+//设置统计显示格式
+total.DisplayFormat = "总:{0}";
+//设置统计的列
+total.FieldName = "F_U0000";
+//设置统计结果显示的页脚，如果不设置，会显示在分组面板中
+total.ShowInGroupColumnFooter = view.Columns["F_U2000"];
+//把分组统计添加到分组统计中
+view.GroupSummary.Add(total);
+
+-------------------------------------------------------------------------------------------------------------------
+十三
+给GridView和TreeList添加行号
+首先要设置好IndicatorWidth 属性，设置宽度（在可视化窗体中设置无效，原因未明，需手动设置）
+GridView
+private void gridView1_CustomDrawRowIndicator(object sender, 
+RowIndicatorCustomDrawEventArgs e) {
+    GridView view = (GridView)sender;
+    //Check whether the indicator cell belongs to a data row
+    if(e.Info.IsRowIndicator && e.RowHandle >= 0) {
+        e.Info.DisplayText = "Row " + e.RowHandle.ToString();
+        if(!indicatorIcon) 
+            e.Info.ImageIndex = -1;
+    }
+}
+
+TreeList
+private void treeListBuilds_CustomDrawNodeIndicator(object sender, CustomDrawNodeIndicatorEventArgs e)
+        {
+            if (e.IsNodeIndicator && e.Node!=null)
+            {
+                string IndexStr = e.Node.GetValue("F_Index").ToString();
+                DevExpress.Utils.Drawing.IndicatorObjectInfoArgs args = e.ObjectArgs as DevExpress.Utils.Drawing.IndicatorObjectInfoArgs;  
+                if (IndexStr != "")
+                {
+                    args.DisplayText = IndexStr;
+                }
+            }
+            
+        }

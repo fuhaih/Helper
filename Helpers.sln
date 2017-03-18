@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tray_beta_1", "Tray_beta_1\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHLog", "FHLog\FHLog.csproj", "{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toolkit", "toolkit\toolkit.csproj", "{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
