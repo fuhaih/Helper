@@ -19,8 +19,13 @@ namespace ConsoleApplication1
         {
             FHLoger.Write(LogType.Info,"testInfo");
             FHLoger.Write(LogType.Warn, "testWarn");
+            FHLoger.Write(LogType.Info, "testInfo");
+            FHLoger.Write(LogType.Info, "testInfo");
+            FHLoger.Write(LogType.Info, "testInfo");
             FHLoger.Write(LogType.Error, "testError");
             FHLoger.Write(LogType.Fatal, "testFatal");
+            FHLoger.Write(LogType.Info, "testInfo");
+
             Console.ReadKey();
         }
 

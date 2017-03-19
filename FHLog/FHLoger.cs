@@ -35,6 +35,8 @@ namespace FHLog
         public static void Write(LogType type, string message)
         {
             string info = string.Format(logFormat, type.ToString(), DateTime.Now, message);
+            Console.ForegroundColor = (ConsoleColor)type;
+            Console.WriteLine(info);
             WriteLog(info);
         }
 
