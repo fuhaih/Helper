@@ -102,3 +102,35 @@ testError
 testFatal
 [Info]-2017/3/19 13:41:31
 testInfo
+[Info]-2017/3/19 14:16:27
+testInfo
+[Warn]-2017/3/19 14:16:27
+testWarn
+[Info]-2017/3/19 14:16:27
+testInfo
+[Info]-2017/3/19 14:16:27
+testInfo
+[Info]-2017/3/19 14:16:27
+testInfo
+[Error]-2017/3/19 14:16:27
+testError
+[Fatal]-2017/3/19 14:16:27
+testFatal
+[Info]-2017/3/19 14:16:27
+testInfo
+[Info]-2017/3/19 14:18:24
+testInfo
+[Warn]-2017/3/19 14:18:24
+testWarn
+[Info]-2017/3/19 14:18:24
+testInfo
+[Info]-2017/3/19 14:18:24
+testInfo
+[Info]-2017/3/19 14:18:24
+testInfo
+[Error]-2017/3/19 14:18:24
+testError
+[Fatal]-2017/3/19 14:18:24
+testFatal
+[Info]-2017/3/19 14:18:24
+testInfo
