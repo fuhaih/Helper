@@ -9,6 +9,12 @@ namespace FHLog
 {
     public class FHLoger
     {
+        private delegate void writerAsync(LogType type, string message);
+
+        private static object logFileLock=new object();
+
+        private static object colorChangeLock = new object();
+
         private static string logPath;
 
         private const string logFormat = "[{0}]-{1}\r\n{2}";
@@ -32,12 +38,26 @@ namespace FHLog
         /// </summary>
         /// <param name="type">日志类型</param>
         /// <param name="message">日志信息</param>
-        public static void Write(LogType type, string message)
+        public  static void Write(LogType type, string message)
+        {
+            writerAsync writer = new writerAsync(WriteLog);
+            writer.BeginInvoke(type, message, null, null);
+        }
+
+        /// <summary>
+        /// 记录日志异步方法
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="message"></param>
+        private static void WriteLog(LogType type, string message)
         {
             string info = string.Format(logFormat, type.ToString(), DateTime.Now, message);
-            Console.ForegroundColor = (ConsoleColor)type;
-            Console.WriteLine(info);
-            Console.ForegroundColor = ConsoleColor.White;
+            lock (colorChangeLock)
+            {
+                Console.ForegroundColor = (ConsoleColor)type;
+                Console.WriteLine(info);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
             WriteLog(info);
         }
 
@@ -45,12 +65,15 @@ namespace FHLog
         /// 记录日志到本地（iocp）
         /// </summary>
         /// <param name="message">日志信息</param>
-        public static void WriteLog(string message)
+        private static void WriteLog(string message)
         {
-            using (StreamWriter writer = new StreamWriter(logPath, true, Encoding.UTF8))
+            lock(logFileLock)
             {
-                writer.WriteLine(message);
-            }
+                using (StreamWriter writer = new StreamWriter(logPath, true, Encoding.UTF8))
+                {
+                    writer.WriteLine(message);
+                }
+            } 
         }
     }
 }

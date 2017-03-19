@@ -17,6 +17,7 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
+            DateTime now = DateTime.Now;
             FHLoger.Write(LogType.Info,"testInfo");
             FHLoger.Write(LogType.Warn, "testWarn");
             FHLoger.Write(LogType.Info, "testInfo");
@@ -25,6 +26,8 @@ namespace ConsoleApplication1
             FHLoger.Write(LogType.Error, "testError");
             FHLoger.Write(LogType.Fatal, "testFatal");
             FHLoger.Write(LogType.Info, "testInfo");
+            DateTime now1 = DateTime.Now;
+            Console.WriteLine(now1-now);
             Console.ReadKey();
         }
 
