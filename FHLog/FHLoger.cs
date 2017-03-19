@@ -69,6 +69,10 @@ namespace FHLog
         {
             lock(logFileLock)
             {
+                //using (FileStream stream = new FileStream(logPath, FileMode.Open, FileAccess.ReadWrite))
+                //{
+                //    long length = stream.Length;
+                //}
                 using (StreamWriter writer = new StreamWriter(logPath, true, Encoding.UTF8))
                 {
                     writer.WriteLine(message);
