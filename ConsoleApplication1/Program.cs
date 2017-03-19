@@ -1,24 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Data;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Security;
-using System.Web.Script.Serialization;
-using System.Security.Cryptography;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
 using System.Runtime.CompilerServices;
-using System.Web;
-using System.Net;
-using System.Linq;
-using TTBEMS.Framework.Helper;
+using FHLog;
+using Helpers;
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -31,6 +17,10 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
+            FHLoger.Write(LogType.Info,"testInfo");
+            FHLoger.Write(LogType.Warn, "testWarn");
+            FHLoger.Write(LogType.Error, "testError");
+            FHLoger.Write(LogType.Fatal, "testFatal");
             Console.ReadKey();
         }
 

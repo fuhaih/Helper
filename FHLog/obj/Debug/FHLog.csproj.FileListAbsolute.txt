@@ -1,0 +1,5 @@
+D:\git\Repos\Helper\FHLog\bin\Debug\FHLog.dll
+D:\git\Repos\Helper\FHLog\bin\Debug\FHLog.pdb
+D:\git\Repos\Helper\FHLog\obj\Debug\FHLog.csprojResolveAssemblyReference.cache
+D:\git\Repos\Helper\FHLog\obj\Debug\FHLog.dll
+D:\git\Repos\Helper\FHLog\obj\Debug\FHLog.pdb
