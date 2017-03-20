@@ -8,7 +8,7 @@
         /// <summary>
         /// 消息
         /// </summary>
-        Info=9,
+        Info=7,
         /// <summary>
         /// 警告
         /// </summary>
@@ -21,10 +21,5 @@
         /// 错误
         /// </summary>
         Fatal=11
-    }
-
-    public enum LogColor
-    {
-
     }
 }

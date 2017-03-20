@@ -15,13 +15,7 @@ D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
-D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\TTBEMS.Framework.dll
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
-D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ChargingStation.Console.exe
-D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ChargingStation.Console.pdb
-D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\TTBEMS.Framework.pdb
-D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\MonitorConsole.exe
-D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\MonitorConsole.pdb
 D:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 D:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 D:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
@@ -32,3 +26,7 @@ D:\git\Repos\Helper\ConsoleApplication1\bin\Debug\FHLog.dll
 D:\git\Repos\Helper\ConsoleApplication1\bin\Debug\FHLog.pdb
 D:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Helpers.dll
 D:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Helpers.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Helpers.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Helpers.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\FHLog.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\FHLog.pdb

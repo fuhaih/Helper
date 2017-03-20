@@ -4,6 +4,7 @@ using System.Security;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using FHLog;
+using System.Threading;
 using Helpers;
 namespace ConsoleApplication1
 {
@@ -18,14 +19,27 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             DateTime now = DateTime.Now;
-            FHLoger.Write(LogType.Info,"testInfo");
-            FHLoger.Write(LogType.Warn, "testWarn");
-            FHLoger.Write(LogType.Info, "testInfo");
-            FHLoger.Write(LogType.Info, "testInfo");
-            FHLoger.Write(LogType.Info, "testInfo");
-            FHLoger.Write(LogType.Error, "testError");
-            FHLoger.Write(LogType.Fatal, "testFatal");
-            FHLoger.Write(LogType.Info, "testInfo");
+            for (int i = 0; i < 500; i++) {
+                Thread thread = new Thread(new ThreadStart(() => {
+                    FHLoger.Write(LogType.Info, "testInfo");
+                }));
+                Thread thread1 = new Thread(new ThreadStart(() =>
+                {
+                    FHLoger.Write(LogType.Warn, "testInfo");
+                }));
+                Thread thread2 = new Thread(new ThreadStart(() =>
+                {
+                    FHLoger.Write(LogType.Error, "testInfo");
+                }));
+                Thread thread3 = new Thread(new ThreadStart(() =>
+                {
+                    FHLoger.Write(LogType.Fatal, "testInfo");
+                }));
+                thread.Start();
+                thread1.Start();
+                thread2.Start();
+                thread3.Start();
+            }
             DateTime now1 = DateTime.Now;
             Console.WriteLine(now1-now);
             Console.ReadKey();

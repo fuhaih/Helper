@@ -5,15 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.IO;
+using System.Collections.Concurrent;
+using System.Threading;
 namespace FHLog
 {
     public class FHLoger
     {
         private delegate void writerAsync(LogType type, string message);
 
+        private delegate void writeToLocalAsync(LogInfo log);
+
         private static object logFileLock=new object();
 
         private static object colorChangeLock = new object();
+
+        private static ConcurrentQueue<LogInfo> logInfo = new ConcurrentQueue<LogInfo>();
 
         private static string logPath;
 
@@ -30,7 +36,8 @@ namespace FHLog
 
         static FHLoger()
         {
-            logPath = string.Format("{0}.log", ProjectName);  
+            logPath = string.Format("{0}.log", ProjectName);
+            ThreadPool.QueueUserWorkItem(WriteLog);
         }
 
         /// <summary>
@@ -40,7 +47,7 @@ namespace FHLog
         /// <param name="message">日志信息</param>
         public  static void Write(LogType type, string message)
         {
-            writerAsync writer = new writerAsync(WriteLog);
+            writerAsync writer = new writerAsync(WriteLogAsync);
             writer.BeginInvoke(type, message, null, null);
         }
 
@@ -49,35 +56,36 @@ namespace FHLog
         /// </summary>
         /// <param name="type"></param>
         /// <param name="message"></param>
-        private static void WriteLog(LogType type, string message)
+        private static void WriteLogAsync(LogType type, string message)
         {
             string info = string.Format(logFormat, type.ToString(), DateTime.Now, message);
-            lock (colorChangeLock)
-            {
-                Console.ForegroundColor = (ConsoleColor)type;
-                Console.WriteLine(info);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            WriteLog(info);
+            logInfo.Enqueue(new LogInfo {
+                Type = type,
+                Info=info
+            });
         }
 
         /// <summary>
-        /// 记录日志到本地（iocp）
+        /// 记录日志到本地
         /// </summary>
-        /// <param name="message">日志信息</param>
-        private static void WriteLog(string message)
+        /// <param name="sender"></param>
+        private static void WriteLog(object sender)
         {
-            lock(logFileLock)
+            while (true)
             {
-                //using (FileStream stream = new FileStream(logPath, FileMode.Open, FileAccess.ReadWrite))
-                //{
-                //    long length = stream.Length;
-                //}
-                using (StreamWriter writer = new StreamWriter(logPath, true, Encoding.UTF8))
+                LogInfo log ;
+                while (logInfo.TryDequeue(out log))
                 {
-                    writer.WriteLine(message);
+                    Console.ForegroundColor = (ConsoleColor)log.Type;
+                    Console.WriteLine(log.Info);
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    using (StreamWriter writer = new StreamWriter(logPath, true, Encoding.UTF8))
+                    {
+                        writer.WriteLine(log.Info);
+                    }
                 }
-            } 
+                Thread.Sleep(3000);
+            }
         }
     }
 }
