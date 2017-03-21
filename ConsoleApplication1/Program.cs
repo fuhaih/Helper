@@ -4,6 +4,7 @@ using System.Security;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using FHLog;
+using System.IO;
 using System.Threading;
 using Helpers;
 namespace ConsoleApplication1
@@ -288,6 +289,7 @@ namespace ConsoleApplication1
                 result = match.Groups[1].Value;
             }
             return result;
+            
         }
     }
 
