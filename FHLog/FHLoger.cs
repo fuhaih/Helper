@@ -15,10 +15,6 @@ namespace FHLog
 
         private delegate void writeToLocalAsync(LogInfo log);
 
-        private static object logFileLock=new object();
-
-        private static object colorChangeLock = new object();
-
         private static ConcurrentQueue<LogInfo> logInfo = new ConcurrentQueue<LogInfo>();
 
         private static string logPath;

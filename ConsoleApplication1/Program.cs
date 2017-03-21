@@ -38,7 +38,7 @@ namespace ConsoleApplication1
                 thread.Start();
                 thread1.Start();
                 thread2.Start();
-                thread3.Start();
+                //thread3.Start();
             }
             DateTime now1 = DateTime.Now;
             Console.WriteLine(now1-now);
