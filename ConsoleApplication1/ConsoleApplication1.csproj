@@ -63,7 +63,6 @@
     <ProjectReference Include="..\FHLog\FHLog.csproj">
       <Project>{334e1f3b-66fd-49e7-9d8f-94f71e8d2125}</Project>
       <Name>FHLog</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{c3cd7d7a-53da-429d-91c5-77d08843520a}</Project>

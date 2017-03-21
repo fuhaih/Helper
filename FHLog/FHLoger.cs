@@ -13,8 +13,6 @@ namespace FHLog
     {
         private delegate void writerAsync(LogType type, string message);
 
-        private delegate void writeToLocalAsync(LogInfo log);
-
         private static ConcurrentQueue<LogInfo> logInfo = new ConcurrentQueue<LogInfo>();
 
         private static string logPath;
@@ -72,16 +70,25 @@ namespace FHLog
                 LogInfo log ;
                 while (logInfo.TryDequeue(out log))
                 {
-                    Console.ForegroundColor = (ConsoleColor)log.Type;
-                    Console.WriteLine(log.Info);
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    using (StreamWriter writer = new StreamWriter(logPath, true, Encoding.UTF8))
-                    {
-                        writer.WriteLine(log.Info);
+                    try{
+                        Console.ForegroundColor = (ConsoleColor)log.Type;
+                        Console.WriteLine(log.Info);
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        using (StreamWriter writer = new StreamWriter(logPath, true, Encoding.UTF8))
+                        {
+                            writer.WriteLine(log.Info);
+                        }
+                    }catch{
+                        continue;
                     }
                 }
                 Thread.Sleep(3000);
             }
+        }
+
+        private static void sockSend()
+        { 
+        
         }
     }
 }
