@@ -4,9 +4,10 @@ using System.Security;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using FHLog;
+using System.Linq;
 using System.IO;
 using System.Threading;
-using Helpers;
+using System.Data;
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -19,31 +20,48 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            DateTime now = DateTime.Now;
-            for (int i = 0; i < 500; i++) {
-                Thread thread = new Thread(new ThreadStart(() => {
-                    FHLoger.Write(LogType.Info, "testInfo");
-                }));
-                Thread thread1 = new Thread(new ThreadStart(() =>
-                {
-                    FHLoger.Write(LogType.Warn, "testInfo");
-                }));
-                Thread thread2 = new Thread(new ThreadStart(() =>
-                {
-                    FHLoger.Write(LogType.Error, "testInfo");
-                }));
-                Thread thread3 = new Thread(new ThreadStart(() =>
-                {
-                    FHLoger.Write(LogType.Fatal, "testInfo");
-                }));
-                thread.Start();
-                thread1.Start();
-                thread2.Start();
-                thread3.Start();
+            for (int i = 0; i < 5000; i++) {
+                ThreadPool.QueueUserWorkItem(TestInfo);
+                ThreadPool.QueueUserWorkItem(TestError);
+                ThreadPool.QueueUserWorkItem(TestFatal);
+                ThreadPool.QueueUserWorkItem(TestWarn);
             }
-            DateTime now1 = DateTime.Now;
-            Console.WriteLine(now1-now);
+
             Console.ReadKey();
+        }
+
+        private static void TestInfo(object sender)
+        {
+            FHLoger.Write(LogType.Info,"TESTINFO");
+        }
+
+        private static void TestError(object sender)
+        {
+            FHLoger.Write(LogType.Error, "TESTERROR");        
+        }
+
+        private static void TestFatal(object sender)
+        {
+            FHLoger.Write(LogType.Fatal, "TESTFATAL");        
+        }
+
+        private static void TestWarn(object sender)
+        {
+            FHLoger.Write(LogType.Warn, "TESTWARN");            
+        }
+
+        private static DataTable getTableFormat()
+        {
+            DateTime startTime = DateTime.Now.Date.AddHours(-2);
+            DateTime endTime = DateTime.Now.Date.AddHours(6);
+            DataTable result = new DataTable();
+            result.Columns.Add("Time").Caption="时间";
+            while (startTime < endTime)
+            {
+                result.Rows.Add(startTime.ToString("HH:mm"));
+                startTime = startTime.AddMinutes(15);
+            }
+            return result;
         }
 
         //Regex reg = new System.Text.RegularExpressions.Regex("[\b]");

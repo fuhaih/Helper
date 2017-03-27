@@ -5,6 +5,9 @@ using System.Text;
 
 namespace FHLog
 {
+    /// <summary>
+    /// 日志信息
+    /// </summary>
     public class LogInfo
     {
         public LogType Type{get;set;}

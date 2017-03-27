@@ -12,17 +12,32 @@ namespace FHLog
 {
     public class FHLoger
     {
+        private static Task writer;
+
         private delegate void writerAsync(LogType type, string message);
 
+        /// <summary>
+        /// 日志消息队列
+        /// </summary>
         private static ConcurrentQueue<LogInfo> logInfo = new ConcurrentQueue<LogInfo>();
 
+        /// <summary>
+        /// 日志配置信息
+        /// </summary>
         private static LogSetting logSet=new LogSetting();
 
+        /// <summary>
+        /// 日志信息格式
+        /// </summary>
         private const string logFormat = "[{0}]-{1}\r\n{2}";
     
         static FHLoger()
         {
-            ThreadPool.QueueUserWorkItem(WriteLog);
+            
+            writer = new Task(WriteLog, null);
+            writer.Start();
+            //TaskScheduler.UnobservedTaskException += new EventHandler<UnobservedTaskExceptionEventArgs>(TaskError);
+            ThreadPool.QueueUserWorkItem(GCCollect);
         }
 
         /// <summary>
@@ -74,6 +89,7 @@ namespace FHLog
                     }
                 }
                 Thread.Sleep(3000);
+                throw new Exception("error");
             }
         }
 
@@ -81,22 +97,56 @@ namespace FHLog
         { 
         
         }
+
+        private static void TaskError(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            var a = sender;
+        }
+
+        private static void GCCollect(object sender)
+        { 
+            while(true){
+                GC.Collect();
+                if (writer == null||writer.Status==TaskStatus.Faulted)
+                {
+                    foreach (var ex in writer.Exception.InnerExceptions)
+                    {
+                        logInfo.Enqueue(new LogInfo { 
+                            Type=LogType.Error,
+                            Info=string.Format("writer线程异常\r\n{0}\r\n已重启",ex.Message)
+                        });
+                    }
+                    writer = new Task(WriteLog, null);
+                    writer.Start();
+                }
+                Thread.Sleep(3000);
+            }
+        }
     }
 
     public class LogSetting 
     {
         public string ProjectName{get;set;}
+        /// <summary>
+        /// 日志全名
+        /// </summary>
         public string FullName {
             get {
                 return Path.Combine(LogPath, FileName);
             }
         }
+        /// <summary>
+        /// 日志文件名称
+        /// </summary>
         public string FileName {
             get {
                 return  LogName+logExtension;
             }
         }
-        public  string logName="";
+        private string logName = "";
+        /// <summary>
+        /// 日志名称
+        /// </summary>
         [LogSet("LogName")]
         public string LogName
         {
@@ -107,7 +157,10 @@ namespace FHLog
                 logName = value;
             }
         }
-        public string logPath = "";
+        private string logPath = "";
+        /// <summary>
+        /// 日志路径
+        /// </summary>
         [LogSet("LogPath")]
         public string LogPath
         {
@@ -120,11 +173,10 @@ namespace FHLog
                 logPath = value;
             }
         }
-        public string logExtension = ".log";
+        private string logExtension = ".log";
         /// <summary>
-        /// 日志后缀名
+        /// 日志后缀.*
         /// </summary>
-        /// <summary>
         [LogSet("LogExtension")]
         public string LogExtension
         {
@@ -144,11 +196,18 @@ namespace FHLog
                
         }
 
+        /// <summary>
+        /// 获取当前项目名称
+        /// </summary>
+        /// <returns></returns>
         public string GetProjectName()
         {
             return "";
         }
 
+        /// <summary>
+        /// 初始化设置项
+        /// </summary>
         private void InitialSetting()
         {
             Type setType = this.GetType();
@@ -173,6 +232,9 @@ namespace FHLog
 
     public class LogSet : Attribute
     {
+        /// <summary>
+        /// 对应配置名称
+        /// </summary>
         public string Name { get; set; }
         public LogSet(string name)
         {
