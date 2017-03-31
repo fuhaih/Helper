@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
     <Compile Include="ArrayHelper.cs" />
+    <Compile Include="DateTimeHelper.cs" />
     <Compile Include="ExceptionHelper.cs" />
     <Compile Include="LinqHelper.cs" />
     <Compile Include="ObjectHelper.cs" />

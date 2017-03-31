@@ -12,9 +12,12 @@ namespace FHLog
 {
     public class FHLoger
     {
+        /// <summary>
+        /// 写者，负责把队列中的日志信息打印到控制台并写进日志文件中
+        /// </summary>
         private static Task writer;
 
-        private delegate void writerAsync(LogType type, string message);
+        private delegate void queueAsync(LogType type, string message);
 
         /// <summary>
         /// 日志消息队列
@@ -33,11 +36,10 @@ namespace FHLog
     
         static FHLoger()
         {
-            
             writer = new Task(WriteLog, null);
             writer.Start();
             //TaskScheduler.UnobservedTaskException += new EventHandler<UnobservedTaskExceptionEventArgs>(TaskError);
-            ThreadPool.QueueUserWorkItem(GCCollect);
+            //ThreadPool.QueueUserWorkItem(GCCollect);
         }
 
         /// <summary>
@@ -47,16 +49,16 @@ namespace FHLog
         /// <param name="message">日志信息</param>
         public  static void Write(LogType type, string message)
         {
-            writerAsync writer = new writerAsync(WriteLogAsync);
-            writer.BeginInvoke(type, message, null, null);
+            queueAsync queue = new queueAsync(EnqueueAsync);
+            queue.BeginInvoke(type, message, null, null);
         }
 
         /// <summary>
-        /// 记录日志异步方法
+        /// 日志信息异步插入到队列中
         /// </summary>
         /// <param name="type"></param>
         /// <param name="message"></param>
-        private static void WriteLogAsync(LogType type, string message)
+        private static void EnqueueAsync(LogType type, string message)
         {
             string info = string.Format(logFormat, type.ToString(), DateTime.Now, message);
             logInfo.Enqueue(new LogInfo {
@@ -89,18 +91,15 @@ namespace FHLog
                     }
                 }
                 Thread.Sleep(3000);
-                throw new Exception("error");
             }
         }
 
+        /// <summary>
+        /// 日志信息发送到服务端
+        /// </summary>
         private static void sockSend()
         { 
         
-        }
-
-        private static void TaskError(object sender, UnobservedTaskExceptionEventArgs e)
-        {
-            var a = sender;
         }
 
         private static void GCCollect(object sender)
@@ -126,6 +125,9 @@ namespace FHLog
 
     public class LogSetting 
     {
+        /// <summary>
+        /// 项目名称
+        /// </summary>
         public string ProjectName{get;set;}
         /// <summary>
         /// 日志全名

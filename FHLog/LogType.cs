@@ -1,5 +1,9 @@
 ﻿namespace FHLog
 {
+    /**备注：
+     * LogType枚举的值跟ConsoleColor的值相对应
+     */
+
     /// <summary>
     /// 日志类型
     /// </summary>

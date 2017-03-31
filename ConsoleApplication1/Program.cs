@@ -20,13 +20,14 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            for (int i = 0; i < 5000; i++) {
-                ThreadPool.QueueUserWorkItem(TestInfo);
-                ThreadPool.QueueUserWorkItem(TestError);
-                ThreadPool.QueueUserWorkItem(TestFatal);
-                ThreadPool.QueueUserWorkItem(TestWarn);
-            }
-
+            //for (int i = 0; i < 5000; i++) {
+            //    ThreadPool.QueueUserWorkItem(TestInfo);
+            //    ThreadPool.QueueUserWorkItem(TestError);
+            //    ThreadPool.QueueUserWorkItem(TestFatal);
+            //    ThreadPool.QueueUserWorkItem(TestWarn);
+            //}
+            TaskTest test = new TaskTest();
+            test.TestAttachedToParent();
             Console.ReadKey();
         }
 
