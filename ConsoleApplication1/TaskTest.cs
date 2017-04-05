@@ -23,6 +23,7 @@ namespace ConsoleApplication1
 
             task1.ContinueWith(task => Console.WriteLine("全部线程已结束"));
             task1.Start();
+            Console.WriteLine("task1已开始");
         }
     }
 }

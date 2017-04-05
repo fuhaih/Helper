@@ -17,7 +17,7 @@ namespace FHLog
         /// </summary>
         private static Task writer;
 
-        private delegate void queueAsync(LogType type, string message);
+        private static object FileLock = new object();
 
         /// <summary>
         /// 日志消息队列
@@ -32,7 +32,7 @@ namespace FHLog
         /// <summary>
         /// 日志信息格式
         /// </summary>
-        private const string logFormat = "[{0}]-{1}\r\n{2}";
+        public static LogFormat Format = new LogFormat();
     
         static FHLoger()
         {
@@ -42,28 +42,47 @@ namespace FHLog
             //ThreadPool.QueueUserWorkItem(GCCollect);
         }
 
-        /// <summary>
-        /// 记录日志
-        /// </summary>
-        /// <param name="type">日志类型</param>
-        /// <param name="message">日志信息</param>
-        public  static void Write(LogType type, string message)
+        public static void Info(string message)
         {
-            queueAsync queue = new queueAsync(EnqueueAsync);
-            queue.BeginInvoke(type, message, null, null);
+            logInfo.Enqueue(new LogInfo
+            {
+                Type = LogType.Info,
+                Info = message,
+                Format = Format.Info,
+                Time=DateTime.Now
+            });
         }
 
-        /// <summary>
-        /// 日志信息异步插入到队列中
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="message"></param>
-        private static void EnqueueAsync(LogType type, string message)
+        public static void Warn(string message)
         {
-            string info = string.Format(logFormat, type.ToString(), DateTime.Now, message);
-            logInfo.Enqueue(new LogInfo {
-                Type = type,
-                Info=info
+            logInfo.Enqueue(new LogInfo
+            {
+                Type = LogType.Warn,
+                Info = message,
+                Format = Format.Warn,
+                Time = DateTime.Now
+            });
+        }
+
+        public static void Error(string message)
+        {
+            logInfo.Enqueue(new LogInfo
+            {
+                Type = LogType.Error,
+                Info = message,
+                Format = Format.Error,
+                Time = DateTime.Now
+            });
+        }
+
+        public static void Fatal(string message)
+        {
+            logInfo.Enqueue(new LogInfo
+            {
+                Type = LogType.Fatal,
+                Info = message,
+                Format = Format.Fatal,
+                Time = DateTime.Now
             });
         }
 
@@ -80,12 +99,9 @@ namespace FHLog
                 {
                     try{
                         Console.ForegroundColor = (ConsoleColor)log.Type;
-                        Console.WriteLine(log.Info);
+                        Console.WriteLine(log.ToString());
                         Console.ForegroundColor = ConsoleColor.Gray;
-                        using (StreamWriter writer = new StreamWriter(logSet.FullName, true, Encoding.UTF8))
-                        {
-                            writer.WriteLine(log.Info);
-                        }
+                        new Task(WriteLogToLocal, log).Start();
                     }catch{
                         continue;
                     }
@@ -94,10 +110,37 @@ namespace FHLog
             }
         }
 
+        private static void WriteLogToLocal(object sender)
+        {
+            LogInfo log = sender as LogInfo;
+            lock (FileLock)
+            {
+                using (StreamWriter writer = new StreamWriter(logSet.FullName, true, Encoding.UTF8))
+                {
+                    long length = writer.BaseStream.Length;
+                    if (length > logSet.MaxLength)
+                    {
+                        writer.Close();
+                        string path = Path.Combine(logSet.LogPath, "LogBack");
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        string newFile = Path.Combine(path,  logSet.LogName+ DateTime.Now.ToString("yyyyMMddHHmmss")+logSet.LogExtension);
+                        File.Move(logSet.FullName, newFile);
+                    } 
+                }
+                using (StreamWriter writer = new StreamWriter(logSet.FullName, true, Encoding.UTF8))
+                {
+                    writer.WriteLine(log.ToString());
+                }
+            }
+        }
+
         /// <summary>
         /// 日志信息发送到服务端
         /// </summary>
-        private static void sockSend()
+        private static void SockSend()
         { 
         
         }
@@ -190,6 +233,20 @@ namespace FHLog
         }
         private static AppSettingsReader setReader = new AppSettingsReader();
 
+        private long maxLength = 1024 * 1024;
+        [LogSet("LogMaxLength")]
+        public long MaxLength
+        {
+            get
+            {
+                return maxLength;
+            }
+            set
+            {
+                maxLength = value;
+            }
+        }
+
         public LogSetting()
         {
             string fullname = Assembly.GetEntryAssembly().FullName;
@@ -247,4 +304,6 @@ namespace FHLog
             return Name;
         }
     }
+
+
 }

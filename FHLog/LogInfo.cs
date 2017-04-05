@@ -12,5 +12,11 @@ namespace FHLog
     {
         public LogType Type{get;set;}
         public string Info { get; set; }
+        public BaseFormat Format { get; set; }
+        public DateTime Time { get; set; }
+        public override string ToString()
+        {
+            return string.Format(Format.FormatString, Type.ToString(), Time, Info);
+        }
     }
 }

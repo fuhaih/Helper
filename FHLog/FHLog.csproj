@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="FHLoger.cs" />
     <Compile Include="FHLogManager.cs" />
-    <Compile Include="IFHLoger.cs" />
+    <Compile Include="LogFormat.cs" />
     <Compile Include="LogInfo.cs" />
     <Compile Include="LogType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

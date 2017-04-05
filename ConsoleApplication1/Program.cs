@@ -20,35 +20,36 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            //for (int i = 0; i < 5000; i++) {
-            //    ThreadPool.QueueUserWorkItem(TestInfo);
-            //    ThreadPool.QueueUserWorkItem(TestError);
-            //    ThreadPool.QueueUserWorkItem(TestFatal);
-            //    ThreadPool.QueueUserWorkItem(TestWarn);
-            //}
-            TaskTest test = new TaskTest();
-            test.TestAttachedToParent();
+            for (int i = 0; i < 5000; i++)
+            {
+                ThreadPool.QueueUserWorkItem(TestInfo);
+                ThreadPool.QueueUserWorkItem(TestError);
+                ThreadPool.QueueUserWorkItem(TestFatal);
+                ThreadPool.QueueUserWorkItem(TestWarn);
+            }
+            //TaskTest test = new TaskTest();
+            //test.TestAttachedToParent();
             Console.ReadKey();
         }
 
         private static void TestInfo(object sender)
         {
-            FHLoger.Write(LogType.Info,"TESTINFO");
+            FHLoger.Info("TESTINFO");
         }
 
         private static void TestError(object sender)
         {
-            FHLoger.Write(LogType.Error, "TESTERROR");        
+            FHLoger.Error("TESTERROR");        
         }
 
         private static void TestFatal(object sender)
         {
-            FHLoger.Write(LogType.Fatal, "TESTFATAL");        
+            FHLoger.Fatal("TESTFATAL");        
         }
 
         private static void TestWarn(object sender)
         {
-            FHLoger.Write(LogType.Warn, "TESTWARN");            
+            FHLoger.Warn("TESTWARN");            
         }
 
         private static DataTable getTableFormat()
