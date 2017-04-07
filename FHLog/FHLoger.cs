@@ -98,7 +98,7 @@ namespace FHLog
                 while (logInfo.TryDequeue(out log))
                 {
                     try{
-                        Console.ForegroundColor = (ConsoleColor)log.Type;
+                        Console.ForegroundColor = log.Format.Color;
                         Console.WriteLine(log.ToString());
                         Console.ForegroundColor = ConsoleColor.Gray;
                         new Task(WriteLogToLocal, log).Start();
