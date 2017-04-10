@@ -29,11 +29,32 @@ namespace FHLog
         /// </summary>
         private static LogSetting logSet=new LogSetting();
 
+        
+        private static LogFormat format = new LogFormat();
+
         /// <summary>
         /// 日志信息格式
         /// </summary>
-        public static LogFormat Format = new LogFormat();
-    
+        public static LogFormat Format
+        {
+            get { return FHLoger.format; }
+            set { FHLoger.format = value; }
+        }
+
+        
+        private static LogAction action = new LogAction();
+
+        /// <summary>
+        /// 一些操作的配置
+        /// </summary>
+        public static LogAction Action
+        {
+            get { return FHLoger.action; }
+            set { FHLoger.action = value; }
+        }
+
+        public static string Test { get; set; }
+
         static FHLoger()
         {
             writer = new Task(WriteLog, null);
@@ -233,7 +254,7 @@ namespace FHLog
         }
         private static AppSettingsReader setReader = new AppSettingsReader();
 
-        private long maxLength = 1024 * 1024;
+        private long maxLength = 2*1024 * 1024;
         [LogSet("LogMaxLength")]
         public long MaxLength
         {

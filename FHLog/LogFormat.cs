@@ -7,16 +7,66 @@ namespace FHLog
 {
     public class LogFormat
     {
-        public WarnFormat Warn = new WarnFormat();
-        public InfoFormat Info = new InfoFormat();
-        public ErrorFormat Error = new ErrorFormat();
-        public FatalFormat Fatal = new FatalFormat();
+        private WarnFormat warn = new WarnFormat();
+
+        public WarnFormat Warn
+        {
+            get {
+                return warn;
+            }
+            set {
+                warn = value;
+            }
+        }
+
+        private InfoFormat info = new InfoFormat();
+
+        public InfoFormat Info
+        {
+            get { return info; }
+            set { info = value; }
+        }
+
+        private ErrorFormat error = new ErrorFormat();
+
+        public ErrorFormat Error
+        {
+            get { return error; }
+            set { error = value; }
+        }
+
+        private FatalFormat fatal = new FatalFormat();
+
+        public FatalFormat Fatal
+        {
+            get { return fatal; }
+            set { fatal = value; }
+        }
+
     }
 
     public class BaseFormat
     {
-        public ConsoleColor Color = ConsoleColor.Gray;
-        public readonly string FormatString = "[{0}]-{1}\r\n{2}";
+        private ConsoleColor color = ConsoleColor.Gray;
+
+        public ConsoleColor Color
+        {
+            get {
+                return color;
+            }
+            set {
+                color = value;
+            }
+        }
+
+        private string formatString = "[{0}]-{1}\r\n{2}";
+
+        public string FormatString
+        {
+            get {
+                return formatString;
+            }
+        }
     }
 
     public class WarnFormat : BaseFormat
