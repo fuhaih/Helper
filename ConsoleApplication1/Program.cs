@@ -23,7 +23,7 @@ namespace ConsoleApplication1
             //FHLoger.Format.Error.Color = ConsoleColor.Gray;
             //FHLoger.Format.Fatal.Color = ConsoleColor.Gray;
             //FHLoger.Format.Warn.Color = ConsoleColor.Gray;
-            for (int i = 0; i < 5000; i++)
+            for (int i = 0; i < 50000; i++)
             {
                 ThreadPool.QueueUserWorkItem(TestInfo);
                 ThreadPool.QueueUserWorkItem(TestError);

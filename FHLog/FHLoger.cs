@@ -41,7 +41,6 @@ namespace FHLog
             set { FHLoger.format = value; }
         }
 
-        
         private static LogAction action = new LogAction();
 
         /// <summary>
@@ -136,21 +135,7 @@ namespace FHLog
             LogInfo log = sender as LogInfo;
             lock (FileLock)
             {
-                using (StreamWriter writer = new StreamWriter(logSet.FullName, true, Encoding.UTF8))
-                {
-                    long length = writer.BaseStream.Length;
-                    if (length > logSet.MaxLength)
-                    {
-                        writer.Close();
-                        string path = Path.Combine(logSet.LogPath, "LogBack");
-                        if (!Directory.Exists(path))
-                        {
-                            Directory.CreateDirectory(path);
-                        }
-                        string newFile = Path.Combine(path,  logSet.LogName+ DateTime.Now.ToString("yyyyMMddHHmmss")+logSet.LogExtension);
-                        File.Move(logSet.FullName, newFile);
-                    } 
-                }
+                action.Rolling.Roll(logSet);
                 using (StreamWriter writer = new StreamWriter(logSet.FullName, true, Encoding.UTF8))
                 {
                     writer.WriteLine(log.ToString());
@@ -193,6 +178,7 @@ namespace FHLog
         /// 项目名称
         /// </summary>
         public string ProjectName{get;set;}
+
         /// <summary>
         /// 日志全名
         /// </summary>
@@ -201,6 +187,7 @@ namespace FHLog
                 return Path.Combine(LogPath, FileName);
             }
         }
+
         /// <summary>
         /// 日志文件名称
         /// </summary>
@@ -209,7 +196,9 @@ namespace FHLog
                 return  LogName+logExtension;
             }
         }
+
         private string logName = "";
+
         /// <summary>
         /// 日志名称
         /// </summary>
@@ -223,7 +212,9 @@ namespace FHLog
                 logName = value;
             }
         }
+
         private string logPath = "";
+
         /// <summary>
         /// 日志路径
         /// </summary>
@@ -239,7 +230,9 @@ namespace FHLog
                 logPath = value;
             }
         }
+
         private string logExtension = ".log";
+
         /// <summary>
         /// 日志后缀.*
         /// </summary>
@@ -252,20 +245,18 @@ namespace FHLog
                 logExtension=value;
             }
         }
-        private static AppSettingsReader setReader = new AppSettingsReader();
 
-        private long maxLength = 2*1024 * 1024;
-        [LogSet("LogMaxLength")]
-        public long MaxLength
+        private AppSettingsReader setReader = new AppSettingsReader();
+        
+        private DateTime time = DateTime.Now;
+
+        /// <summary>
+        /// 日志轮训时间
+        /// </summary>
+        public DateTime Time
         {
-            get
-            {
-                return maxLength;
-            }
-            set
-            {
-                maxLength = value;
-            }
+            get { return time; }
+            set { time = value; }
         }
 
         public LogSetting()
