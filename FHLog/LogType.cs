@@ -1,9 +1,5 @@
 ﻿namespace FHLog
 {
-    /**备注：
-     * LogType枚举的值跟ConsoleColor的值相对应
-     */
-
     /// <summary>
     /// 日志类型
     /// </summary>
@@ -12,18 +8,18 @@
         /// <summary>
         /// 消息
         /// </summary>
-        Info=7,
+        Info,
         /// <summary>
         /// 警告
         /// </summary>
-        Warn=14,
+        Warn,
         /// <summary>
         /// 异常
         /// </summary>
-        Error=12,
+        Error,
         /// <summary>
         /// 错误
         /// </summary>
-        Fatal=11
+        Fatal
     }
 }
