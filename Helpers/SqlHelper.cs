@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Xml;
-using System.Data.SqlClient;
+using System.Linq;
 using System.Collections;
+using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Reflection;
 namespace Helpers
 {
     /// <summary>
@@ -2369,7 +2372,6 @@ namespace Helpers
             }
         }
         #endregion
-
     }
 
     /// <summary>
@@ -2646,7 +2648,7 @@ namespace Helpers
             catch (Exception ex)
             {
                 sqlbulkTransaction.Rollback();
-                ex.WriteErrorStackToLocal();
+                throw ex;
             }
             finally
             {
@@ -2655,4 +2657,94 @@ namespace Helpers
             }
         }
     }
+
+    public class BaseContent
+    {
+        public string TableName { get;set; }
+
+        public BaseContent(string tableName)
+        {
+            TableName = tableName;
+        }
+    }
+
+    public class SqlControl
+    {
+        public static void Insert<T>(T daydata, string connStr) where T : BaseContent
+        {
+            SqlConnection con = new SqlConnection(connStr);
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            con.Open();
+            try
+            {
+                Dictionary<string, object> direct = new Dictionary<string, object>();
+                Type type = daydata.GetType();
+                PropertyInfo[] infos = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (PropertyInfo info in infos)
+                {
+                    string name = info.Name;
+                    object value = info.GetValue(daydata, null);
+                    direct.Add(name, value);
+                }
+                string[] names = direct.Keys.ToArray();
+                string[] paramsName = names.Select(m => "@" + m).ToArray();
+                string insertText = string.Format("insert into {0}({1}) values({2})", daydata.TableName, string.Join(",", names), string.Join(",", paramsName));
+                foreach (var item in direct)
+                {
+                    com.Parameters.Add(new SqlParameter("@" + item.Key, item.Value == null ? DBNull.Value : item.Value));
+                }
+                com.CommandText = insertText;
+                com.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+        }
+
+        /// <summary>
+        /// 批量插入
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="daydatas"></param>
+        /// <param name="connStr"></param>
+        public static void BulkInsert<T>(List<T> daydatas, string connStr) where T : BaseContent
+        {
+            if (daydatas.Count == 0)
+            {
+                return;
+            }
+            T t = daydatas.FirstOrDefault();
+            DataTable data = new DataTable();
+            data.TableName = t.TableName;
+            Type type = t.GetType(); ;
+            PropertyInfo[] infos = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo info in infos)
+            {
+                string name = info.Name;
+                Type proType = info.PropertyType;
+                data.Columns.Add(name, proType);
+            }
+            foreach (T item in daydatas)
+            {
+                List<object> values = new List<object>();
+                foreach (PropertyInfo info in infos)
+                {
+                    string name = info.Name;
+                    object value = info.GetValue(item, null);
+                    values.Add(value);
+                }
+                data.Rows.Add(values.ToArray());
+            }
+            SqlHelperExtend.SqlBulkCopyInsert(connStr, data.TableName, data);
+        }
+    }
+
 }
