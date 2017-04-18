@@ -2656,6 +2656,22 @@ namespace Helpers
                 conn.Close();
             }
         }
+
+        public static void AdaptUpdate(string connectStr, string strTableName, DataTable dataTable)
+        {
+            SqlConnection con = new SqlConnection(connectStr);
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapt);
+            builder.ConflictOption = ConflictOption.OverwriteChanges;
+            con.Open();
+            adapt.UpdateBatchSize = 5000;
+            adapt.SelectCommand.Transaction = con.BeginTransaction();
+            adapt.SelectCommand.CommandText = dataTable.ExtendedProperties["SQL"].ToString();
+            adapt.Update(dataTable);
+            adapt.SelectCommand.Transaction.Commit();
+        }
     }
 
     public class BaseContent
@@ -2745,6 +2761,7 @@ namespace Helpers
             }
             SqlHelperExtend.SqlBulkCopyInsert(connStr, data.TableName, data);
         }
+
     }
 
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.IO;
 using System.Threading;
 using System.Data;
+using Helpers;
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -23,13 +24,14 @@ namespace ConsoleApplication1
             //FHLoger.Format.Error.Color = ConsoleColor.Gray;
             //FHLoger.Format.Fatal.Color = ConsoleColor.Gray;
             //FHLoger.Format.Warn.Color = ConsoleColor.Gray;
-            for (int i = 0; i < 50000; i++)
-            {
-                ThreadPool.QueueUserWorkItem(TestInfo);
-                ThreadPool.QueueUserWorkItem(TestError);
-                ThreadPool.QueueUserWorkItem(TestFatal);
-                ThreadPool.QueueUserWorkItem(TestWarn);
-            }
+            //for (int i = 0; i < 50000; i++)
+            //{
+            //    ThreadPool.QueueUserWorkItem(TestInfo);
+            //    ThreadPool.QueueUserWorkItem(TestError);
+            //    ThreadPool.QueueUserWorkItem(TestFatal);
+            //    ThreadPool.QueueUserWorkItem(TestWarn);
+            //}
+
             //TaskTest test = new TaskTest();
             //test.TestAttachedToParent();
             Console.ReadKey();
