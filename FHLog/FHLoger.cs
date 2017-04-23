@@ -60,8 +60,6 @@ namespace FHLog
             set { FHLoger.action = value; }
         }
 
-        public static string Test { get; set; }
-
         static FHLoger()
         {
             writer = new Task(WriteLog, null);
@@ -135,7 +133,7 @@ namespace FHLog
                 foreach (LogInfo[] item in writeInfos)
                 {
                     Task.Factory.StartNew(WriteLogToLocal, item);
-                    if (action.Output.IsOpenConsole)
+                    if (Action.Output.IsOpenConsole)
                     {
                         Task.Factory.StartNew(WriteLogToConsole, item);
                     }
@@ -310,15 +308,6 @@ namespace FHLog
             ProjectName=logName = fullname.Split(',')[0]; 
             InitialSetting();
                
-        }
-
-        /// <summary>
-        /// 获取当前项目名称
-        /// </summary>
-        /// <returns></returns>
-        public string GetProjectName()
-        {
-            return "";
         }
 
         /// <summary>
