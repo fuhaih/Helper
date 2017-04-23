@@ -30,3 +30,13 @@ D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Helpers.dll
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Helpers.pdb
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\FHLog.dll
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\FHLog.pdb
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\FHLog.dll
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Helpers.dll
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\FHLog.pdb
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Helpers.pdb
+F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

@@ -8,6 +8,7 @@ using System.IO;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Configuration;
+using Helpers;
 namespace FHLog
 {
     public class FHLoger
@@ -19,17 +20,24 @@ namespace FHLog
 
         private static object FileLock = new object();
 
+        private static object ConsoleLock = new object();
+
         /// <summary>
         /// 日志消息队列
         /// </summary>
-        private static ConcurrentQueue<LogInfo> logInfo = new ConcurrentQueue<LogInfo>();
+        private static ConcurrentQueue<LogInfo> logInfo1 = new ConcurrentQueue<LogInfo>();
+
+        private static ConcurrentQueue<LogInfo> logInfo2 = new ConcurrentQueue<LogInfo>();
+
+        private static ConcurrentQueue<LogInfo> writeInfo = new ConcurrentQueue<LogInfo>();
+
+        private static ConcurrentQueue<LogInfo> readInfo = new ConcurrentQueue<LogInfo>();
 
         /// <summary>
         /// 日志配置信息
         /// </summary>
         private static LogSetting logSet=new LogSetting();
 
-        
         private static LogFormat format = new LogFormat();
 
         /// <summary>
@@ -58,13 +66,15 @@ namespace FHLog
         {
             writer = new Task(WriteLog, null);
             writer.Start();
+            writeInfo = logInfo1;
+            readInfo = logInfo2;
             //TaskScheduler.UnobservedTaskException += new EventHandler<UnobservedTaskExceptionEventArgs>(TaskError);
             //ThreadPool.QueueUserWorkItem(GCCollect);
         }
 
         public static void Info(string message)
         {
-            logInfo.Enqueue(new LogInfo
+            writeInfo.Enqueue(new LogInfo
             {
                 Type = LogType.Info,
                 Info = message,
@@ -75,7 +85,7 @@ namespace FHLog
 
         public static void Warn(string message)
         {
-            logInfo.Enqueue(new LogInfo
+            writeInfo.Enqueue(new LogInfo
             {
                 Type = LogType.Warn,
                 Info = message,
@@ -86,7 +96,7 @@ namespace FHLog
 
         public static void Error(string message)
         {
-            logInfo.Enqueue(new LogInfo
+            writeInfo.Enqueue(new LogInfo
             {
                 Type = LogType.Error,
                 Info = message,
@@ -97,7 +107,7 @@ namespace FHLog
 
         public static void Fatal(string message)
         {
-            logInfo.Enqueue(new LogInfo
+            writeInfo.Enqueue(new LogInfo
             {
                 Type = LogType.Fatal,
                 Info = message,
@@ -107,38 +117,73 @@ namespace FHLog
         }
 
         /// <summary>
-        /// 记录日志到本地
+        /// 日志输出
         /// </summary>
         /// <param name="sender"></param>
         private static void WriteLog(object sender)
         {
             while (true)
             {
+                List<LogInfo> infos = new List<LogInfo>();
                 LogInfo log ;
-                while (logInfo.TryDequeue(out log))
+                while (readInfo.TryDequeue(out log))
                 {
-                    try{
-                        Console.ForegroundColor = log.Format.Color;
-                        Console.WriteLine(log.ToString());
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        new Task(WriteLogToLocal, log).Start();
-                    }catch{
-                        continue;
+                    LogInfo info = log;
+                    infos.Add(info);
+                }
+                LogInfo[][] writeInfos = infos.Split(200);
+                foreach (LogInfo[] item in writeInfos)
+                {
+                    Task.Factory.StartNew(WriteLogToLocal, item);
+                    if (action.Output.IsOpenConsole)
+                    {
+                        Task.Factory.StartNew(WriteLogToConsole, item);
                     }
                 }
-                Thread.Sleep(3000);
+                Thread.Sleep(100);
+                if (Interlocked.Equals(writeInfo, logInfo1))
+                {
+                    Interlocked.Exchange<ConcurrentQueue<LogInfo>>(ref writeInfo, logInfo2);
+                    Interlocked.Exchange<ConcurrentQueue<LogInfo>>(ref readInfo, logInfo1);
+                }
+                else {
+                    Interlocked.Exchange<ConcurrentQueue<LogInfo>>(ref writeInfo, logInfo1);
+                    Interlocked.Exchange<ConcurrentQueue<LogInfo>>(ref readInfo, logInfo2);
+                }
             }
         }
-
+        /// <summary>
+        /// 把日志写到本地
+        /// </summary>
+        /// <param name="sender"></param>
         private static void WriteLogToLocal(object sender)
         {
-            LogInfo log = sender as LogInfo;
+            LogInfo[] log = sender as LogInfo[];
             lock (FileLock)
             {
                 action.Rolling.Roll(logSet);
                 using (StreamWriter writer = new StreamWriter(logSet.FullName, true, Encoding.UTF8))
                 {
-                    writer.WriteLine(log.ToString());
+                    string[] strs = log.Select(m => m.ToString()).ToArray();
+                    string writeText = string.Join("\r\n", strs);
+                    writer.WriteLine(writeText);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 把日志输出到控制台
+        /// </summary>
+        private static void WriteLogToConsole(object sender)
+        {
+            LogInfo[] logs = sender as LogInfo[];
+            foreach (LogInfo log in logs)
+            {
+                lock (ConsoleLock)
+                {
+                    Console.ForegroundColor = log.Format.Color;
+                    Console.WriteLine(log.ToString());
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 }
             }
         }
@@ -159,7 +204,7 @@ namespace FHLog
                 {
                     foreach (var ex in writer.Exception.InnerExceptions)
                     {
-                        logInfo.Enqueue(new LogInfo { 
+                        writeInfo.Enqueue(new LogInfo { 
                             Type=LogType.Error,
                             Info=string.Format("writer线程异常\r\n{0}\r\n已重启",ex.Message)
                         });

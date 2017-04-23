@@ -40,7 +40,7 @@ namespace FHLog
                                 {
                                     Directory.CreateDirectory(path);
                                 }
-                                string newFile = Path.Combine(path, logSet.LogName + DateTime.Now.ToString("yyyyMMddHHmmss") + logSet.LogExtension);
+                                string newFile = Path.Combine(path, logSet.LogName + DateTime.Now.ToString("yyyyMMddHHmmss(fff)") + logSet.LogExtension);
                                 File.Move(logSet.FullName, newFile);
                             }
                         }
@@ -56,7 +56,7 @@ namespace FHLog
                             {
                                 Directory.CreateDirectory(path);
                             }
-                            string newFile = Path.Combine(path, logSet.LogName + DateTime.Now.ToString("yyyyMMddHHmmss") + logSet.LogExtension);
+                            string newFile = Path.Combine(path, logSet.LogName + DateTime.Now.ToString("yyyyMMddHHmmss(fff)") + logSet.LogExtension);
                             File.Move(logSet.FullName, newFile);
                         }
                 }break;

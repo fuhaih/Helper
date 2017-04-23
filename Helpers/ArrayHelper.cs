@@ -17,6 +17,10 @@ namespace Helpers
         /// <returns>差分后的交错数组</returns>
         public static T[][] Split<T>(this IEnumerable<T> t, int partLength)
         {
+            if (t.Count() == 0)
+            {
+                return new T[0][];
+            }
             List<T> buffer = t.ToList();
             int length = t.Count();
             int count = (length - 1) / partLength + 1;
