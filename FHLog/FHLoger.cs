@@ -8,7 +8,6 @@ using System.IO;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Configuration;
-using Helpers;
 namespace FHLog
 {
     public class FHLoger
@@ -132,10 +131,10 @@ namespace FHLog
                 LogInfo[][] writeInfos = infos.Split(200);
                 foreach (LogInfo[] item in writeInfos)
                 {
-                    Task.Factory.StartNew(WriteLogToLocal, item);
+                    WriteLogToLocal(item);
                     if (Action.Output.IsOpenConsole)
                     {
-                        Task.Factory.StartNew(WriteLogToConsole, item);
+                        WriteLogToConsole(item);
                     }
                 }
                 Thread.Sleep(100);
@@ -150,39 +149,32 @@ namespace FHLog
                 }
             }
         }
+
         /// <summary>
         /// 把日志写到本地
         /// </summary>
         /// <param name="sender"></param>
-        private static void WriteLogToLocal(object sender)
+        private static void WriteLogToLocal(LogInfo[] logs)
         {
-            LogInfo[] log = sender as LogInfo[];
-            lock (FileLock)
+            action.Rolling.Roll(logSet);
+            using (StreamWriter writer = new StreamWriter(logSet.FullName, true, Encoding.UTF8))
             {
-                action.Rolling.Roll(logSet);
-                using (StreamWriter writer = new StreamWriter(logSet.FullName, true, Encoding.UTF8))
-                {
-                    string[] strs = log.Select(m => m.ToString()).ToArray();
-                    string writeText = string.Join("\r\n", strs);
-                    writer.WriteLine(writeText);
-                }
+                string[] strs = logs.Select(m => m.ToString()).ToArray();
+                string writeText = string.Join("\r\n", strs);
+                writer.WriteLine(writeText);
             }
         }
 
         /// <summary>
         /// 把日志输出到控制台
         /// </summary>
-        private static void WriteLogToConsole(object sender)
+        private static void WriteLogToConsole(LogInfo[] logs)
         {
-            LogInfo[] logs = sender as LogInfo[];
             foreach (LogInfo log in logs)
             {
-                lock (ConsoleLock)
-                {
-                    Console.ForegroundColor = log.Format.Color;
-                    Console.WriteLine(log.ToString());
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                }
+                Console.ForegroundColor = log.Format.Color;
+                Console.WriteLine(log.ToString());
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
 
@@ -351,5 +343,40 @@ namespace FHLog
         }
     }
 
-
+    public static class LogExtend
+    {
+        /// <summary>
+        /// 数组拆分
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <param name="partLength">每组数组的长度</param>
+        /// <returns>差分后的交错数组</returns>
+        public static T[][] Split<T>(this IEnumerable<T> t, int partLength)
+        {
+            if (t.Count() == 0)
+            {
+                return new T[0][];
+            }
+            List<T> buffer = t.ToList();
+            int length = t.Count();
+            int count = (length - 1) / partLength + 1;
+            int remainder = length % partLength;
+            T[][] result = new T[count][];
+            for (int i = 0; i < count; i++)
+            {
+                if (i == count - 1)
+                {
+                    result[i] = new T[remainder == 0 ? partLength : remainder];
+                    buffer.CopyTo(i * partLength, result[i], 0, remainder == 0 ? partLength : remainder);
+                }
+                else
+                {
+                    result[i] = new T[partLength];
+                    buffer.CopyTo(i * partLength, result[i], 0, partLength);
+                }
+            }
+            return result;
+        }
+    }
 }
