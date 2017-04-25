@@ -14,10 +14,13 @@ namespace FHLog
             get { return _rolling; }
             set { _rolling = value; }
         }
-
-        public LogOutput Output { get => _output; set => _output = value; }
-
         private LogOutput _output = new LogOutput();
+
+        public LogOutput Output
+        {
+          get { return _output; }
+          set { _output = value; }
+        }
 
     }
 
@@ -28,7 +31,13 @@ namespace FHLog
         /// <summary>
         /// 是否开启控制台输出，只读
         /// </summary>
-        public bool IsOpenConsole { get => _isOpenConsole;}
+        public bool IsOpenConsole
+        {
+            get { return _isOpenConsole; }
+        }
+
+
+       
 
         /// <summary>
         /// 打开控制台输出
