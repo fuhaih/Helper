@@ -56,6 +56,7 @@ namespace Helpers
             最好不用‘+’连接地址，用Path.Combine，不然在不同版本的系统或环境中容易出错*/
             string path =Path.Combine( basepath,"errorInfo.txt");
             StackTrace st = new StackTrace(true);
+            
             string methodName = st.GetFrame(deep).GetMethod().Name;
             string fileName = st.GetFrame(deep).GetFileName();
             int line = st.GetFrame(deep).GetFileLineNumber();
@@ -67,7 +68,8 @@ namespace Helpers
                 sw.WriteLine("行号：" + line);
                 sw.WriteLine("错误信息：" + ex.Message);
                 sw.WriteLine("----------------------------------------------------------------");
-            }        
+            }     
+            
         }
         /// <summary>
         /// 获取异常的堆栈信息，适合在异常的最外围调用
