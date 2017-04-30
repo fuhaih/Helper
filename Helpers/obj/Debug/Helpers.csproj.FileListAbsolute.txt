@@ -15,6 +15,5 @@ D:\git\Repos\Helper\Helpers\obj\Debug\Helpers.pdb
 D:\Fuhai\GitWorkSpace\Helpers\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
 F:\git\Repos\Helper\Helpers\bin\Debug\Helpers.dll
 F:\git\Repos\Helper\Helpers\bin\Debug\Helpers.pdb
-F:\git\Repos\Helper\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
 F:\git\Repos\Helper\Helpers\obj\Debug\Helpers.dll
 F:\git\Repos\Helper\Helpers\obj\Debug\Helpers.pdb

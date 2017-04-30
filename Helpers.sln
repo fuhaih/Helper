@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{C3CD7D7A-53DA-429D-91C5-77D08843520A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{8BE02462-08D2-4BB6-8A15-1E3994657FC5}"
@@ -12,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHLog", "FHLog\FHLog.csproj", "{334E1F3B-66FD-49E7-9D8F-94F71E8D2125}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toolkit", "toolkit\toolkit.csproj", "{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogCollection", "LogCollection\LogCollection.csproj", "{31B62814-A279-4FC8-82F8-48DC16827498}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8ACF033E-A6F7-45B2-9A13-AAEF1E20C3C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,14 @@ Global
 		{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5DC2332-8E16-474A-8FA0-1B15E1C0DD39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31B62814-A279-4FC8-82F8-48DC16827498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31B62814-A279-4FC8-82F8-48DC16827498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31B62814-A279-4FC8-82F8-48DC16827498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31B62814-A279-4FC8-82F8-48DC16827498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ACF033E-A6F7-45B2-9A13-AAEF1E20C3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ACF033E-A6F7-45B2-9A13-AAEF1E20C3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ACF033E-A6F7-45B2-9A13-AAEF1E20C3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ACF033E-A6F7-45B2-9A13-AAEF1E20C3C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
