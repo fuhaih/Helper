@@ -11,10 +11,19 @@ namespace LogCollection
     {
         static void Main(string[] args)
         {
-            int port = 6000;
-            string host = "127.0.0.1";
+            Server ser = new Server(6000, 100);
+            IPEndPoint ipe = new IPEndPoint(IPAddress.Parse("192.168.0.100"), 6001);
+            ser.Init();
+            ser.Start(ipe);
+            //ResiveSocket();
+        }
 
-            IPAddress ip = IPAddress.Parse(host);
+        private static  void ResiveSocket()
+        {
+            int port = 6001;
+            string host = "192.168.0.100";
+
+            IPAddress ip =IPAddress.Parse(host);
             IPEndPoint ipe = new IPEndPoint(ip, port);
 
             Socket sSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

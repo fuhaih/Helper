@@ -32,7 +32,14 @@ namespace ConsoleApplication1
             //    ThreadPool.QueueUserWorkItem(TestFatal);
             //    ThreadPool.QueueUserWorkItem(TestWarn);
             //}
-            socketTest.Send();
+            try
+            {
+                socketTest.Send();
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
             //TaskTest test = new TaskTest();
             //test.TestAttachedToParent();
             Console.ReadKey();

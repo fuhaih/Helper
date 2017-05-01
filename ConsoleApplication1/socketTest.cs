@@ -11,8 +11,8 @@ namespace ConsoleApplication1
     {
         public static void Send()
         {
-            int port = 6000;
-            string host = "127.0.0.1";//服务器端ip地址
+            int port = 6001;
+            string host = "192.168.0.100";//服务器端ip地址
 
             IPAddress ip = IPAddress.Parse(host);
             IPEndPoint ipe = new IPEndPoint(ip, port);
@@ -21,18 +21,28 @@ namespace ConsoleApplication1
             clientSocket.Connect(ipe);
 
             //send message
-            string sendStr = "send to server : hello,ni hao";
+            string sendStr = "send to server : hello";
             byte[] sendBytes = Encoding.ASCII.GetBytes(sendStr);
             clientSocket.Send(sendBytes);
-
+            SocketAsyncEventArgs e = new SocketAsyncEventArgs();
+            e.AcceptSocket = clientSocket;
+            e.Completed += new EventHandler<SocketAsyncEventArgs>(Complete);
+            e.SetBuffer(sendBytes, 0, sendBytes.Length);
+            //clientSocket.SendAsync(e);
+            clientSocket.Send(sendBytes, SocketFlags.None);
             //receive message
             string recStr = "";
-            byte[] recBytes = new byte[4096];
-            int bytes = clientSocket.Receive(recBytes, recBytes.Length, 0);
-            recStr += Encoding.ASCII.GetString(recBytes, 0, bytes);
-            Console.WriteLine(recStr);
+            //byte[] recBytes = new byte[4096];
+            //int bytes = clientSocket.Receive(recBytes, recBytes.Length, 0);
+            //recStr += Encoding.ASCII.GetString(recBytes, 0, bytes);
+            //Console.WriteLine(recStr);
+            Console.ReadKey();
+            
+        }
 
-            clientSocket.Close();
+        private static void Complete(object sender, SocketAsyncEventArgs e)
+        {
+            //e.AcceptSocket.Close();
         }
 
     }

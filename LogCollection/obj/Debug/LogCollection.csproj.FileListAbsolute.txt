@@ -1,6 +1,5 @@
 F:\git\Repos\Helper\LogCollection\bin\Debug\LogCollection.exe
 F:\git\Repos\Helper\LogCollection\bin\Debug\LogCollection.pdb
-F:\git\Repos\Helper\LogCollection\obj\Debug\LogCollection.csprojResolveAssemblyReference.cache
 F:\git\Repos\Helper\LogCollection\obj\Debug\LogCollection.exe
 F:\git\Repos\Helper\LogCollection\obj\Debug\LogCollection.pdb
 F:\git\Repos\Helper\LogCollection\bin\Debug\LogCollection.exe.config
