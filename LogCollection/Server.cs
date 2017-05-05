@@ -141,6 +141,12 @@ namespace LogCollection
             ((AsyncUserToken)readEventArgs.UserToken).Socket = e.AcceptSocket;
 
             // As soon as the client is connected, post a receive to the connection
+            //ReceiveAsync要成功运行需要这几个东西
+            //SocketAsyncEventArgs.Buffer 或 SocketAsyncEventArgs.BufferList
+            //SocketAsyncEventArgs.Count 如果 SocketAsyncEventArgs.Buffer 设置
+            //SocketAsyncEventArgs.Offset 如果 SocketAsyncEventArgs.Buffer 设置
+            //SocketAsyncEventArgs.Completed
+            //http://stackoverflow.com/questions/32176826/c-sharp-socket-receiveasync
             bool willRaiseEvent = e.AcceptSocket.ReceiveAsync(readEventArgs);
             if (!willRaiseEvent)
             {

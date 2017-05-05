@@ -21,6 +21,7 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
+
             //FHLoger.Format.Error.Color = ConsoleColor.Gray;
             //FHLoger.Format.Fatal.Color = ConsoleColor.Gray;
             //FHLoger.Format.Warn.Color = ConsoleColor.Gray;
@@ -32,14 +33,14 @@ namespace ConsoleApplication1
             //    ThreadPool.QueueUserWorkItem(TestFatal);
             //    ThreadPool.QueueUserWorkItem(TestWarn);
             //}
-            try
-            {
-                socketTest.Send();
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
+            //try
+            //{
+            //    socketTest.Send();
+            //}
+            //catch (Exception ex) {
+            //    Console.WriteLine(ex.Message);
+            //    Console.WriteLine(ex.StackTrace);
+            //}
             //TaskTest test = new TaskTest();
             //test.TestAttachedToParent();
             Console.ReadKey();
