@@ -17,7 +17,7 @@ namespace Tray_beta_1
             Console.Title = "TestConsoleLikeWin32";
             ConsoleWin32Helper.ShowNotifyIcon();
             ConsoleWin32Helper.DisableCloseButton(Console.Title);
-
+            ConsoleWin32Helper.ShowConsole(Console.Title, 0);
             Thread threadMonitorInput = new Thread(new ThreadStart(MonitorInput));
             threadMonitorInput.Start();
 
@@ -80,7 +80,14 @@ namespace Tray_beta_1
 
         [DllImport("user32.dll", EntryPoint = "RemoveMenu")]
         static extern IntPtr RemoveMenu(IntPtr hMenu, uint uPosition, uint uFlags);
-
+        /// <summary>
+        /// 隐藏本dos窗体, 0: 后台执行；1:正常启动；2:最小化到任务栏；3:最大化
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [DllImport("User32.dll", EntryPoint = "ShowWindow")]
+        static extern bool ShowWindow(IntPtr hWnd, int type);
         /// <summary>
         /// 禁用关闭按钮
         /// </summary>
@@ -115,7 +122,11 @@ namespace Tray_beta_1
         {
             _NotifyIcon.Visible = false;
         }
-
+        public static void ShowConsole(string title, int Type)
+        {
+            IntPtr windowHandle = FindWindow(null, title);
+            ShowWindow(windowHandle, Type);
+        }
         #endregion
     }
 }

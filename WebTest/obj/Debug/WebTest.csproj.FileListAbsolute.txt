@@ -9,7 +9,6 @@ D:\Fuhai\MyDemo\Helpers\WebTest\bin\Helpers.pdb
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\bin\WebTest.dll
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\bin\WebTest.pdb
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\bin\Helpers.dll
-D:\Fuhai\GitWorkSpace\Helpers\WebTest\bin\TTBEMS.Framework.dll
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\bin\Helpers.pdb
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\obj\Debug\WebTest.csprojResolveAssemblyReference.cache
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\obj\Debug\WebTest.dll
