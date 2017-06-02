@@ -1,0 +1,22 @@
+2017-06-02 10:06:10,302 [9] INFO  ConsoleApplication1.quartzTest.example - 正在初始化工作任务
+ ConsoleApplication1.quartzTest.examplename2017-06-02 10:06:10,350 [9] INFO  ConsoleApplication1.quartzTest.example - 正在设置触发器
+ ConsoleApplication1.quartzTest.examplename2017-06-02 10:06:10,548 [9] INFO  ConsoleApplication1.quartzTest.example - 注册工作任务
+ ConsoleApplication1.quartzTest.examplename2017-06-02 10:32:00,135 [XmlConfiguredInstance_Worker-1] INFO  ConsoleApplication1.quartzTest.SimpleJob - 开始执行定时任务2017/6/2 10:32:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:32:00,162 [XmlConfiguredInstance_Worker-1] INFO  ConsoleApplication1.quartzTest.SimpleJob - 任务下次执行时间2017/6/2 10:33:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:32:00,163 [XmlConfiguredInstance_Worker-1] INFO  ConsoleApplication1.quartzTest.SimpleJob - 每秒钟一次2017/6/2 10:32:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:33:00,000 [XmlConfiguredInstance_Worker-2] INFO  ConsoleApplication1.quartzTest.SimpleJob - 开始执行定时任务2017/6/2 10:33:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:33:00,001 [XmlConfiguredInstance_Worker-2] INFO  ConsoleApplication1.quartzTest.SimpleJob - 任务下次执行时间2017/6/2 10:34:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:33:00,001 [XmlConfiguredInstance_Worker-2] INFO  ConsoleApplication1.quartzTest.SimpleJob - 每秒钟一次2017/6/2 10:33:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:34:00,000 [XmlConfiguredInstance_Worker-3] INFO  ConsoleApplication1.quartzTest.SimpleJob - 开始执行定时任务2017/6/2 10:34:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:34:00,001 [XmlConfiguredInstance_Worker-3] INFO  ConsoleApplication1.quartzTest.SimpleJob - 任务下次执行时间2017/6/2 10:35:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:34:00,001 [XmlConfiguredInstance_Worker-3] INFO  ConsoleApplication1.quartzTest.SimpleJob - 每秒钟一次2017/6/2 10:34:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:35:00,000 [XmlConfiguredInstance_Worker-4] INFO  ConsoleApplication1.quartzTest.SimpleJob - 开始执行定时任务2017/6/2 10:35:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:35:00,001 [XmlConfiguredInstance_Worker-4] INFO  ConsoleApplication1.quartzTest.SimpleJob - 任务下次执行时间2017/6/2 10:36:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:35:00,001 [XmlConfiguredInstance_Worker-4] INFO  ConsoleApplication1.quartzTest.SimpleJob - 每秒钟一次2017/6/2 10:35:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:36:00,000 [XmlConfiguredInstance_Worker-5] INFO  ConsoleApplication1.quartzTest.SimpleJob - 开始执行定时任务2017/6/2 10:36:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:36:00,001 [XmlConfiguredInstance_Worker-5] INFO  ConsoleApplication1.quartzTest.SimpleJob - 任务下次执行时间2017/6/2 10:37:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:36:00,001 [XmlConfiguredInstance_Worker-5] INFO  ConsoleApplication1.quartzTest.SimpleJob - 每秒钟一次2017/6/2 10:36:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:37:00,000 [XmlConfiguredInstance_Worker-1] INFO  ConsoleApplication1.quartzTest.SimpleJob - 开始执行定时任务2017/6/2 10:37:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:37:00,001 [XmlConfiguredInstance_Worker-1] INFO  ConsoleApplication1.quartzTest.SimpleJob - 任务下次执行时间2017/6/2 10:38:00
+ ConsoleApplication1.quartzTest.SimpleJobname2017-06-02 10:37:00,001 [XmlConfiguredInstance_Worker-1] INFO  ConsoleApplication1.quartzTest.SimpleJob - 每秒钟一次2017/6/2 10:37:00
+ ConsoleApplication1.quartzTest.SimpleJobname

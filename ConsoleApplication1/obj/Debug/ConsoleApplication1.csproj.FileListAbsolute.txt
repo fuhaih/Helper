@@ -40,3 +40,16 @@ F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Helpers.pdb
 F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Common.Logging.Core.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Common.Logging.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Quartz.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Common.Logging.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Common.Logging.xml
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Common.Logging.Core.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Common.Logging.Core.xml
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Quartz.pdb
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Quartz.xml
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\log4net.dll
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\log4net.xml
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\log4net.config
+D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\quartz_jobs.xml

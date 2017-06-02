@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading;
 using System.Data;
 using Helpers;
+using System.Net;
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -21,7 +22,7 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-
+            TestMvc();
             //FHLoger.Format.Error.Color = ConsoleColor.Gray;
             //FHLoger.Format.Fatal.Color = ConsoleColor.Gray;
             //FHLoger.Format.Warn.Color = ConsoleColor.Gray;
@@ -91,6 +92,18 @@ namespace ConsoleApplication1
             }
             return result;
             
+        }
+
+        static void TestMvc()
+        {
+            //HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://192.168.68.38:8081/shevcs/v1/notification_stationInfo");
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://192.168.68.38:8081/shevcs/v1/notification_stationInfo");
+            request.Method = "POST";
+            Stream stream = request.GetRequestStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.WriteLine("test");
+            HttpWebResponse respon = (HttpWebResponse)request.GetResponse();
+            Stream responStream= respon.GetResponseStream();
         }
     }
 
