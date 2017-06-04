@@ -84,6 +84,7 @@
     <Compile Include="quartzTest\SimpleJob.cs" />
     <Compile Include="socketTest.cs" />
     <Compile Include="TaskTest.cs" />
+    <Compile Include="timeControl\timeControler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

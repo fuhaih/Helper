@@ -45,6 +45,7 @@
   <ItemGroup>
     <Content Include="exption\异常类型.txt" />
     <Content Include="git\g.txt" />
+    <Content Include="quartz\CronTrigger Tutorial.txt" />
     <Content Include="WorkSpace\dev gridcontroller.txt" />
     <Content Include="WorkSpace\javascript方法.txt" />
     <Content Include="WorkSpace\javascript生成csv文件并下载\demo.txt" />

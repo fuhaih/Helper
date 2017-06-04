@@ -53,3 +53,16 @@ D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\log4net.dll
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\log4net.xml
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\log4net.config
 D:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\quartz_jobs.xml
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\quartz_jobs.xml
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\log4net.config
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Common.Logging.Core.dll
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Common.Logging.dll
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\log4net.dll
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Quartz.dll
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Common.Logging.pdb
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Common.Logging.xml
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Common.Logging.Core.pdb
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Common.Logging.Core.xml
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\log4net.xml
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Quartz.pdb
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Quartz.xml

@@ -31,7 +31,8 @@ namespace ConsoleApplication1.quartzTest
                                     .WithIdentity("trigger", "group")
                                     .WithCronSchedule("0 0/5 * * * ?")
                                     .Build();
-
+            
+            
             //WithCronSchedule:  秒 分钟 小时 日期（1~31） 月份（1~12） 星期几
             //*表示任意  -表示区间 
 
@@ -60,6 +61,8 @@ namespace ConsoleApplication1.quartzTest
 
             ISchedulerFactory sf = new StdSchedulerFactory(properties);
             IScheduler sched = sf.GetScheduler();
+            TriggerKey key = new TriggerKey("simpleName", "simpleGroup");
+            ITrigger triger= sched.GetTrigger(key);
             sched.Start();
         }
     }
