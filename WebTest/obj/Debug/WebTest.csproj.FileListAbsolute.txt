@@ -13,3 +13,11 @@ D:\Fuhai\GitWorkSpace\Helpers\WebTest\bin\Helpers.pdb
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\obj\Debug\WebTest.csprojResolveAssemblyReference.cache
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\obj\Debug\WebTest.dll
 D:\Fuhai\GitWorkSpace\Helpers\WebTest\obj\Debug\WebTest.pdb
+D:\FuHai\Git\Helper\WebTest\bin\WebTest.dll.config
+D:\FuHai\Git\Helper\WebTest\bin\WebTest.dll
+D:\FuHai\Git\Helper\WebTest\bin\WebTest.pdb
+D:\FuHai\Git\Helper\WebTest\bin\Helpers.dll
+D:\FuHai\Git\Helper\WebTest\bin\Helpers.pdb
+D:\FuHai\Git\Helper\WebTest\obj\Debug\WebTest.csprojResolveAssemblyReference.cache
+D:\FuHai\Git\Helper\WebTest\obj\Debug\WebTest.dll
+D:\FuHai\Git\Helper\WebTest\obj\Debug\WebTest.pdb

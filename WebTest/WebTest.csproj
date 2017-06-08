@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="JavaScriptTest\closureTest.html" />
+    <Content Include="JavaScriptTest\closureTest.js" />
     <Content Include="RSA\Barrett.js" />
     <Content Include="RSA\BigInt.js" />
     <Content Include="Domain\jquery.min.js" />

@@ -66,3 +66,6 @@ F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Common.Logging.Core.xml
 F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\log4net.xml
 F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Quartz.pdb
 F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Quartz.xml
+D:\FuHai\Git\Helper\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+D:\FuHai\Git\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\FuHai\Git\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
