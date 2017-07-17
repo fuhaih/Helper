@@ -12,3 +12,7 @@ F:\git\Repos\Helper\FHLog\bin\Debug\FHLog.dll
 F:\git\Repos\Helper\FHLog\bin\Debug\FHLog.pdb
 F:\git\Repos\Helper\FHLog\obj\Debug\FHLog.dll
 F:\git\Repos\Helper\FHLog\obj\Debug\FHLog.pdb
+D:\FuHai\Git\Helper\FHLog\bin\Debug\FHLog.dll
+D:\FuHai\Git\Helper\FHLog\bin\Debug\FHLog.pdb
+D:\FuHai\Git\Helper\FHLog\obj\Debug\FHLog.dll
+D:\FuHai\Git\Helper\FHLog\obj\Debug\FHLog.pdb

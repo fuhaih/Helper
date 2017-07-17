@@ -13,3 +13,10 @@ D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.csproj.GenerateR
 D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.exe
 D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.pdb
 D:\Fuhai\GitWorkSpace\Helpers\Tray_beta_1\obj\Debug\Tray_beta_1.csprojResolveAssemblyReference.cache
+D:\FuHai\Git\Helper\Tray_beta_1\bin\Debug\Tray_beta_1.exe.config
+D:\FuHai\Git\Helper\Tray_beta_1\bin\Debug\Tray_beta_1.exe
+D:\FuHai\Git\Helper\Tray_beta_1\bin\Debug\Tray_beta_1.pdb
+D:\FuHai\Git\Helper\Tray_beta_1\obj\Debug\Tray_beta_1.Properties.Resource1.resources
+D:\FuHai\Git\Helper\Tray_beta_1\obj\Debug\Tray_beta_1.csproj.GenerateResource.Cache
+D:\FuHai\Git\Helper\Tray_beta_1\obj\Debug\Tray_beta_1.exe
+D:\FuHai\Git\Helper\Tray_beta_1\obj\Debug\Tray_beta_1.pdb

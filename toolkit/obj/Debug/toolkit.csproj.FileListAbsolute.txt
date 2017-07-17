@@ -1,0 +1,4 @@
+D:\FuHai\Git\Helper\toolkit\bin\Debug\toolkit.dll
+D:\FuHai\Git\Helper\toolkit\bin\Debug\toolkit.pdb
+D:\FuHai\Git\Helper\toolkit\obj\Debug\toolkit.dll
+D:\FuHai\Git\Helper\toolkit\obj\Debug\toolkit.pdb
