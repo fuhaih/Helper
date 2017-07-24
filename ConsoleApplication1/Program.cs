@@ -29,7 +29,7 @@ namespace ConsoleApplication1
         {
 
 			Path.GetInvalidPathChars().ToString();
-			RegExTest.RegExTest.RepeatWorld();
+			RegExTest.RegExTest.Replace();
 			//FHLoger.Format.Error.Color = ConsoleColor.Gray;
 			//FHLoger.Format.Fatal.Color = ConsoleColor.Gray;
 			//FHLoger.Format.Warn.Color = ConsoleColor.Gray;

@@ -17,7 +17,7 @@ namespace ConsoleApplication1.RegExTest
 				$1为正则表达式匹配到的第一组	 
 			*/
 			string s = "123.254800000009";
-			string result= Regex.Replace(s, @"(\.\d\d[1-9]?)\d*", "${name}", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+			string result= Regex.Replace(s, @"(?<name>\.\d\d[1-9]?)\d*", "${name}", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 			/*
 			 ()--括号的用法可以是分组，也可以用来分支选择 
@@ -45,6 +45,26 @@ namespace ConsoleApplication1.RegExTest
 		public static void RepeatWorld()
 		{
 
+		}
+		/// <summary>
+		/// 正则表达式模式修饰符
+		/// </summary>
+		public static void Modifier()
+		{
+			string test = "<B>Very</B>";
+			Regex reg = new Regex("<B>(?i)very(?-i)</B>");//(?i)...(?-i)之间的内容忽略大小写
+			bool bl= reg.IsMatch(test);
+			Console.WriteLine(bl);
+		}
+		/// <summary>
+		/// 正则表达式注释
+		/// </summary>
+		public static void Annotation()
+		{
+			string test = "<B>Very</B>";
+			Regex reg = new Regex("<B>(?i)very(?-i)(?#IgnoreCase)</B>");//(?i)...(?-i)之间的内容忽略大小写
+			bool bl= reg.IsMatch(test);
+			Console.WriteLine(bl);
 		}
 	}
 }

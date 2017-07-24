@@ -23,7 +23,7 @@ namespace Tray_beta_1
 
             while (true)
             {
-                Application.DoEvents();
+                Application.DoEvents();//很重要，没有这个的话可能隐藏的图标点击没有效果
                 if (_IsExit)
                 {
                     break;
