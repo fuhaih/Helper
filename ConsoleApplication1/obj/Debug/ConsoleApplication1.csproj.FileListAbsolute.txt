@@ -89,3 +89,6 @@ D:\FuHai\Git\Helper\ConsoleApplication1\bin\Debug\log4net.xml
 D:\FuHai\Git\Helper\ConsoleApplication1\bin\Debug\Quartz.pdb
 D:\FuHai\Git\Helper\ConsoleApplication1\bin\Debug\Quartz.xml
 D:\FuHai\Git\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

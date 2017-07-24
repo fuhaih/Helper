@@ -56,5 +56,8 @@
     <Content Include="WorkSpace\table2excel.js" />
     <Content Include="WorkSpace\正则表达式.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="git\gitHelper.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
