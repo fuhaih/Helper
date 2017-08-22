@@ -16,3 +16,8 @@ D:\FuHai\Git\Helper\FHLog\bin\Debug\FHLog.dll
 D:\FuHai\Git\Helper\FHLog\bin\Debug\FHLog.pdb
 D:\FuHai\Git\Helper\FHLog\obj\Debug\FHLog.dll
 D:\FuHai\Git\Helper\FHLog\obj\Debug\FHLog.pdb
+G:\Fuhai\GitWorkSpace\Helpers\FHLog\bin\Debug\FHLog.dll
+G:\Fuhai\GitWorkSpace\Helpers\FHLog\bin\Debug\FHLog.pdb
+G:\Fuhai\GitWorkSpace\Helpers\FHLog\obj\Debug\FHLog.dll
+G:\Fuhai\GitWorkSpace\Helpers\FHLog\obj\Debug\FHLog.pdb
+G:\Fuhai\GitWorkSpace\Helpers\FHLog\obj\Debug\FHLog.csprojResolveAssemblyReference.cache

@@ -21,3 +21,8 @@ D:\FuHai\Git\Helper\Helpers\bin\Debug\Helpers.dll
 D:\FuHai\Git\Helper\Helpers\bin\Debug\Helpers.pdb
 D:\FuHai\Git\Helper\Helpers\obj\Debug\Helpers.dll
 D:\FuHai\Git\Helper\Helpers\obj\Debug\Helpers.pdb
+G:\Fuhai\GitWorkSpace\Helpers\Helpers\bin\Debug\Helpers.dll
+G:\Fuhai\GitWorkSpace\Helpers\Helpers\bin\Debug\Helpers.pdb
+G:\Fuhai\GitWorkSpace\Helpers\Helpers\obj\Debug\Helpers.dll
+G:\Fuhai\GitWorkSpace\Helpers\Helpers\obj\Debug\Helpers.pdb
+G:\Fuhai\GitWorkSpace\Helpers\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache

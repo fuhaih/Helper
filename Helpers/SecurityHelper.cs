@@ -16,20 +16,18 @@ namespace Helpers
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        public static string ToMD5(this string t)
+        public static byte[] ToMD5(this string t)
         {
-            string result = "";
             byte[] buffer= Encoding.Default.GetBytes(t);
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] retVal = md5.ComputeHash(buffer);
-                           
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < retVal.Length; i++)
-            {
-                sb.Append(retVal[i].ToString("x2"));
-            }
-            result = sb.ToString();
-            return result;
+            //StringBuilder sb = new StringBuilder();
+            //for (int i = 0; i < retVal.Length; i++)
+            //{
+            //    sb.Append(retVal[i].ToString("x2"));
+            //}
+            //result = sb.ToString();
+            return retVal;
         }
 
         /// <summary>
@@ -38,17 +36,17 @@ namespace Helpers
         /// <param name="t"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static string ToHMACMD5(this string t,string key)
+        public static byte[] ToHMACMD5(this string t,string key)
         {
             HMACMD5 MDS = new HMACMD5(Encoding.UTF8.GetBytes(key));
             byte[] buffer = MDS.ComputeHash(Encoding.UTF8.GetBytes(t));
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < buffer.Length; i++)
-            {
-                sb.Append(buffer[i].ToString("x2"));
-            }
-            string result = sb.ToString();
-            return result;
+            //StringBuilder sb = new StringBuilder();
+            //for (int i = 0; i < buffer.Length; i++)
+            //{
+            //    sb.Append(buffer[i].ToString("x2"));
+            //}
+            //string result = sb.ToString();
+            return buffer;
         }
 
         /// <summary>
@@ -57,7 +55,7 @@ namespace Helpers
         /// <param name="source">源字符串</param>
         /// <param name="key">aes密钥，长度必须32位</param>
         /// <returns>加密后的字符串</returns>
-        public static string EncryptAes(string source, string key, string iv)
+        public static byte[] EncryptAes(string source, string key, string iv)
         {
             using (AesCryptoServiceProvider aesProvider = new AesCryptoServiceProvider())
             {
@@ -71,7 +69,8 @@ namespace Helpers
                     byte[] results = cryptoTransform.TransformFinalBlock(inputBuffers, 0, inputBuffers.Length);
                     aesProvider.Clear();
                     aesProvider.Dispose();
-                    return Convert.ToBase64String(results, 0, results.Length);
+                    //return Convert.ToBase64String(results, 0, results.Length);
+                    return results;
                 }
             }
         }
@@ -82,7 +81,7 @@ namespace Helpers
         /// <param name="source">源字符串</param>
         /// <param name="key">aes密钥，长度必须32位</param>
         /// <returns>解密后的字符串</returns>
-        public static string DecryptAes(string source, string key, string iv)
+        public static byte[] DecryptAes(string source, string key, string iv)
         {
             using (AesCryptoServiceProvider aesProvider = new AesCryptoServiceProvider())
             {
@@ -95,7 +94,7 @@ namespace Helpers
                     byte[] inputBuffers = Convert.FromBase64String(source);
                     byte[] results = cryptoTransform.TransformFinalBlock(inputBuffers, 0, inputBuffers.Length);
                     aesProvider.Clear();
-                    return Encoding.UTF8.GetString(results);
+                    return results;
                 }
             }
         }
