@@ -30,9 +30,7 @@ namespace ConsoleApplication1
         {
 
            Console.WriteLine();
-            byte[] bytes = new byte[2];
-            bytes[0] = 12;
-            char name = '黄';
+            
             //FHLoger.Format.Error.Color = ConsoleColor.Gray;
             //FHLoger.Format.Fatal.Color = ConsoleColor.Gray;
             //FHLoger.Format.Warn.Color = ConsoleColor.Gray;
