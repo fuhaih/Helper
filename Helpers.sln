@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NETIOCPSvr", "IOCPDemo_NET_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NETUploadClient", "IOCPDemo_NET_V4\NET_Source\NETUploadClient\NETUploadClient.csproj", "{1EA7CDFC-C506-4598-8E32-C256437D7DA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FramworkTest", "..\FramworkTest\FramworkTest.csproj", "{76AA0D76-10BC-4BDB-BAC7-B37C2199D6A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FramworkTest", "FramworkTest\FramworkTest.csproj", "{76AA0D76-10BC-4BDB-BAC7-B37C2199D6A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
