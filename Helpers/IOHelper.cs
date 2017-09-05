@@ -5,7 +5,8 @@ using System.Text;
 using System.IO;
 namespace Helpers
 {
-    public static class HttpHelper
+
+    public static class IOHelper
     {
         public static MemoryStream ToMemoryStream(this Stream stream)
         {

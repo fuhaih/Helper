@@ -48,7 +48,7 @@
     <Compile Include="ArrayHelper.cs" />
     <Compile Include="DateTimeHelper.cs" />
     <Compile Include="ExceptionHelper.cs" />
-    <Compile Include="HttpHelper.cs" />
+    <Compile Include="IOHelper.cs" />
     <Compile Include="LinqHelper.cs" />
     <Compile Include="NetworkMapping.cs" />
     <Compile Include="ObjectHelper.cs" />
