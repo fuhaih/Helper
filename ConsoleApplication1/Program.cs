@@ -6,6 +6,7 @@ using System.Security;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using FHLog;
+using System.Threading.Tasks;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -28,9 +29,25 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-
            Console.WriteLine();
-            
+
+            string str = "";
+            Task all = new Task(() =>
+            {
+                for (int i = 0; i <10; i++)
+                {
+                    int test = i;
+                    Task.Factory.StartNew(() =>
+                    {
+                        str = str + test;
+                    }, TaskCreationOptions.AttachedToParent);
+
+                }
+            });
+            all.Start();
+            Task.WaitAll(all);
+            Console.Write(str);
+
             //FHLoger.Format.Error.Color = ConsoleColor.Gray;
             //FHLoger.Format.Fatal.Color = ConsoleColor.Gray;
             //FHLoger.Format.Warn.Color = ConsoleColor.Gray;
