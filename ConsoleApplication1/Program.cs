@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Security;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using FHLog;
 using System.Threading.Tasks;
 using System.Linq;
@@ -29,46 +30,18 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-           Console.WriteLine();
-
-            string str = "";
-            Task all = new Task(() =>
+            Person person = new Person
             {
-                for (int i = 0; i <10; i++)
-                {
-                    int test = i;
-                    Task.Factory.StartNew(() =>
-                    {
-                        str = str + test;
-                    }, TaskCreationOptions.AttachedToParent);
-
+                birth = DateTime.Now,
+                id = 6666,
+                name = "fuhai",
+                son=new Son {
+                    birth=null,
+                    name="haizi"
                 }
-            });
-            all.Start();
-            Task.WaitAll(all);
-            Console.Write(str);
-
-            //FHLoger.Format.Error.Color = ConsoleColor.Gray;
-            //FHLoger.Format.Fatal.Color = ConsoleColor.Gray;
-            //FHLoger.Format.Warn.Color = ConsoleColor.Gray;
-            //FHLoger.Action.Output.OpenConsole();
-            //for (int i = 0; i < 500000; i++)
-            //{
-            //    ThreadPool.QueueUserWorkItem(TestInfo);
-            //    ThreadPool.QueueUserWorkItem(TestError);
-            //    ThreadPool.QueueUserWorkItem(TestFatal);
-            //    ThreadPool.QueueUserWorkItem(TestWarn);
-            //}
-            //try
-            //{
-            //    socketTest.Send();
-            //}
-            //catch (Exception ex) {
-            //    Console.WriteLine(ex.Message);
-            //    Console.WriteLine(ex.StackTrace);
-            //}
-            //TaskTest test = new TaskTest();
-            //test.TestAttachedToParent();
+            };
+            string json = person.ToJson();
+            Console.WriteLine(json);
             Console.ReadKey();
         }
 
@@ -166,7 +139,6 @@ namespace ConsoleApplication1
         }
     }
 
-
     public class test
     {
         public static myservice service = new myservice();
@@ -187,16 +159,25 @@ namespace ConsoleApplication1
     ///如"<name>k__BackingField":"fuhai"
     ///解决方案，再添加DataContract和DataMembe特性
 
-    [Serializable]
+    //[Serializable]
     //[DataContract]
     public class Person
     {
         //[DataMember]
         public int id { get; set; }
-        //[DataMember]
         public string name { get; set; }
         //[DataMember]
         public DateTime birth { get; set; }
 
+        public Son son { get; set; }
+
+    }
+    [DataContract]
+    public class Son
+    {
+        [DataMember(Name = "myName")]
+        public string name { get; set; }
+        [DataMember(Name = "date")]
+        public DateTime? birth { get; set; }
     }
 }

@@ -57,5 +57,23 @@ namespace Helpers
             }
             return result;
         }
+
+        /// <summary>
+        /// 把字节数组转换为16进制字符串
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
+        public static string ToHexValues(this byte[] buffer)
+        {
+            //c#中一个字节的大小是0-256
+            //一个两位的十六进制能表示的大小范围也是0-256（16x16）即00-ff
+            //所以一个字节能够转换为一个两位的十六进制
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                sb.Append(buffer[i].ToString("x2"));
+            }
+            return  sb.ToString();
+        }
     }
 }

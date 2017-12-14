@@ -34,7 +34,7 @@ namespace AsyncSocketServer
                 Directory.CreateDirectory(FileDirectory);
             int port = 0;
             if (!(int.TryParse(config.AppSettings.Settings["Port"].Value, out port)))
-                port = 6001;
+                port = 6000;
             int parallelNum = 0;
             if (!(int.TryParse(config.AppSettings.Settings["ParallelNum"].Value, out parallelNum)))
                 parallelNum = 8000;
@@ -45,7 +45,7 @@ namespace AsyncSocketServer
             AsyncSocketSvr = new AsyncSocketServer(parallelNum);
             AsyncSocketSvr.SocketTimeOutMS = socketTimeOutMS;
             AsyncSocketSvr.Init();
-            IPEndPoint listenPoint = new IPEndPoint(IPAddress.Parse("192.168.0.100"), port);
+            IPEndPoint listenPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             AsyncSocketSvr.Start(listenPoint);
 
             Console.WriteLine("Press any key to terminate the server process....");

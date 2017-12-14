@@ -4,3 +4,9 @@ F:\git\Repos\Helper\IOCPDemo_NET_V4\Bin\SocketAsyncSvr.pdb
 F:\git\Repos\Helper\IOCPDemo_NET_V4\NET_Source\NETIOCPSvr\obj\x86\Debug\SocketAsyncSvr.exe
 F:\git\Repos\Helper\IOCPDemo_NET_V4\NET_Source\NETIOCPSvr\obj\x86\Debug\SocketAsyncSvr.pdb
 F:\git\Repos\Helper\IOCPDemo_NET_V4\NET_Source\NETIOCPSvr\obj\x86\Debug\NETIOCPSvr.csprojResolveAssemblyReference.cache
+G:\Fuhai\GitWorkSpace\Helpers\IOCPDemo_NET_V4\Bin\SocketAsyncSvr.exe.config
+G:\Fuhai\GitWorkSpace\Helpers\IOCPDemo_NET_V4\NET_Source\NETIOCPSvr\obj\x86\Debug\SocketAsyncSvr.exe
+G:\Fuhai\GitWorkSpace\Helpers\IOCPDemo_NET_V4\NET_Source\NETIOCPSvr\obj\x86\Debug\SocketAsyncSvr.pdb
+G:\Fuhai\GitWorkSpace\Helpers\IOCPDemo_NET_V4\Bin\SocketAsyncSvr.exe
+G:\Fuhai\GitWorkSpace\Helpers\IOCPDemo_NET_V4\Bin\SocketAsyncSvr.pdb
+G:\Fuhai\GitWorkSpace\Helpers\IOCPDemo_NET_V4\NET_Source\NETIOCPSvr\obj\x86\Debug\NETIOCPSvr.csprojResolveAssemblyReference.cache

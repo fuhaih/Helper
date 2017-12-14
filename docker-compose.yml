@@ -1,8 +1,0 @@
-version: '2.1'
-
-services:
-  logcollection:
-    image: logcollection
-    build:
-      context: .\LogCollection
-      dockerfile: Dockerfile
