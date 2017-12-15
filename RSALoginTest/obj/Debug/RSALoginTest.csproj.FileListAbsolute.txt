@@ -1,4 +1,0 @@
-C:\Users\Sun\Downloads\RSALoginTest\bin\RSALoginTest.dll
-C:\Users\Sun\Downloads\RSALoginTest\bin\RSALoginTest.pdb
-C:\Users\Sun\Downloads\RSALoginTest\obj\Debug\RSALoginTest.dll
-C:\Users\Sun\Downloads\RSALoginTest\obj\Debug\RSALoginTest.pdb
