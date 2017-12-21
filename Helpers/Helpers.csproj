@@ -47,6 +47,7 @@
     <Compile Include="Algorithm.cs" />
     <Compile Include="ArrayHelper.cs" />
     <Compile Include="CMDHelper.cs" />
+    <Compile Include="CoordinateHelper.cs" />
     <Compile Include="DateTimeExtend\DateTimeRange.cs" />
     <Compile Include="DateTimeExtend\DateTimeHelper.cs" />
     <Compile Include="ExceptionHelper.cs" />
