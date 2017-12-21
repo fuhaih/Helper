@@ -15,7 +15,6 @@ namespace Helpers
         // ee = (a^2 - b^2) / a^2;  
         const double a = 6378245.0;
         const double ee = 0.00669342162296594323;
-
         /// <summary>
         /// gps坐标转换为火星坐标
         /// </summary>
@@ -42,7 +41,6 @@ namespace Helpers
             mgLat = wgLat + dLat;
             mgLon = wgLon + dLon;
         }
-
         static bool outOfChina(double lat, double lon)
         {
             if (lon < 72.004 || lon > 137.8347)
@@ -51,7 +49,6 @@ namespace Helpers
                 return true;
             return false;
         }
-
         static double transformLat(double x, double y)
         {
             double ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.Sqrt(Math.Abs(x));
@@ -60,7 +57,6 @@ namespace Helpers
             ret += (160.0 * Math.Sin(y / 12.0 * Math.PI) + 320 * Math.Sin(y * Math.PI / 30.0)) * 2.0 / 3.0;
             return ret;
         }
-
         static double transformLon(double x, double y)
         {
             double ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.Sqrt(Math.Abs(x));
