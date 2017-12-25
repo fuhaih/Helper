@@ -28,7 +28,7 @@ namespace Helpers
             }
             double dLat = transformLat(wgLon - 105.0, wgLat - 35.0);
             double dLon = transformLon(wgLon - 105.0, wgLat - 35.0);
-            double radLat = wgLat / 180.0 * pi;
+            double radLat = wgLat / 180.0 * Math.PI;
             double magic = Math.Sin(radLat);
             magic = 1 - ee * magic * magic;
             double sqrtMagic = Math.Sqrt(magic);

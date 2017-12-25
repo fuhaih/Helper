@@ -30,18 +30,7 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            Person person = new Person
-            {
-                birth = DateTime.Now,
-                id = 6666,
-                name = "fuhai",
-                son=new Son {
-                    birth=null,
-                    name="haizi"
-                }
-            };
-            string json = person.ToJson();
-            Console.WriteLine(json);
+            Convert.ToDouble(null);
             Console.ReadKey();
         }
 
