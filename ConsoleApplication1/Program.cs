@@ -15,9 +15,7 @@ using System.Threading;
 using System.Data;
 using Helpers;
 using System.Net;
-using System.Net.Sockets;
-using Quartz;
-using Quartz.Impl;
+using System.Xml.Serialization;
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -30,7 +28,17 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            Convert.ToDouble(null);
+            Person per = new Person()
+            {
+                birth = DateTime.Now,
+                id = 1,
+                name = "fuhai",
+                son=new Son {
+                    name="son",
+                    birth=DateTime.Now
+                }
+            };
+            per.XmlSerialize("test.xml");
             Console.ReadKey();
         }
 
@@ -118,55 +126,29 @@ namespace ConsoleApplication1
         }
     }
 
-    public class myservice
-    {
-        public DateTime initialTime;
-        public int poit=0;
-        public myservice()
-        {
-            initialTime = DateTime.Now;
-        }
-    }
-
-    public class test
-    {
-        public static myservice service = new myservice();
-        public test()
-        {
-            //service.poit = 1;
-        }
-
-        public void consoTime()
-        {
-            Console.WriteLine("service初始化时间:" + service.initialTime.ToString("hh:mm:ss.fffffff"));
-        }
-    }
-
-    /// 注意：要序列化为Binary数组的时候要添加Serializable特性
-    /// 但是，用Serializable特性的时候，如果类声明的是自动化属性，
-    /// 那么用DataContractJsonSerializer将对象序列化为json格式的时候会带有k__BackingField后缀
-    ///如"<name>k__BackingField":"fuhai"
-    ///解决方案，再添加DataContract和DataMembe特性
-
-    //[Serializable]
-    //[DataContract]
     public class Person
     {
-        //[DataMember]
+        
         public int id { get; set; }
         public string name { get; set; }
         //[DataMember]
         public DateTime birth { get; set; }
-
+        [XmlElement(ElementName = "myson")]
         public Son son { get; set; }
 
     }
     [DataContract]
     public class Son
     {
-        [DataMember(Name = "myName")]
+        [XmlElement(ElementName ="sonname")]
         public string name { get; set; }
-        [DataMember(Name = "date")]
+        public DateTime? birth { get; set; }
+        public Glasson glasson { get; set; }
+    }
+
+    public class Glasson
+    {
+        public string name { get; set; }
         public DateTime? birth { get; set; }
     }
 }
