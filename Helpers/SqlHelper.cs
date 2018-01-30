@@ -2627,18 +2627,13 @@ namespace Helpers
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = connectStr;
             conn.Open();
-
             SqlTransaction sqlbulkTransaction = conn.BeginTransaction();
-
             //请在插入数据的同时检查约束，如果发生错误调用sqlbulkTransaction事务  
             SqlBulkCopy copy = new SqlBulkCopy(conn, SqlBulkCopyOptions.CheckConstraints|SqlBulkCopyOptions.FireTriggers, sqlbulkTransaction);
-
-
             copy.DestinationTableName = strTableName;
             foreach (DataColumn dc in dataTable.Columns)
             {
                 copy.ColumnMappings.Add(dc.ColumnName, dc.ColumnName);
-
             }
             try
             {

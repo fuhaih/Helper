@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using FHLog;
 using System.Threading.Tasks;
+using System.Globalization;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -15,6 +16,8 @@ using System.Threading;
 using System.Data;
 using Helpers;
 using System.Net;
+using Polly;
+using Polly.Retry;
 using System.Xml.Serialization;
 namespace ConsoleApplication1
 {
@@ -28,17 +31,12 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            Person per = new Person()
-            {
-                birth = DateTime.Now,
-                id = 1,
-                name = "fuhai",
-                son=new Son {
-                    name="son",
-                    birth=DateTime.Now
-                }
+            Test test = new Test {
+                time = DateTime.Now
             };
-            per.XmlSerialize("test.xml");
+            string json = test.ToJsJson();
+            Test test1 = SerializeHelper.JsJsonTo<Test>(json);
+            //Console.WriteLine();
             Console.ReadKey();
         }
 
@@ -86,69 +84,26 @@ namespace ConsoleApplication1
             FHLoger.Warn("TESTWARN");            
         }
 
-        private static DataTable getTableFormat()
+        private static void TestPolicy()
         {
-            DateTime startTime = DateTime.Now.Date.AddHours(-2);
-            DateTime endTime = DateTime.Now.Date.AddHours(6);
-            DataTable result = new DataTable();
-            result.Columns.Add("Time").Caption="时间";
-            while (startTime < endTime)
-            {
-                result.Rows.Add(startTime.ToString("HH:mm"));
-                startTime = startTime.AddMinutes(15);
-            }
-            return result;
-        }
-        
-        static string GetDescValue(string desc,string key)
-        {
-            string result = "";
-            Regex reg = new Regex("{"+key+":(.*?)}");
-            Match match = reg.Match(desc);
-            if (match != null)
-            {
-                result = match.Groups[1].Value;
-            }
-            return result;
-            
+            var plicy = Policy.Handle<Exception>().Retry(3, (ex, count, context) => {
+                Console.WriteLine(string.Format("发生异常{0},尝试第{1}次", ex.Message, count));
+            });
+            plicy.Execute(() => {
+                Thread.Sleep(1000);
+                throw new Exception("retry");
+            });
         }
 
-        static void TestMvc()
+        private static void ExcelCopy()
         {
-            //HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://192.168.68.38:8081/shevcs/v1/notification_stationInfo");
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://192.168.68.38:8081/shevcs/v1/notification_stationInfo");
-            request.Method = "POST";
-            Stream stream = request.GetRequestStream();
-            StreamWriter writer = new StreamWriter(stream);
-            writer.WriteLine("test");
-            HttpWebResponse respon = (HttpWebResponse)request.GetResponse();
-            Stream responStream= respon.GetResponseStream();
+
         }
-    }
-
-    public class Person
-    {
-        
-        public int id { get; set; }
-        public string name { get; set; }
-        //[DataMember]
-        public DateTime birth { get; set; }
-        [XmlElement(ElementName = "myson")]
-        public Son son { get; set; }
 
     }
-    [DataContract]
-    public class Son
-    {
-        [XmlElement(ElementName ="sonname")]
-        public string name { get; set; }
-        public DateTime? birth { get; set; }
-        public Glasson glasson { get; set; }
-    }
 
-    public class Glasson
+    public class Test
     {
-        public string name { get; set; }
-        public DateTime? birth { get; set; }
+        public DateTime time { get; set; }
     }
 }

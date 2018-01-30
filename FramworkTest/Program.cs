@@ -14,9 +14,7 @@ namespace FramworkTest
         {
             ISchedulerFactory sf = new StdSchedulerFactory();
             IScheduler sched = sf.GetScheduler();
-            GroupMatcher<TriggerKey> match = GroupMatcher<TriggerKey>.GroupEquals("");
-            
-
+            GroupMatcher<TriggerKey> match = GroupMatcher<TriggerKey>.GroupEquals("");  
         }
     }
 }

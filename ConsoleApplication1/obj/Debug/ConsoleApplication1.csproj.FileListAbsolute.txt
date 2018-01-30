@@ -114,3 +114,6 @@ G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Quartz.xml
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.Resource1.resources
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.GenerateResource.Cache
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Polly.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Polly.pdb
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Polly.xml
