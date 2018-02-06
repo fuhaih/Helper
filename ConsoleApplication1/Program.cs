@@ -34,7 +34,7 @@ namespace ConsoleApplication1
                 FileStream fs = new FileStream(configpath, FileMode.OpenOrCreate);
             }
             IniParser parser = IniParser.Load(configpath);
-            parser.Write("Setting", "Test", "12344567");
+            parser.Write("Setting", "Test", "dfshofgudis");
             //写入配置
             //ProfileWriteValue("Settings", "DefaultSerialPort", "8327", configpath);
             Dictionary<string, string> result = parser.GetKeyValues("Setting");

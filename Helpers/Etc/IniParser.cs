@@ -52,6 +52,15 @@ namespace Helpers.Etc
             WritePrivateProfileString(section, key, value,this.path);
         }
         /// <summary>
+        /// 删除配置
+        /// </summary>
+        /// <param name="section">节点</param>
+        /// <param name="key">键</param>
+        public void Delete(string section, string key)
+        {
+            WritePrivateProfileString(section, key, null, this.path);
+        }
+        /// <summary>
         /// 读取配置
         /// </summary>
         /// <param name="section">节点</param>
@@ -63,6 +72,10 @@ namespace Helpers.Etc
             int success=GetPrivateProfileString(section, key, "", sb, this.MaxLength, this.path);
             return success==0?null:sb.ToString().Trim();
         }
+        /// <summary>
+        /// 获取所有的节点
+        /// </summary>
+        /// <returns></returns>
         public string[] GetSections()
         {
             byte[] buffer = new byte[this.MaxLength];
@@ -77,6 +90,11 @@ namespace Helpers.Etc
             }
             return success == 0 ? null : result;
         }
+        /// <summary>
+        /// 获取指定节点下的所有键值对
+        /// </summary>
+        /// <param name="section"></param>
+        /// <returns></returns>
         public Dictionary<string,string> GetKeyValues(string section)
         {
             byte[] buffer = new byte[this.MaxLength];
