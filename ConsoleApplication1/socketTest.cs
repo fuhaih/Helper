@@ -31,7 +31,7 @@ namespace ConsoleApplication1
             //clientSocket.SendAsync(e);
             clientSocket.Send(sendBytes, SocketFlags.None);
             //receive message
-            string recStr = "";
+            //string recStr = "";
             //byte[] recBytes = new byte[4096];
             //int bytes = clientSocket.Receive(recBytes, recBytes.Length, 0);
             //recStr += Encoding.ASCII.GetString(recBytes, 0, bytes);

@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading;
 using System.Data;
 using Helpers;
+using Helpers.Etc;
 using System.Net;
 using Polly;
 using Polly.Retry;
@@ -25,18 +26,19 @@ namespace ConsoleApplication1
 
     class Program
     {
-        [MethodImpl(MethodImplOptions.InternalCall), SecurityCritical]
-        [DllImport("kernel32.dll")]
-        internal static extern string FastAllocateString(int length);
-
         static void Main(string[] args)
         {
-            Test test = new Test {
-                time = DateTime.Now
-            };
-            string json = test.ToJsJson();
-            Test test1 = SerializeHelper.JsJsonTo<Test>(json);
-            //Console.WriteLine();
+            string configpath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
+            if (!File.Exists(configpath))
+            {
+                FileStream fs = new FileStream(configpath, FileMode.OpenOrCreate);
+            }
+            IniParser parser = IniParser.Load(configpath);
+            parser.Write("Setting", "Test", "12344567");
+            //写入配置
+            //ProfileWriteValue("Settings", "DefaultSerialPort", "8327", configpath);
+            Dictionary<string, string> result = parser.GetKeyValues("Setting");
+            //Console.WriteLine(value);
             Console.ReadKey();
         }
 
