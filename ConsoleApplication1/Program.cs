@@ -29,15 +29,14 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             string configpath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
-            if (!File.Exists(configpath))
-            {
-                FileStream fs = new FileStream(configpath, FileMode.OpenOrCreate);
-            }
             IniParser parser = IniParser.Load(configpath);
-            parser.Write("Setting", "Test", "dfshofgudis");
+            var success=parser.Delete("Setting", "Test");
+            parser.Write("setting", "port", "465");
+            parser.Delete("setting", "port");
+            string[] sections= parser.GetSections();
             //写入配置
             //ProfileWriteValue("Settings", "DefaultSerialPort", "8327", configpath);
-            Dictionary<string, string> result = parser.GetKeyValues("Setting");
+            string port = parser.ReadString("setting", "port");
             //Console.WriteLine(value);
             Console.ReadKey();
         }

@@ -33,6 +33,11 @@ namespace Helpers.Etc
         {
             this.path = path;
         }
+        /// <summary>
+        /// 加载配置文件，如果文件不存在，创建新的配置文件
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static IniParser Load(string path)
         {
             if (!File.Exists(path))
@@ -47,18 +52,18 @@ namespace Helpers.Etc
         /// <param name="section">节点</param>
         /// <param name="key">键</param>
         /// <param name="value">值</param>
-        public void Write(string section, string key, string value)
+        public long Write(string section, string key, string value)
         {
-            WritePrivateProfileString(section, key, value,this.path);
+            return WritePrivateProfileString(section, key, value,this.path);
         }
         /// <summary>
         /// 删除配置
         /// </summary>
         /// <param name="section">节点</param>
         /// <param name="key">键</param>
-        public void Delete(string section, string key)
+        public long  Delete(string section, string key)
         {
-            WritePrivateProfileString(section, key, null, this.path);
+            return WritePrivateProfileString(section, key, null, this.path);
         }
         /// <summary>
         /// 读取配置
