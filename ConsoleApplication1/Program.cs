@@ -1,25 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Text.RegularExpressions;
-using System.Security;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using FHLog;
-using System.Threading.Tasks;
-using System.Globalization;
-using System.Linq;
-using System.IO;
 using System.Text;
 using System.Threading;
-using System.Data;
-using Helpers;
-using Helpers.Etc;
-using System.Net;
 using Polly;
-using Polly.Retry;
 using System.Xml.Serialization;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -28,17 +15,28 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            string configpath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
-            IniParser parser = IniParser.Load(configpath);
-            var success=parser.Delete("Setting", "Test");
-            parser.Write("setting", "port", "465");
-            parser.Delete("setting", "port");
-            string[] sections= parser.GetSections();
-            //写入配置
-            //ProfileWriteValue("Settings", "DefaultSerialPort", "8327", configpath);
-            string port = parser.ReadString("setting", "port");
-            //Console.WriteLine(value);
+            
+
+            int count = 0;
+            Stack<int> stacks = new Stack<int>();
+
+            Interlocked.CompareExchange(ref count, 1, 1);
+            //List<Task> tasks = new List<Task>();
+            //for (int i = 0; i < 10000; i++)
+            //{
+            //    Task task= Task.Factory.StartNew(()=> {
+            //        Interlocked.CompareExchange(ref count,)
+            //    });
+            //    tasks.Add(task);
+            //}
+            //Task.WaitAll(tasks.ToArray());
+            Console.WriteLine(count);
             Console.ReadKey();
+        }
+        public static Test Copy(Test test)
+        {
+            Test result = test;
+            return result;
         }
 
         private static string Base64(byte[] buffer)
@@ -90,6 +88,7 @@ namespace ConsoleApplication1
             var plicy = Policy.Handle<Exception>().Retry(3, (ex, count, context) => {
                 Console.WriteLine(string.Format("发生异常{0},尝试第{1}次", ex.Message, count));
             });
+            Policy.Handle<Exception>();
             plicy.Execute(() => {
                 Thread.Sleep(1000);
                 throw new Exception("retry");
@@ -105,6 +104,17 @@ namespace ConsoleApplication1
 
     public class Test
     {
-        public DateTime time { get; set; }
+        public string name { get; set; }
+        public Parent people { get; set;}
+    }
+    [XmlInclude(typeof(Children))]
+    public class Parent
+    {
+        public string Name { get; set; }
+    }
+
+    public class Children : Parent
+    {
+        public string MyName { get; set;}
     }
 }

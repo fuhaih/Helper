@@ -239,6 +239,9 @@ namespace Helpers
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
                 serializer.Serialize(stream, t);
             }
+            catch (Exception ex)
+            {
+            }
             finally
             {
                 stream.Close();
