@@ -6,7 +6,6 @@ using Polly;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -15,11 +14,11 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            
-
             int count = 0;
+            int value = 0;
+            
             Stack<int> stacks = new Stack<int>();
-
+            bool bl= ReferenceEquals(count, value);
             Interlocked.CompareExchange(ref count, 1, 1);
             //List<Task> tasks = new List<Task>();
             //for (int i = 0; i < 10000; i++)
@@ -30,7 +29,7 @@ namespace ConsoleApplication1
             //    tasks.Add(task);
             //}
             //Task.WaitAll(tasks.ToArray());
-            Console.WriteLine(count);
+            Console.WriteLine("".Equals(""));
             Console.ReadKey();
         }
         public static Test Copy(Test test)
