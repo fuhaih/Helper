@@ -117,3 +117,10 @@ G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\obj\Debug\ConsoleApplication1.
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Polly.dll
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Polly.pdb
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Polly.xml
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Polly.dll
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Polly.pdb
+F:\git\Repos\Helper\ConsoleApplication1\bin\Debug\Polly.xml
+F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.Resource1.resources
+F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.GenerateResource.cache
+F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.CoreCompileInputs.cache
+F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.CopyComplete
