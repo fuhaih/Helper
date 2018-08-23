@@ -2590,6 +2590,10 @@ namespace Helpers
 
     public sealed class SqlHelperExtend
     {
+        //批量删除数据思路
+        //创建一个临时表，批量插入数据到该表
+        //通过sql语句join联合删除
+
         /// <summary>
         /// 批量插入数据
         /// </summary>
