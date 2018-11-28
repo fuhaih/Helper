@@ -20,6 +20,6 @@ G:\Fuhai\GitWorkSpace\Helpers\FHLog\bin\Debug\FHLog.dll
 G:\Fuhai\GitWorkSpace\Helpers\FHLog\bin\Debug\FHLog.pdb
 G:\Fuhai\GitWorkSpace\Helpers\FHLog\obj\Debug\FHLog.dll
 G:\Fuhai\GitWorkSpace\Helpers\FHLog\obj\Debug\FHLog.pdb
-G:\Fuhai\GitWorkSpace\Helpers\FHLog\obj\Debug\FHLog.csprojResolveAssemblyReference.cache
 F:\git\Repos\Helper\FHLog\obj\Debug\FHLog.csprojResolveAssemblyReference.cache
 F:\git\Repos\Helper\FHLog\obj\Debug\FHLog.csproj.CoreCompileInputs.cache
+G:\Fuhai\GitWorkSpace\Helpers\FHLog\obj\Debug\FHLog.csprojResolveAssemblyReference.cache

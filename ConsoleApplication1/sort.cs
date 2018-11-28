@@ -8,7 +8,14 @@ namespace ConsoleApplication1
 {
     public static class sort
     {
-
+        /** 思路：两两比较，循环n(n-1)次
+        */
+        /// <summary>
+        /// 冒泡排序
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static IList<T> BubbleSort<T>(this IList<T> list) where T : IComparable
         {
             for (int i = 0; i < list.Count; i++)
@@ -26,6 +33,16 @@ namespace ConsoleApplication1
             return list;
         }
 
+        /**思路：从n个数中查找最小值下标，该下标的值和下标为0的值替换
+        从剩下的n-1个数中查找最小值下标，该下标的值和下标为1的值替换
+        以此类推
+        */
+        /// <summary>
+        /// 选择排序
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static IList<T> SelectSort<T>(this IList<T> list) where T : IComparable
         {
             for (int i = 0; i < list.Count()-1; i++)
@@ -49,6 +66,15 @@ namespace ConsoleApplication1
             return list;
         }
 
+        /**
+         * 思路：从数组第二个数开始，往前进行插入操作，
+         */
+        /// <summary>
+        /// 插入排序
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static IList<T> InsertSort<T>(this IList<T> list) where T : IComparable
         {
             for (int i = 1; i < list.Count(); i++)
@@ -63,6 +89,7 @@ namespace ConsoleApplication1
             }
             return list;
         }
+
         /// <summary>
         /// 快速排序(左右指针法)
         /// </summary>

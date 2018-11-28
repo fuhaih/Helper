@@ -124,3 +124,13 @@ F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.Resource1.
 F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.GenerateResource.cache
 F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.CoreCompileInputs.cache
 F:\git\Repos\Helper\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.CopyComplete
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Core.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Interfaces.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Linq.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.PlatformServices.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Windows.Threading.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Core.xml
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Interfaces.xml
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Linq.xml
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.PlatformServices.xml
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Windows.Threading.xml

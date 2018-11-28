@@ -15,28 +15,27 @@ namespace Helpers
         /// <param name="t"></param>
         /// <param name="partLength">每组数组的长度</param>
         /// <returns>差分后的交错数组</returns>
-        public static T[][] Split<T>(this IEnumerable<T> t, int partLength)
+        public static T[][] Split<T>(this IEnumerable<T> list, int partLength)
         {
-            if (t.Count() == 0)
+            if (partLength <= 0)
+            {
+                throw new ArgumentOutOfRangeException("partLength必须要大于0");
+            }
+            if (list == null || list.Count() == 0)
             {
                 return new T[0][];
             }
-            List<T> buffer = t.ToList();
-            int length = t.Count();
-            int count = (length - 1) / partLength + 1;
-            int remainder = length % partLength;
+            int count = (list.Count() - 1) / partLength + 1;
             T[][] result = new T[count][];
             for (int i = 0; i < count; i++)
             {
-                if (i == count - 1)
+                int startindex = i * partLength;
+                int secondleve = Math.Min(startindex + partLength, list.Count());
+                int secondcount = secondleve - startindex;
+                result[i] = new T[secondcount];
+                for (int j = 0; j < secondcount; j++)
                 {
-                    result[i] = new T[remainder == 0 ? partLength : remainder];
-                    buffer.CopyTo(i * partLength, result[i], 0, remainder == 0 ? partLength : remainder);
-                }
-                else
-                {
-                    result[i] = new T[partLength];
-                    buffer.CopyTo(i * partLength, result[i], 0, partLength);
+                    result[i][j] = list.ElementAt(startindex + j);
                 }
             }
             return result;
