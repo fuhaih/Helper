@@ -31,7 +31,8 @@ namespace ConsoleApplication1
                 return size;
             }
         }
-
+        //这个是用来处理倒排的，获取倒排优先队列，可以设置为ConparaResult=r=>-r;
+        //GetPriorityQueueDesc就是这么来的。
         private Func<int, int> ConparaResult = r => r;
         //private int modCount = 0;
 
