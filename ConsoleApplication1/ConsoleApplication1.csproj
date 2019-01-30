@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArraySort.cs" />
+    <Compile Include="AsyncPump.cs" />
     <Compile Include="DesignPattern\Singleton.cs" />
     <Compile Include="PriorityQueue.cs" />
     <Compile Include="Program.cs" />
@@ -119,6 +120,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="SingleThreadSynchronizationContext.cs" />
     <Compile Include="socketTest.cs" />
     <Compile Include="sort.cs" />
     <Compile Include="TaskTest.cs" />

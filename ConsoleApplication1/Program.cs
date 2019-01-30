@@ -21,6 +21,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.IO;
 using System.Text.RegularExpressions;
+using Microsoft.Threading;
 
 namespace ConsoleApplication1
 {
@@ -31,6 +32,12 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
 
+            AsyncPump.Run(async delegate
+            {
+
+                await DemoAsync().ConfigureAwait(false);
+
+            });
             Console.ReadKey();
             Regex reg = new Regex("\"\\w+\"\\s*:\\s*(\\w|\")+");
             reg.Replace("", match =>
@@ -39,7 +46,27 @@ namespace ConsoleApplication1
             });
 
         }
+        static async Task DemoAsync()
+        {
 
+            var d = new Dictionary<int, int>();
+
+            for (int i = 0; i < 10000; i++)
+            {
+
+                int id = Thread.CurrentThread.ManagedThreadId;
+
+                int count;
+
+                d[id] = d.TryGetValue(id, out count) ? count + 1 : 1;
+
+                await Task.Run(()=> { });
+
+            }
+
+            foreach (var pair in d) Console.WriteLine(pair);
+
+        }
         public async Task test()
         {
             Task task = new Task(()=> { });
