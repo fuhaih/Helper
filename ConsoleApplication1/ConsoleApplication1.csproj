@@ -124,6 +124,7 @@
     <Compile Include="socketTest.cs" />
     <Compile Include="sort.cs" />
     <Compile Include="TaskTest.cs" />
+    <Compile Include="timeControl\IdWorker.cs" />
     <Compile Include="timeControl\timeControler.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,10 @@ using System.Reactive.Subjects;
 using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.Threading;
+using ConsoleApplication1.timeControl;
+using System.Xml;
+using System.Linq;
+using Helpers;
 
 namespace ConsoleApplication1
 {
@@ -32,20 +36,16 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
 
-            AsyncPump.Run(async delegate
-            {
-
-                await DemoAsync().ConfigureAwait(false);
-
-            });
+            Console.WriteLine(Algorithm.Manacher("waabwswfd"));
+            Console.WriteLine(Algorithm.Manacher("sdfisjodsfoiwfuhaioiahufsdjoiuds"));
+            "sdfisjodsfoiwfuhaioiahufsdjoiuds".IndexOf("fuhaio")
             Console.ReadKey();
-            Regex reg = new Regex("\"\\w+\"\\s*:\\s*(\\w|\")+");
-            reg.Replace("", match =>
-            {
-                return "";
-            });
 
         }
+
+
+        
+
         static async Task DemoAsync()
         {
 
@@ -67,6 +67,7 @@ namespace ConsoleApplication1
             foreach (var pair in d) Console.WriteLine(pair);
 
         }
+
         public async Task test()
         {
             Task task = new Task(()=> { });

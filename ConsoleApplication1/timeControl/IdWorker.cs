@@ -37,11 +37,11 @@ namespace ConsoleApplication1.timeControl
             // sanity check for workerId
             if (workerId > maxWorkerId || workerId < 0)
             {
-                throw new ArgumentException(string.Format("worker Id can't be greater than %d or less than 0", maxWorkerId));
+                throw new ArgumentException(string.Format("worker Id can't be greater than {0} or less than 0", maxWorkerId));
             }
             if (datacenterId > maxDatacenterId || datacenterId < 0)
             {
-                throw new ArgumentException(string.Format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
+                throw new ArgumentException(string.Format("datacenter Id can't be greater than {0} or less than 0", maxDatacenterId));
             }
             this.workerId = workerId;
             this.datacenterId = datacenterId;

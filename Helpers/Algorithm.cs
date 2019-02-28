@@ -55,7 +55,54 @@ namespace Helpers
         }
         #endregion
 
+        #region 回文数 manacher算法
+        public static string Manacher(string s)
+        {
+            //预处理
+            StringBuilder builder = new StringBuilder();
+            builder.Append("#");
+            for (int i = 0; i < s.Length; i++)
+            {
+                builder.Append("#" + s[i]);
+            }
+            builder.Append("#");
+            string rs = builder.ToString();
 
+            int[] RL = new int[rs.Length];
+            int maxright = 0, pos = 0, maxlen = 0, maxpos = 0;
+
+            for (int i = 0; i < rs.Length; i++)
+            {
+                if (i < maxright)
+                {
+                    RL[i] = Math.Min(RL[2 * pos - i], maxright - i);
+                }
+                else
+                {
+                    RL[i] = 1;
+                }
+
+                while (i - RL[i] > 0 && i + RL[i] < rs.Length && rs[i - RL[i]] == rs[i + RL[i]])
+                {
+                    RL[i]++;
+                }
+
+                if (RL[i] + i - 1 > maxright)
+                {
+                    maxright = RL[i] + i - 1;
+                    pos = i;
+                }
+                if (maxlen < RL[i])
+                {
+                    maxlen = RL[i];
+                    maxpos = i;
+                }
+
+            }
+            int realstart = (maxpos - maxlen + 1) / 2;
+            return s.Substring(realstart, maxlen - 1);
+        }
+        #endregion
 
     }
 }
