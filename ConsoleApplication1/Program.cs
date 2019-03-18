@@ -35,16 +35,10 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine(Algorithm.Manacher("waabwswfd"));
-            Console.WriteLine(Algorithm.Manacher("sdfisjodsfoiwfuhaioiahufsdjoiuds"));
-            "sdfisjodsfoiwfuhaioiahufsdjoiuds".IndexOf("fuhaio")
+            Console.WriteLine("1234".IndexOf("123"));
             Console.ReadKey();
 
         }
-
-
-        
 
         static async Task DemoAsync()
         {
@@ -86,6 +80,7 @@ namespace ConsoleApplication1
         {
             await test();
         }
+
         private static string Base64(byte[] buffer)
         {
             string[] base64 = new string[] {
@@ -109,6 +104,7 @@ namespace ConsoleApplication1
             }
             return result.ToString();
         }
+
     }
     public interface IAwaitable<out TResult>
     {

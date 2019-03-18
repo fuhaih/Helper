@@ -2658,18 +2658,24 @@ namespace Helpers
 
         public static void AdaptUpdate(string connectStr, string strTableName, DataTable dataTable)
         {
-            SqlConnection con = new SqlConnection(connectStr);
-            SqlCommand com = new SqlCommand();
-            com.Connection = con;
-            SqlDataAdapter adapt = new SqlDataAdapter(com);
-            SqlCommandBuilder builder = new SqlCommandBuilder(adapt);
-            builder.ConflictOption = ConflictOption.OverwriteChanges;
-            con.Open();
-            adapt.UpdateBatchSize = 5000;
-            adapt.SelectCommand.Transaction = con.BeginTransaction();
-            adapt.SelectCommand.CommandText = dataTable.ExtendedProperties["SQL"].ToString();
-            adapt.Update(dataTable);
-            adapt.SelectCommand.Transaction.Commit();
+            dataTable.TableName = strTableName;
+            using (SqlConnection con = new SqlConnection(connectStr))
+            {
+                SqlCommand com = new SqlCommand();
+                com.Connection = con;
+                SqlDataAdapter adapt = new SqlDataAdapter(com);
+                SqlCommandBuilder builder = new SqlCommandBuilder(adapt);
+                builder.ConflictOption = ConflictOption.OverwriteChanges;
+                con.Open();
+                adapt.UpdateBatchSize = 5000;
+                adapt.SelectCommand.Transaction = con.BeginTransaction();
+                //前提是要有主键信息
+                //如果 select * FROM +strTableName 没有返回任何关于此table的主键信息
+                //SqlCommandBuilder是无法生成update和delete语句的
+                adapt.SelectCommand.CommandText = "select * FROM " + strTableName;
+                adapt.Update(dataTable);
+                adapt.SelectCommand.Transaction.Commit();
+            }
         }
     }
 
