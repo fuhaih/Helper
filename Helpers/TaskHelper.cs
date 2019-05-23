@@ -18,12 +18,25 @@ namespace Helpers
             return await task;
         }
 
-        //该函数的作用是隐藏真正的异常信息，异常信息的记录可以在action方法中进行
-        //然后再抛出一个简单的异常信息，比如果“保存失败，联系管理员”
-        //program类中会统一处理这些异常，通过弹框方式显示给用户看
-        public static ExcetpionTaskBuilder Catch(this Task task, Action<Exception> catchAction)
+        /// <summary>
+        /// 捕获异常
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="catchAction"></param>
+        /// <returns></returns>
+        public static ExceptionTaskBuilder Catch(this Task task, Action<Exception> catchAction)
         {
-            return new ExcetpionTaskBuilder(task, catchAction);
+            return new ExceptionTaskBuilder(task, catchAction);
+        }
+
+        /// <summary>
+        /// 捕获再抛出异常
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        public static ExceptionTaskThrowBuilder CatchThrow(this Task task)
+        {
+            return new ExceptionTaskThrowBuilder(task);
         }
 
         public static ExcetpionTaskBuilder<T> Catch<T>(this Task<T> task, Func<Exception, Exception> catchfunc)
@@ -31,6 +44,13 @@ namespace Helpers
             return new ExcetpionTaskBuilder<T>(task, catchfunc);
         }
 
+        /// <summary>
+        /// 捕获异常
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="task"></param>
+        /// <param name="catchfunc"></param>
+        /// <returns></returns>
         public static ExcetpionTaskReturnBuilder<T> CatchReturn<T>(this Task<T> task, Func<Exception, T> catchfunc)
         {
             return new ExcetpionTaskReturnBuilder<T>(task, catchfunc);
@@ -41,11 +61,11 @@ namespace Helpers
     /// 捕获异常，该异步没有返回值
     /// 所以捕获到异常后是继续向上抛出还是处理异常，由回调函数决定
     /// </summary>
-    public class ExcetpionTaskBuilder
+    public class ExceptionTaskBuilder
     {
         private Action<Exception> CatchAction;
         private Task CatchTask;
-        public ExcetpionTaskBuilder(Task task, Action<Exception> catchAction)
+        public ExceptionTaskBuilder(Task task, Action<Exception> catchAction)
         {
             this.CatchTask = task;
             this.CatchAction = catchAction;
@@ -59,6 +79,30 @@ namespace Helpers
             catch (Exception ex)
             {
                 CatchAction(ex);
+            }
+            finally
+            {
+                finallyAction?.Invoke();
+            }
+        }
+    }
+
+    public class ExceptionTaskThrowBuilder
+    {
+        private Task CatchTask;
+        public ExceptionTaskThrowBuilder(Task task)
+        {
+            this.CatchTask = task;
+        }
+        public async Task Finally(Action finallyAction = null)
+        {
+            try
+            {
+                await CatchTask;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {

@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 namespace Helpers
 {
 
@@ -16,6 +19,18 @@ namespace Helpers
             }
             result.Position = 0;
             return result;
+        }
+
+        public static string GetRealPath(string path)
+        {
+            Regex regex = new Regex(@"^[a-zA-Z]:\\");
+            if(regex.IsMatch(path)) return path;
+            string basepath = AppDomain.CurrentDomain.BaseDirectory;
+            string[] segments=path.Split('\\','/');
+            string[] realPathSegment = new string[segments.Length + 1];
+            realPathSegment[0] = basepath;
+            segments.CopyTo(realPathSegment, 1);
+            return Path.Combine(realPathSegment);
         }
     }
 }

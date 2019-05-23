@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHLog", "FHLog\FHLog.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FramworkTest", "FramworkTest\FramworkTest.csproj", "{76AA0D76-10BC-4BDB-BAC7-B37C2199D6A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpersTest", "HelpersTest\HelpersTest.csproj", "{786A21C6-3763-47B3-A61A-C122F47702BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -105,6 +107,26 @@ Global
 		{76AA0D76-10BC-4BDB-BAC7-B37C2199D6A3}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 		{76AA0D76-10BC-4BDB-BAC7-B37C2199D6A3}.SingleImage|x86.ActiveCfg = Release|Any CPU
 		{76AA0D76-10BC-4BDB-BAC7-B37C2199D6A3}.SingleImage|x86.Build.0 = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.CD_ROM|x86.Build.0 = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.Debug|x86.Build.0 = Debug|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.DVD-5|x86.Build.0 = Debug|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.Release|x86.ActiveCfg = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.Release|x86.Build.0 = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.SingleImage|x86.ActiveCfg = Release|Any CPU
+		{786A21C6-3763-47B3-A61A-C122F47702BD}.SingleImage|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

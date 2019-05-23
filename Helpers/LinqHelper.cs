@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Reflection;
+using System.Linq.Expressions;
+using Helpers.Orm;
+
 namespace Helpers
 {
     public static class LinqHelper
@@ -95,6 +98,66 @@ namespace Helpers
                 }
                 return current;
             }
+        }
+
+        public static Func<TIn, TOut> GetMappingFunc<TIn, TOut>(this TIn objin)
+        {
+            ParameterExpression input = Expression.Parameter(typeof(TIn), "p");
+            List<MemberBinding> memberBindings = new List<MemberBinding>();
+
+            //绑定属性
+            PropertyInfo[] outPropertyInfos = typeof(TOut).GetProperties();
+            foreach (var prop in outPropertyInfos)
+            {
+                PropertyInfo inPropertyInfo = typeof(TIn).GetProperty(prop.Name);
+                if (inPropertyInfo != null)
+                {
+                    MemberExpression property = Expression.Property(input, inPropertyInfo);
+                    MemberBinding memberBinding = Expression.Bind(prop, property);
+                    memberBindings.Add(memberBinding);
+                }
+            }
+
+            //绑定字段
+            FieldInfo[] outFieldInfos = typeof(TOut).GetFields();
+            foreach (var field in outFieldInfos)
+            {
+                FieldInfo inFieldInfo = typeof(TIn).GetField(field.Name);
+                if (inFieldInfo != null)
+                {
+                    MemberExpression fieldInfo = Expression.Field(input, inFieldInfo);
+                    MemberBinding memberBinding = Expression.Bind(field, fieldInfo);
+                    memberBindings.Add(memberBinding);
+                }
+            }
+
+            MemberInitExpression init = Expression.MemberInit(Expression.New(typeof(TOut)), memberBindings.ToArray());
+            Expression<Func<TIn, TOut>> lambda = Expression.Lambda<Func<TIn, TOut>>(init, input);
+            Func<TIn, TOut> func = lambda.Compile();
+            return func;
+        }
+
+        /// <summary>
+        /// 把一个类型的对象映射到另一个类型中
+        /// </summary>
+        /// <typeparam name="TIn"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="objin"></param>
+        /// <returns></returns>
+        public static TOut MappingTo<TIn, TOut>(this TIn objin)
+        {
+            //也可以直接通过反射来完成
+            //通过lambda来实现的优点:
+            //lambda可以编译成Func<>,然后反复使用，无需重复构造。
+            Func<TIn, TOut> func = objin.GetMappingFunc<TIn, TOut>();
+            return func.Invoke(objin);
+        }
+
+        public static string Query<T>(this T obj, Expression<Func<T, bool>> filter)
+        {
+            CustomVisitor visitor = new CustomVisitor();
+            Expression epress = visitor.Visit(filter);
+            return visitor.ToSqlCommand();
         }
     }
 }

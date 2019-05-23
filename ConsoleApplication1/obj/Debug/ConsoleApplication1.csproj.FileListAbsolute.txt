@@ -134,3 +134,9 @@ G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Inte
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Linq.xml
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.PlatformServices.xml
 G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\System.Reactive.Windows.Threading.xml
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Microsoft.Office.Interop.Word.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\office.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Microsoft.Vbe.Interop.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\stdole.dll
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\Microsoft.Office.Interop.Word.xml
+G:\Fuhai\GitWorkSpace\Helpers\ConsoleApplication1\bin\Debug\office.xml
