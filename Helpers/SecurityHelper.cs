@@ -29,7 +29,24 @@ namespace Helpers
             //result = sb.ToString();
             return retVal;
         }
-
+        /// <summary>
+        /// 转换为2位16进制字符串格式
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string ToX2(this byte[] bytes)
+        {
+            /**
+             * 每个字节8位，可以表示为两个四位
+             * 1111 1111
+             */
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                sb.Append(bytes[i].ToString("x2"));
+            }
+            return sb.ToString();
+        }
         /// <summary>
         /// 计算HMACMD5哈希序列
         /// </summary>

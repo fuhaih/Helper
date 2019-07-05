@@ -159,5 +159,52 @@ namespace Helpers
             Expression epress = visitor.Visit(filter);
             return visitor.ToSqlCommand();
         }
+
+        public static T MaxOne<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> func) where TResult : IComparable
+        {
+            return collection.CompareOne(func);
+        }
+
+        public static T MinOne<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> func) where TResult : IComparable
+        {
+            return collection.CompareOne(func, false);
+        }
+
+        private static T CompareOne<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> func, bool desc = true) where TResult : IComparable
+        {
+            /**结果表达式
+             * compareResult 结果表达式
+             * desc=true : bl => bl;返回原比较结果，也就能取出最大值
+             * desc=false : bl => ！bl;返回原比较结果的非，也就能取出最小值
+             */
+            Func<bool, bool> compareResult = desc ? new Func<bool, bool>(bl => bl) : new Func<bool, bool>(bl => !bl);
+
+            T tSource = default(T);
+            TResult tResult = default(TResult);
+            bool flag = false;
+            foreach (T current in collection)
+            {
+                if (flag)
+                {
+                    if (compareResult(func(current).CompareTo(tResult) > 0))
+                    {
+                        tSource = current;
+                        tResult = func(tSource);
+                    }
+                }
+                else
+                {
+                    tSource = current;
+                    tResult = func(tSource);
+                    flag = true;
+                }
+            }
+            if (flag)
+            {
+                return tSource;
+            }
+            throw new InvalidOperationException("NoElements");
+        }
+
     }
 }

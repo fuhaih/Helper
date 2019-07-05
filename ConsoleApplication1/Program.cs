@@ -14,6 +14,14 @@ using System.Reflection;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Diagnostics;
+using System.Xml;
+using System.Linq.Expressions;
+using Helpers.Orm;
+using Polly;
+using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
+
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -22,32 +30,94 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            int value = (int)Math.Pow(2,1);
-            Console.WriteLine(Convert.ToInt16("1000", 2));
-            //List<Parent> parents = new List<Parent>();
-            //parents.Select(m=> { m.Age = 1;return m; });
-
-            //Parent parent = new Parent
-            //{
-            //    Age = 40,
-            //    Desc = "test",
-            //    Name = "huang"
+            byte byte2 = 128;
+            Console.WriteLine(127&byte2);
+            Console.WriteLine(128&byte2);
+            Console.WriteLine(130&byte2);
+            MethodInfo info;
+            //List<TestTree> test = new List<TestTree>() {
+            //    new TestTree { num=0,parentnum=0},
+            //    new TestTree { num=1,parentnum=1},
+            //    new TestTree { num=2,parentnum=0},
+            //    new TestTree { num=3,parentnum=0},
+            //    new TestTree { num=4,parentnum=1},
+            //    new TestTree { num=5,parentnum=1},
+            //    new TestTree { num=6,parentnum=4},
             //};
 
-            //Sun sun = parent.MappingTo<Parent, Sun>();
-            //string filter = parent.Query(m =>  m.Name == sun.Name);
-            //Console.WriteLine(filter);
-            //Console.WriteLine(CountAndSay(1));
-            //Console.WriteLine(CountAndSay(2));
-            //Console.WriteLine(CountAndSay(3));
-            
-            Console.WriteLine(CountAndSay(4));
-            Console.WriteLine(CountAndSay(5));
+            //List<TestTree> result = GetTree(test,m=>m.num, m=>m.parentnum);
+            //var types = AppDomain.CurrentDomain.GetAssemblies()
+            //.SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IService))))
+            //.ToArray();
+            //var police = Policy.Handle<Exception>()
+            //.RetryAsync(1, async (e, i) =>
+            //{
+            //    await Task.Run(()=>Console.WriteLine("重试"));
+            //});
+            //Task.Factory.StartNew(async()=> {
+            //    try
+            //    {
+            //        await police.ExecuteAsync(async() =>
+            //        {
+            //            await Task.Delay(0);
+            //            throw new Exception("测试异常");
+            //        });
+            //    }
+            //    catch (Exception ex)
+            //    {
 
+            //    }
+            //    Console.WriteLine("完成");
+            //});
 
             Console.ReadKey();
         }
 
+        static int SingleNumber(int[] nums)
+        {
+            int result = nums[0];
+            for (int i = 1; i < nums.Length; i++)
+            {
+                result = result | nums[i];
+            }
+            for (int i = 0; i < nums.Length; i++)
+            {
+                result = result ^ nums[i];
+            }
+            for (int i = 0; i < nums.Length; i++)
+            {
+                result = result ^ nums[i];
+            }
+            return result;
+        }
+
+        static void TestBaseLine()
+        {
+            string planID = "PL0000000032";
+            string alID = "AL0001";
+            long timespan = DateTime.Now.Ticks;
+            string token= (timespan.ToString() + "key").ToMD5().ToX2();
+            string url = string.Format("http://localhost:3756/api/vpp/{0}/{1}/{2}/{3}/{4}", planID,alID, "Default", timespan, token);
+
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            request.Method = "GET";
+            HttpWebResponse respon =(HttpWebResponse)request.GetResponse();
+        }
+
+        static float sqrt(float x)
+        {
+            if (x == 0) return 0;
+            float result = x;
+            float xhalf = 0.5f * result;
+            int i = (int)result;
+            i = 0x5f375a86 - (i >> 1); // what the fuck? 
+            result = (float)i;
+            result = result * (1.5f - xhalf * result * result); // Newton step, repeating increases accuracy 
+            result = result * (1.5f - xhalf * result * result);
+            return 1.0f / result;
+
+
+        }
 
         static bool IsPalindrome(int x)
         {
@@ -59,8 +129,8 @@ namespace ConsoleApplication1
                 result = result * 10 + (x % 10);
                 x = x / 10;
             } while (x > 0);
-            
-            return result== compare;
+
+            return result == compare;
         }
 
         static string CountAndSay(int n)
@@ -75,7 +145,7 @@ namespace ConsoleApplication1
                 else {
                     int length = builder.Length;
                     int start = 0;
-                    
+
                     for (int j = 0; j < length; j++)
                     {
                         if (builder[j] != builder[start])
@@ -90,6 +160,7 @@ namespace ConsoleApplication1
             }
             return builder.ToString();
         }
+
         static void CreateWord()
         {
             string connectstr = @"Data Source=192.168.68.11;Initial Catalog=TTVVP_System;User ID=sa;Password=TT_database@2106";
@@ -116,14 +187,13 @@ namespace ConsoleApplication1
             wordDoc.SaveAs2(ref path, ref missing, ref missing, ref missing, ref missing);
         }
 
-
-        static void AddTable(MSWord.Document wordDoc,string connectstr,string tablename)
+        static void AddTable(MSWord.Document wordDoc, string connectstr, string tablename)
         {
 
             DataSet ds = new DataSet();
             using (SqlConnection con = new SqlConnection(connectstr))
             {
-                SqlDataAdapter adapter = new SqlDataAdapter("sp_help "+ tablename, con);
+                SqlDataAdapter adapter = new SqlDataAdapter("sp_help " + tablename, con);
                 adapter.Fill(ds);
             }
             DataTable dtable = ds.Tables[1];
@@ -132,7 +202,7 @@ namespace ConsoleApplication1
 
             DataRow indexrow = pk.Select().FirstOrDefault(m => Convert.ToString(m["index_name"]).IndexOf("PK") == 0);
             string key = indexrow == null ? "" : Convert.ToString(indexrow["index_keys"]);
-            string[] keys = key.Split(',').Select(m=>m.Trim()).ToArray();
+            string[] keys = key.Split(',').Select(m => m.Trim()).ToArray();
             MSWord.Range range = wordDoc.Range(wordDoc.Paragraphs.Last.Range.Start, wordDoc.Paragraphs.Last.Range.End);
             range.Text = tablename;
             range.Font.Size = 14;
@@ -187,7 +257,7 @@ namespace ConsoleApplication1
                 table.Cell(2 + i, 3).Range.Text = type;
                 table.Cell(2 + i, 4).Range.Font.Name = "新宋体";
                 table.Cell(2 + i, 4).Range.Font.Size = 9.5f;
-                table.Cell(2 + i, 4).Range.Text = iskey ? "PK":"";
+                table.Cell(2 + i, 4).Range.Text = iskey ? "PK" : "";
                 table.Cell(2 + i, 5).Range.Text = "";
                 table.Cell(2 + i, 5).Range.Font.Name = "新宋体";
                 table.Cell(2 + i, 5).Range.Font.Size = 9.5f;
@@ -210,7 +280,7 @@ namespace ConsoleApplication1
 
                 d[id] = d.TryGetValue(id, out count) ? count + 1 : 1;
 
-                await Task.Run(()=> { });
+                await Task.Run(() => { });
 
             }
 
@@ -220,7 +290,7 @@ namespace ConsoleApplication1
 
         public async Task test()
         {
-            Task task = new Task(()=> { });
+            Task task = new Task(() => { });
             await task;
             //MyTask task = new MyTask();
             //await task;
@@ -250,17 +320,83 @@ namespace ConsoleApplication1
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < buffer.Length; i++)
             {
-                builder.Append(Convert.ToString(buffer[i], 2).PadLeft(8,'0'));
+                builder.Append(Convert.ToString(buffer[i], 2).PadLeft(8, '0'));
             }
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < builder.Length; i = i + 6)
             {
                 string charstr = builder.ToString(i, 6);
-                result.Append(base64[Convert.ToInt32(charstr,2)]);
+                result.Append(base64[Convert.ToInt32(charstr, 2)]);
             }
             return result.ToString();
         }
 
+        public static List<T> GetTree<T>(List<T> trees,Func<T, object> ValueMember,Func<T, object> ParentMember) where T:Tree
+        {
+            if (trees.Count == 0) return trees;
+
+            Dictionary<object,List<T>> Childs = new Dictionary<object,List<T>>();
+            Queue<T> parents = new Queue<T>();
+
+            List<T> root = new List<T>();
+            foreach (T node in trees)
+            {
+                object value = ValueMember(node);
+                object parent = ParentMember(node);
+                if (value.Equals(parent))
+                {
+                    root.Add(node);
+                    parents.Enqueue(node);
+                }
+                else {
+                    List<T> childs;
+                    Childs.TryGetValue(parent, out childs);
+                    if (childs == null)
+                    {
+                        childs = new List<T>();
+                        Childs.Add(parent, childs);
+                    }
+                    childs.Add(node);
+                }
+            }
+            while(parents.Count>0)
+            {
+                T item = parents.Dequeue();
+                object value = ValueMember(item);
+                List<T> childs;
+                Childs.TryGetValue(value, out childs);
+                if (childs != null)
+                {
+                    item.Childs = childs.Select(m=>(Tree)m).ToList();
+                    Childs.Remove(value);
+                    childs.ForEach(c=> parents.Enqueue(c));
+                }
+            }
+            return root;
+        }
+
+    }
+
+
+    public abstract class Tree
+    {
+        public List<Tree> Childs { get; set; }
+    }
+
+    public class TestTree:Tree
+    {
+        public int num { get; set; }
+        public int parentnum { get; set; }
+    }
+
+    public interface IService
+    {
+
+    }
+
+    public class MyService:IService
+    {
+        
     }
 
     public class Parent
@@ -292,4 +428,28 @@ namespace ConsoleApplication1
         }
     }
 
+    public interface IOrder
+    {
+        IOrder GetOrderInfo();
+    }
+
+    public class OrderA : IOrder
+    {
+        public string A { get; set; }
+
+        public IOrder GetOrderInfo()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class OrderB : IOrder
+    {
+        public string B { get; set; }
+
+        IOrder IOrder.GetOrderInfo()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

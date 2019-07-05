@@ -21,13 +21,13 @@ namespace Helpers.Orm
 
         protected override Expression VisitBinary(BinaryExpression node)
         {
-            base.Visit(node.Left);
+            //base.Visit(node.Left);
 
-            SqlCommand.Add(node.NodeType.ToSqlOperation());
+            //SqlCommand.Add(node.NodeType.ToSqlOperation());
 
-            base.Visit(node.Right);
+            //base.Visit(node.Right);
 
-            return node;
+            return base.VisitBinary(node);
         }
 
         protected override Expression VisitBlock(BlockExpression node)
@@ -47,7 +47,6 @@ namespace Helpers.Orm
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
-            stack.Push(node.Value);
             return base.VisitConstant(node);
         }
 
@@ -118,10 +117,7 @@ namespace Helpers.Orm
 
         protected override Expression VisitMember(MemberExpression node)
         {
-            //stack.Push(node);
-            //SqlCommand.Add(node.Member.Name);
             return base.VisitMember(node);
-
         }
 
         protected override MemberAssignment VisitMemberAssignment(MemberAssignment node)
