@@ -21,7 +21,7 @@ using Helpers.Orm;
 using Polly;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
-
+using System.Web.UI.WebControls.Expressions;
 namespace ConsoleApplication1
 {
     public delegate int mydelegate();
@@ -35,17 +35,17 @@ namespace ConsoleApplication1
             Console.WriteLine(128&byte2);
             Console.WriteLine(130&byte2);
             MethodInfo info;
-            //List<TestTree> test = new List<TestTree>() {
-            //    new TestTree { num=0,parentnum=0},
-            //    new TestTree { num=1,parentnum=1},
-            //    new TestTree { num=2,parentnum=0},
-            //    new TestTree { num=3,parentnum=0},
-            //    new TestTree { num=4,parentnum=1},
-            //    new TestTree { num=5,parentnum=1},
-            //    new TestTree { num=6,parentnum=4},
-            //};
+            List<TestTree> test = new List<TestTree>() {
+                new TestTree { ID=0,ParentID=0},
+                new TestTree { ID=1,ParentID=1},
+                new TestTree { ID=2,ParentID=0},
+                new TestTree { ID=3,ParentID=0},
+                new TestTree { ID=4,ParentID=1},
+                new TestTree { ID=5,ParentID=1},
+                new TestTree { ID=6,ParentID=4},
+            };
 
-            //List<TestTree> result = GetTree(test,m=>m.num, m=>m.parentnum);
+            List<TestTree> result = test.GetTree(m=>m.Childs, m => m.ID, m => m.ParentID);
             //var types = AppDomain.CurrentDomain.GetAssemblies()
             //.SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IService))))
             //.ToArray();
@@ -331,62 +331,13 @@ namespace ConsoleApplication1
             return result.ToString();
         }
 
-        public static List<T> GetTree<T>(List<T> trees,Func<T, object> ValueMember,Func<T, object> ParentMember) where T:Tree
-        {
-            if (trees.Count == 0) return trees;
-
-            Dictionary<object,List<T>> Childs = new Dictionary<object,List<T>>();
-            Queue<T> parents = new Queue<T>();
-
-            List<T> root = new List<T>();
-            foreach (T node in trees)
-            {
-                object value = ValueMember(node);
-                object parent = ParentMember(node);
-                if (value.Equals(parent))
-                {
-                    root.Add(node);
-                    parents.Enqueue(node);
-                }
-                else {
-                    List<T> childs;
-                    Childs.TryGetValue(parent, out childs);
-                    if (childs == null)
-                    {
-                        childs = new List<T>();
-                        Childs.Add(parent, childs);
-                    }
-                    childs.Add(node);
-                }
-            }
-            while(parents.Count>0)
-            {
-                T item = parents.Dequeue();
-                object value = ValueMember(item);
-                List<T> childs;
-                Childs.TryGetValue(value, out childs);
-                if (childs != null)
-                {
-                    item.Childs = childs.Select(m=>(Tree)m).ToList();
-                    Childs.Remove(value);
-                    childs.ForEach(c=> parents.Enqueue(c));
-                }
-            }
-            return root;
-        }
-
     }
 
-
-    public abstract class Tree
+    public class TestTree
     {
-        public List<Tree> Childs { get; set; }
-    }
-
-    public class TestTree:Tree
-    {
-        public int num { get; set; }
-        public int parentnum { get; set; }
+        public int ID { get; set; }
+        public int ParentID { get; set; }
+        public List<TestTree> Childs { get; set; }
     }
 
     public interface IService
