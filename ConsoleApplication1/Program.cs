@@ -30,45 +30,19 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            byte byte2 = 128;
-            Console.WriteLine(127&byte2);
-            Console.WriteLine(128&byte2);
-            Console.WriteLine(130&byte2);
-            MethodInfo info;
-            List<TestTree> test = new List<TestTree>() {
-                new TestTree { ID=0,ParentID=0},
-                new TestTree { ID=1,ParentID=1},
-                new TestTree { ID=2,ParentID=0},
-                new TestTree { ID=3,ParentID=0},
-                new TestTree { ID=4,ParentID=1},
-                new TestTree { ID=5,ParentID=1},
-                new TestTree { ID=6,ParentID=4},
-            };
+            decimal dl = 4.5M;
+            double result = Convert.ToDouble(dl);
 
-            List<TestTree> result = test.GetTree(m=>m.Childs, m => m.ID, m => m.ParentID);
-            //var types = AppDomain.CurrentDomain.GetAssemblies()
-            //.SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IService))))
-            //.ToArray();
-            //var police = Policy.Handle<Exception>()
-            //.RetryAsync(1, async (e, i) =>
-            //{
-            //    await Task.Run(()=>Console.WriteLine("重试"));
-            //});
-            //Task.Factory.StartNew(async()=> {
-            //    try
-            //    {
-            //        await police.ExecuteAsync(async() =>
-            //        {
-            //            await Task.Delay(0);
-            //            throw new Exception("测试异常");
-            //        });
-            //    }
-            //    catch (Exception ex)
-            //    {
+            Type type = typeof(Parent);
+            PropertyInfo info = type.GetProperty("Name");
+            MethodInfo methord= info.GetGetMethod();
+            DataTable table = new DataTable();
+            table.Columns.Add("Name", typeof(string));
+            table.Columns.Add("Age", typeof(int));
+            table.Rows.Add("test",1);
 
-            //    }
-            //    Console.WriteLine("完成");
-            //});
+            Converter<Parent> parentconvert = new Converter<Parent>();
+            List<Parent> items = parentconvert.Convert(table);
 
             Console.ReadKey();
         }
@@ -96,7 +70,7 @@ namespace ConsoleApplication1
             string planID = "PL0000000032";
             string alID = "AL0001";
             long timespan = DateTime.Now.Ticks;
-            string token= (timespan.ToString() + "key").ToMD5().ToX2();
+            string token= (timespan.ToString() + "key").ToMD5().HexEecode();
             string url = string.Format("http://localhost:3756/api/vpp/{0}/{1}/{2}/{3}/{4}", planID,alID, "Default", timespan, token);
 
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
@@ -401,6 +375,56 @@ namespace ConsoleApplication1
         IOrder IOrder.GetOrderInfo()
         {
             throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 表格对象转换器
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class Converter<T>
+    {
+        public List<T> Convert(DataTable table)
+        {
+            List<T> result = new List<T>();
+            var map = GetMapFunc(table.Columns);
+            foreach (DataRow row in table.Rows)
+            {
+                result.Add(map(row));
+            }
+            return result;
+        }
+
+        private Func<DataRow, T> GetMapFunc(DataColumnCollection Columns)
+        {
+            var exps = new List<Expression>();
+
+            var paramRow = Expression.Parameter(typeof(DataRow), "row");
+
+            List<MemberBinding> memberBindings = new List<MemberBinding>();
+            var itemarray = typeof(DataRow).GetProperty("ItemArray");
+            var indexerInfo = typeof(DataRow).GetProperty("Item", new[] { typeof(string) });
+            foreach (DataColumn column in Columns)
+            {
+                var outPropertyInfo = typeof(T).GetProperty(
+                    column.ColumnName,
+                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                if (outPropertyInfo == null)
+                    continue;
+                DataRow row = null;
+                var columnNameExp = Expression.Constant(column.ColumnName);
+                var propertyExp = Expression.MakeIndex(
+                    paramRow,
+                    indexerInfo, new[] { columnNameExp });
+                var convertExp = Expression.Convert(propertyExp, outPropertyInfo.PropertyType);
+                MemberBinding memberBinding = Expression.Bind(outPropertyInfo, convertExp);
+                memberBindings.Add(memberBinding);
+            }
+
+            MemberInitExpression init = Expression.MemberInit(Expression.New(typeof(T)), memberBindings.ToArray());
+            Expression<Func<DataRow, T>> lambda = Expression.Lambda<Func<DataRow, T>>(init, paramRow);
+            Func<DataRow, T> func = lambda.Compile();
+            return func;
         }
     }
 }

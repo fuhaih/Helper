@@ -58,6 +58,7 @@
     <Compile Include="LinqHelper.cs" />
     <Compile Include="NetworkMapping.cs" />
     <Compile Include="ObjectHelper.cs" />
+    <Compile Include="Orm\Converter.cs" />
     <Compile Include="Orm\CustomVisitor.cs" />
     <Compile Include="Orm\SqlOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

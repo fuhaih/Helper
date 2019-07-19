@@ -34,7 +34,7 @@ namespace Helpers
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns></returns>
-        public static string ToX2(this byte[] bytes)
+        public static string HexEecode(this byte[] bytes)
         {
             /**
              * 每个字节8位，可以表示为两个四位
@@ -47,6 +47,20 @@ namespace Helpers
             }
             return sb.ToString();
         }
+
+        public static byte[] HexDecode(this string str)
+        {
+            byte[] result = new byte[str.Length / 2];
+            for (int i = 0; i < str.Length; i += 2)
+            {
+                int left = Convert.ToInt32(str.Substring(i, 1));
+                int right = Convert.ToInt32(str.Substring(i+1, 1));
+                int value = (left << 4) + right;
+                result[i/2] =Convert.ToByte(value);
+            }
+            return result;
+        }
+
         /// <summary>
         /// 计算HMACMD5哈希序列
         /// </summary>
