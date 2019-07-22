@@ -121,7 +121,6 @@
     <Compile Include="AsyncPump.cs" />
     <Compile Include="DbTypeDictionary.cs" />
     <Compile Include="DesignPattern\Singleton.cs" />
-    <Compile Include="PriorityQueue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="quartzTest\example.cs" />
