@@ -30,19 +30,7 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            decimal dl = 4.5M;
-            double result = Convert.ToDouble(dl);
-
-            Type type = typeof(Parent);
-            PropertyInfo info = type.GetProperty("Name");
-            MethodInfo methord= info.GetGetMethod();
-            DataTable table = new DataTable();
-            table.Columns.Add("Name", typeof(string));
-            table.Columns.Add("Age", typeof(int));
-            table.Rows.Add("test",1);
-
-            Converter<Parent> parentconvert = new Converter<Parent>();
-            List<Parent> items = parentconvert.Convert(table);
+            TestOrm();
 
             Console.ReadKey();
         }
@@ -304,6 +292,88 @@ namespace ConsoleApplication1
             }
             return result.ToString();
         }
+
+        private static void TestOrm()
+        {
+            string connectStr = "server=192.168.68.12;uid=sa;pwd=TT_database@2106;database=TTBEMS_System";
+            string commandStr = "SELECT * FROM [TTBEMS_System].[dbo].[T_BD_BuildBaseInfo]";
+            Converter converter = new Converter();
+            List<BuildBaseInfo> result = converter.Excute<BuildBaseInfo>(connectStr, commandStr);
+        }
+
+        private static Func<IDataReader, T> GetMapFunc<T>(IDataReader dataReader)
+        {
+            var exps = new List<Expression>();
+
+            var columnNames = Enumerable.Range(0, dataReader.FieldCount)
+                                .Select(i => new { i, name = dataReader.GetName(i) });
+            var paramRow = Expression.Parameter(typeof(IDataReader), "row");
+            var nullvalue = Expression.Constant(System.DBNull.Value);
+            List<MemberBinding> memberBindings = new List<MemberBinding>();
+
+            var indexerInfo = typeof(IDataRecord).GetProperty("Item", new[] { typeof(int) });
+            foreach (var column in columnNames)
+            {
+                var outPropertyInfo = typeof(T).GetProperty(
+                    column.name,
+                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                if (outPropertyInfo == null)
+                    continue;
+                var columnNameExp = Expression.Constant(column.i);
+                var propertyExp = Expression.MakeIndex(
+                    paramRow,
+                    indexerInfo, new[] { columnNameExp });
+                var condition = Expression.Equal(propertyExp, nullvalue);
+                var convertExp = Expression.Convert(propertyExp, outPropertyInfo.PropertyType);
+                //这个三木表达式可能有点影响速度 reader[field]==System.DBNull.Value?defult():conver(reader[field])
+                //这里reader[field]索引使用了两次，需要优化一下
+                var setExp = Expression.Condition(condition, Expression.Default(outPropertyInfo.PropertyType), convertExp);
+                MemberBinding memberBinding = Expression.Bind(outPropertyInfo, setExp);
+                memberBindings.Add(memberBinding);
+            }
+            MemberInitExpression init = Expression.MemberInit(Expression.New(typeof(T)), memberBindings.ToArray());
+            Expression<Func<IDataReader, T>> lambda = Expression.Lambda<Func<IDataReader, T>>(init, paramRow);
+            Func<IDataReader, T> func = lambda.Compile();
+            return func;
+        }
+
+    }
+
+    public class BuildBaseInfo
+    {
+        public string F_BuildID { get; set; }
+        public string F_DataCenterID { get; set; }
+        public string F_BuildName { get; set; }
+        public string F_AliasName { get; set; }
+        public string F_BuildOwner { get; set; }
+        public Int16 F_State { get; set; }
+        public string F_DistrictCode { get; set; }
+        public string F_BuildAddr { get; set; }
+        public decimal F_BuildLong { get; set; }
+        public decimal F_BuildLat { get; set; }
+        public int F_BuildYear { get; set; }
+        public int F_UpFloor { get; set; }
+        public int F_DownFloor { get; set; }
+        public string F_BuildFunc { get; set; }
+        public decimal F_TotalArea { get; set; }
+        public decimal F_AirArea { get; set; }
+        public decimal F_HeatArea { get; set; }
+        public string F_AirType { get; set; }
+        public string F_HeatType { get; set; }
+        public decimal F_BodyCoef { get; set; }
+        public string F_StruType { get; set; }
+        public string F_WallMatType { get; set; }
+        public string F_WallWarmType { get; set; }
+        public string F_WallWinType { get; set; }
+        public string F_GlassType { get; set; }
+        public string F_WinFrameType { get; set; }
+        public Int16 F_IsStandard { get; set; }
+        public string F_DesignDept { get; set; }
+        public string F_WorkDept { get; set; }
+        public DateTime F_CreateTime { get; set; }
+        public string F_CreateUser { get; set; }
+        public DateTime F_MonitorDate { get; set; }
+        public DateTime F_AcceptDate { get; set; }
 
     }
 
