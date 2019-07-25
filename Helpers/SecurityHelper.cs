@@ -53,10 +53,8 @@ namespace Helpers
             byte[] result = new byte[str.Length / 2];
             for (int i = 0; i < str.Length; i += 2)
             {
-                int left = Convert.ToInt32(str.Substring(i, 1));
-                int right = Convert.ToInt32(str.Substring(i+1, 1));
-                int value = (left << 4) + right;
-                result[i/2] =Convert.ToByte(value);
+                int value = Convert.ToInt32(str.Substring(i, 2), 16);
+                result[i / 2] = Convert.ToByte(value);
             }
             return result;
         }

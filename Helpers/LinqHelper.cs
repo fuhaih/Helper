@@ -30,7 +30,13 @@ namespace Helpers
             foreach (var pro in pros)
             {
                 string columnName = pro.Name;
-                dt.Columns.Add(columnName,pro.PropertyType);
+                Type colType = pro.PropertyType; if ((colType.IsGenericType) && (colType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                {
+
+                    colType = colType.GetGenericArguments()[0];
+
+                }
+                dt.Columns.Add(columnName, colType);
             }
             IEnumerator<T> col = collection.GetEnumerator();
             while (col.MoveNext())
@@ -40,7 +46,8 @@ namespace Helpers
                 List<object> objs = new List<object>();
                 foreach (PropertyInfo pro in pros)
                 {
-                    objs.Add(pro.GetValue(obj,null));
+                    object value = pro.GetValue(obj, null);
+                    objs.Add(value == null ? DBNull.Value : value);
                 }
                 dt.Rows.Add(objs.ToArray());
             }
