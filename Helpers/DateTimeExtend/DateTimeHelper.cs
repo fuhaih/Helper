@@ -19,5 +19,30 @@ namespace Helpers.DateTimeExtend
             int weekOfYear = gc.GetWeekOfYear(dt, CalendarWeekRule.FirstDay, firstDayOfWeek);
             return weekOfYear;
         }
+
+        public static DateTime PreQuarter(this DateTime time)
+        {
+            int quarter = time.Minute / 15;
+            time = time.Date.AddMinutes(quarter*15);
+            return time;
+        }
+
+        public static DateTime NextQuarter(this DateTime time)
+        {
+            int quarter = time.Minute / 15;
+            DateTime next = time.Date.AddMinutes((quarter+1) * 15);
+            return time.AddMinutes(15) == next ? time : next;
+        }
+        /// <summary>
+        /// 最近的刻钟 22.5分钟最近的刻钟是30分钟，22刻钟最近的刻钟是15分钟
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static DateTime NearQuarter(this DateTime time)
+        {
+            time = time.AddMinutes(7.5);
+            time = time.Date.AddMinutes(time.Minute);
+            return time;
+        }
     }
 }
