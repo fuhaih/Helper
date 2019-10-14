@@ -1,4 +1,0 @@
-D:\Fuhai\GitWorkSpace\Helpers\FHORM\bin\Debug\FHORM.dll
-D:\Fuhai\GitWorkSpace\Helpers\FHORM\bin\Debug\FHORM.pdb
-D:\Fuhai\GitWorkSpace\Helpers\FHORM\obj\Debug\FHORM.dll
-D:\Fuhai\GitWorkSpace\Helpers\FHORM\obj\Debug\FHORM.pdb
