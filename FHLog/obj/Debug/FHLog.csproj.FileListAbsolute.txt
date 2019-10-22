@@ -25,6 +25,5 @@ F:\git\Repos\Helper\FHLog\obj\Debug\FHLog.csproj.CoreCompileInputs.cache
 G:\Fuhai\GitWorkSpace\Helpers\FHLog\obj\Debug\FHLog.csprojResolveAssemblyReference.cache
 D:\fuhai\GitWorkspace\Helper\FHLog\bin\Debug\FHLog.dll
 D:\fuhai\GitWorkspace\Helper\FHLog\bin\Debug\FHLog.pdb
-D:\fuhai\GitWorkspace\Helper\FHLog\obj\Debug\FHLog.csprojResolveAssemblyReference.cache
 D:\fuhai\GitWorkspace\Helper\FHLog\obj\Debug\FHLog.dll
 D:\fuhai\GitWorkspace\Helper\FHLog\obj\Debug\FHLog.pdb

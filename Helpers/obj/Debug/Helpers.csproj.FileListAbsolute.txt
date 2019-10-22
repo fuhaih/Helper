@@ -30,6 +30,5 @@ F:\git\Repos\Helper\Helpers\obj\Debug\Helpers.csproj.CoreCompileInputs.cache
 G:\Fuhai\GitWorkSpace\Helpers\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
 D:\fuhai\GitWorkspace\Helper\Helpers\bin\Debug\Helpers.dll
 D:\fuhai\GitWorkspace\Helper\Helpers\bin\Debug\Helpers.pdb
-D:\fuhai\GitWorkspace\Helper\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
 D:\fuhai\GitWorkspace\Helper\Helpers\obj\Debug\Helpers.dll
 D:\fuhai\GitWorkspace\Helper\Helpers\obj\Debug\Helpers.pdb
