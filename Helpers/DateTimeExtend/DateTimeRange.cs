@@ -32,7 +32,7 @@ namespace Helpers.DateTimeExtend
                     End = fun(start)
                 });
                 start = fun(start);
-            }
+            } 
             if (start < end)
             {
                 result.Add(new DateTimeRange

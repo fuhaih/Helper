@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -90,6 +91,17 @@ namespace Helpers.Orm
 
             var columnNames = Enumerable.Range(0, dataReader.FieldCount)
                                 .Select(i => new { i, name = dataReader.GetName(i) });
+#if DEBUG
+            Type ttype = typeof(T);
+            Debug.WriteLine(string.Format("模型{0}各个字段数据的类型", ttype.Name));
+            DataTable table = dataReader.GetSchemaTable();
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                string name = System.Convert.ToString(table.Rows[i]["ColumnName"]);
+                string type = System.Convert.ToString(table.Rows[i]["DataType"]);
+                Debug.WriteLine(string.Format("{0} -- {1}", name, type));
+            }
+#endif
             var paramRow = Expression.Parameter(typeof(IDataReader), "row");
             var nullvalue = Expression.Constant(System.DBNull.Value);
             List<MemberBinding> memberBindings = new List<MemberBinding>();
