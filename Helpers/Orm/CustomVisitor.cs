@@ -102,7 +102,9 @@ namespace Helpers.Orm
 
         protected override Expression VisitLambda<T>(Expression<T> node)
         {
-            return base.VisitLambda<T>(node);
+            //body 和parameter ,要生成查询条件，parameter是不需要的，这里就只遍历Body
+            return base.Visit(node.Body);
+            //return base.VisitLambda<T>(node);
         }
 
         protected override Expression VisitListInit(ListInitExpression node)
@@ -198,7 +200,7 @@ namespace Helpers.Orm
 
         public string ToSqlCommand()
         {
-            return string.Join(" ", SqlCommand);
+            return "";
         }
     }
 }
