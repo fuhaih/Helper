@@ -2617,7 +2617,7 @@ namespace Helpers
             }
             catch (Exception ex)
             {
-                ex.WriteErrorStackToLocal();
+                //ex.WriteErrorStackToLocal();
             }
         }
 

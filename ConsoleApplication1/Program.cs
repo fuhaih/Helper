@@ -33,11 +33,38 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            TestPolly();
-            Console.WriteLine();
+            
+
+            Console.WriteLine(DateTime.Now.ToString("r"));
             Console.ReadKey();
         }
 
+        public static void ReadFile()
+        {
+            string path = @"D:\360安全浏览器下载\ZendStudio-13.6.1-win32.win32.x86_64.exe";
+
+            using (FileStream file = File.OpenRead(path))
+            {
+                byte[] buffer = new byte[file.Length];
+                int result = file.Read(buffer, 0, buffer.Length);
+                Console.WriteLine("文件读取完成,结果为{0}", result);
+            }
+            //byte[] buffer = File.ReadAllBytes(path);
+            //Console.WriteLine("文件读取完成,结果为{0}", buffer.Length);
+        }
+
+        public static string RandomString(Random random)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < 8; i++)
+            {
+                int rvalue = random.Next(255);
+                byte rbyte = Convert.ToByte(rvalue);
+                string rstr = rbyte.ToString("x2");
+                builder.Append(rstr);
+            }
+            return builder.ToString();
+        }
         public static string GetHtml(string url, Encoding encoding)
         {
             HttpWebRequest request = null;

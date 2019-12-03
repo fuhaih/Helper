@@ -53,7 +53,6 @@
     <Compile Include="DateTimeExtend\DateTimeRange.cs" />
     <Compile Include="DateTimeExtend\DateTimeHelper.cs" />
     <Compile Include="Etc\IniParser.cs" />
-    <Compile Include="ExceptionHelper.cs" />
     <Compile Include="IOHelper.cs" />
     <Compile Include="LinqHelper.cs" />
     <Compile Include="NetworkMapping.cs" />

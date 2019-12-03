@@ -1,6 +1,9 @@
 ﻿using System;
 namespace Helpers
 {
+    /// <summary>
+    /// 坐标
+    /// </summary>
     public class CoordinateHelper
     {
         //  
@@ -14,10 +17,10 @@ namespace Helpers
         /// <summary>
         /// gps坐标转换为火星坐标
         /// </summary>
-        /// <param name="wgLat"></param>
-        /// <param name="wgLon"></param>
-        /// <param name="mgLat"></param>
-        /// <param name="mgLon"></param>
+        /// <param name="wgLat">gps纬度</param>
+        /// <param name="wgLon">gps经度</param>
+        /// <param name="mgLat">火星坐标纬度</param>
+        /// <param name="mgLon">火星坐标经度</param>
         public static void transform(double wgLat, double wgLon, out double mgLat, out double mgLon)
         {
             if (outOfChina(wgLat, wgLon))
@@ -64,10 +67,10 @@ namespace Helpers
         /// <summary>
         /// 火星坐标转换为百度地图坐标
         /// </summary>
-        /// <param name="gg_lat"></param>
-        /// <param name="gg_lon"></param>
-        /// <param name="bd_lat"></param>
-        /// <param name="bd_lon"></param>
+        /// <param name="gg_lat">火星坐标纬度</param>
+        /// <param name="gg_lon">火星坐标经度</param>
+        /// <param name="bd_lat">百度坐标纬度</param>
+        /// <param name="bd_lon">百度坐标经度</param>
         public static void bd_encrypt(double gg_lat, double gg_lon, out double bd_lat, out double bd_lon)
         {
             double x = gg_lon, y = gg_lat;
@@ -79,10 +82,10 @@ namespace Helpers
         /// <summary>
         /// 百度地图坐标转换为火星坐标
         /// </summary>
-        /// <param name="bd_lat"></param>
-        /// <param name="bd_lon"></param>
-        /// <param name="gg_lat"></param>
-        /// <param name="gg_lon"></param>
+        /// <param name="bd_lat">百度坐标纬度</param>
+        /// <param name="bd_lon">百度坐标经度</param>
+        /// <param name="gg_lat">火星坐标纬度</param>
+        /// <param name="gg_lon">火星坐标经度</param>
         public static void bd_decrypt(double bd_lat, double bd_lon, out double gg_lat, out double gg_lon)
         {
             double x = bd_lon - 0.0065, y = bd_lat - 0.006;

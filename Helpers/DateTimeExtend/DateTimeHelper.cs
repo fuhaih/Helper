@@ -85,7 +85,5 @@ namespace Helpers.DateTimeExtend
             time = time.AddMinutes(minutes);
             return time.PreMinutes(timespan);
         }
-
-
     }
 }
