@@ -55,6 +55,9 @@
     <Compile Include="Etc\IniParser.cs" />
     <Compile Include="IOHelper.cs" />
     <Compile Include="LinqHelper.cs" />
+    <Compile Include="Media\Atom.cs" />
+    <Compile Include="Media\MediaReader.cs" />
+    <Compile Include="Media\MediaTransformer.cs" />
     <Compile Include="NetworkMapping.cs" />
     <Compile Include="ObjectHelper.cs" />
     <Compile Include="Orm\Converter.cs" />
