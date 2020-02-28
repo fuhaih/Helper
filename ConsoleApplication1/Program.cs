@@ -33,8 +33,8 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            
 
+            Console.WriteLine((9/10)+1);
             Console.WriteLine(DateTime.Now.ToString("r"));
             Console.ReadKey();
         }
@@ -42,7 +42,6 @@ namespace ConsoleApplication1
         public static void ReadFile()
         {
             string path = @"D:\360安全浏览器下载\ZendStudio-13.6.1-win32.win32.x86_64.exe";
-
             using (FileStream file = File.OpenRead(path))
             {
                 byte[] buffer = new byte[file.Length];

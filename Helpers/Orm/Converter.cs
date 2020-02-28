@@ -13,20 +13,18 @@ namespace Helpers.Orm
 {
     public class Converter
     {
-        public List<T> Convert<T>(DataTable table)
+        public IEnumerable<T> Convert<T>(DataTable table)
         {
-            List<T> result = new List<T>();
             var map = GetMapFunc<T>(table.Columns);
             foreach (DataRow row in table.Rows)
             {
-                result.Add(map(row));
+                yield return map(row);
             }
-            return result;
         }
 
-        public List<T> Excute<T>(string connectStr, string commandStr)
+        public IEnumerable<T> Excute<T>(string connectStr, string commandStr)
         {
-            List<T> result = new List<T>();
+            // List<T> result = new List<T>();
             using (SqlConnection con = new SqlConnection(connectStr))
             {
                 con.Open();
@@ -37,11 +35,11 @@ namespace Helpers.Orm
 
                 while (reader.Read())
                 {
-                    result.Add(func(reader));
+                    yield return func(reader);
                 }
             }
 
-            return result;
+            
         }
 
         /**GetMapFunc得出的结果是
