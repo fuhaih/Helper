@@ -8,8 +8,9 @@ namespace Helpers.Media
 {
     public class Atom
     {
-        public string Name;
-        public long Position;
-        public long Size;
+        public string Name { get; set; }
+        public long Position { get; set; }
+        public long Size { get; set; }
+        public int HeadLength { get; set; }
     }
 }

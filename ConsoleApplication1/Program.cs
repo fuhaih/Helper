@@ -22,8 +22,9 @@ using Polly;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.Web.UI.WebControls.Expressions;
-using System.IO.Compression; 
+using System.IO.Compression;
 using System.ComponentModel;
+using Helpers.Media;
 
 namespace ConsoleApplication1
 {
@@ -34,9 +35,22 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
 
-            Console.WriteLine((9/10)+1);
-            Console.WriteLine(DateTime.Now.ToString("r"));
+            TestMoveMoov();
             Console.ReadKey();
+        }
+
+        public static void TestMoveMoov()
+        {
+            string filename = @"D:\fuhai\视频语料1.mp4";
+            string newfilename = @"D:\fuhai\视频语料1_temple.mp4";
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            using (MediaTransformer transform = new MediaTransformer(filename))
+            {
+                transform.MoveMoov2Top(newfilename);
+            }
+            watch.Stop();
+            Console.WriteLine("耗时：{0}",watch.Elapsed);
         }
 
         public static void ReadFile()

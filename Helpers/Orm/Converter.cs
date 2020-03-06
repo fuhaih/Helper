@@ -37,9 +37,7 @@ namespace Helpers.Orm
                 {
                     yield return func(reader);
                 }
-            }
-
-            
+            }          
         }
 
         /**GetMapFunc得出的结果是
@@ -65,7 +63,6 @@ namespace Helpers.Orm
                     BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
                 if (outPropertyInfo == null)
                     continue;
-                DataRow row = null;
                 var columnNameExp = Expression.Constant(column.ColumnName);
                 var propertyExp = Expression.MakeIndex(
                     paramRow,
@@ -122,7 +119,6 @@ namespace Helpers.Orm
                 MemberBinding memberBinding = Expression.Bind(outPropertyInfo, setExp);
                 memberBindings.Add(memberBinding);
             }
-
             MemberInitExpression init = Expression.MemberInit(Expression.New(typeof(T)), memberBindings.ToArray());
             Expression<Func<IDataReader, T>> lambda = Expression.Lambda<Func<IDataReader, T>>(init, paramRow);
             Func<IDataReader, T> func = lambda.Compile();
