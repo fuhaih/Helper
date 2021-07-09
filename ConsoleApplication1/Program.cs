@@ -25,6 +25,7 @@ using System.Web.UI.WebControls.Expressions;
 using System.IO.Compression;
 using System.ComponentModel;
 using Helpers.Media;
+using ConsoleApplication1.map;
 
 namespace ConsoleApplication1
 {
@@ -34,9 +35,78 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-
-            TestMoveMoov();
+            int rate =int.Parse("2020092500");
+            for (int i = 0; i < 24; i++)
+            {
+                Random random = new Random(rate+i);
+                Console.Write(random.Next(0,20));
+                Console.Write(" ");
+            }
             Console.ReadKey();
+        }
+
+        static double Angle(Point o,Point s,Point e)
+        {
+            /**
+             * 余弦定理
+             * cos α = b² + c² - a² /2bc
+             * 
+             *   根据向量判断顺时针还是逆时针
+             * 
+             *   判断两个向量之间夹角是顺时针还是逆时针
+             *
+             *   利用平面向量的叉乘
+             *
+             *   a = (x1,y1)    b = (x2,y2)
+             *
+             *   a×b = x1y2 - x2y1
+             *
+             *   若结果为正，则向量b在a的逆时针方向
+             *
+             *   否则，b在a的顺时针方向
+             *
+             *   若结果为0，则a与b共线
+             *   逆时针是正的，顺时针算出来角度是负值
+             *   
+             *   排除在电上和线上，点上和线上都是在多边形内。
+             */
+            double cosfi = 0, fi = 0, norm = 0;
+            double dsx = s.X - o.X;
+            double dsy = s.Y - o.Y;
+            double dex = e.X - o.X;
+            double dey = e.Y - o.Y;
+            cosfi = dsx * dex + dsy * dey; //这里是分母，已经推导简化
+            norm = (dsx * dsx + dsy * dsy) * (dex * dex + dey * dey);
+            if (norm == 0) return 0;
+            cosfi /= Math.Sqrt(norm);
+            if (cosfi >= 1.0) return 0;
+            if (cosfi <= -1.0) return 180;
+            fi = Math.Acos(cosfi);
+            if (180 * fi / Math.PI < 180)
+            {
+                return 180 * fi / Math.PI;
+            }
+            else
+            {
+                return 360 - 180 * fi / Math.PI;
+            }
+        }
+
+        public static void TestDelegate(Func<Task> action) {
+            action().Wait();
+        }
+
+        public static void TestSqlBulkCopy()
+        {
+            string connectStr = "Data Source=.;Initial Catalog=test;Integrated Security=True";
+            DataTable peoples = new DataTable();
+            peoples.Columns.Add("Name", Type.GetType("System.String"));
+            peoples.Columns.Add("Age", Type.GetType("System.Int32"));
+            peoples.Columns.Add("Source", Type.GetType("System.Int32"));
+            peoples.TableName = "People";
+            peoples.Rows.Add("test1", 1,1);
+            peoples.Rows.Add("test2", 2,2);
+            SqlHelperExtend.SqlBulkCopyInsert(connectStr, "People", peoples);
         }
 
         public static void TestMoveMoov()
@@ -171,9 +241,6 @@ namespace ConsoleApplication1
             await test();
         }
 
-
-        
-
     }
 
 
@@ -183,7 +250,10 @@ namespace ConsoleApplication1
         public int ParentID { get; set; }
         public List<TestTree> Childs { get; set; }
     }
-
+    public enum TestEnum
+    {
+        DefineValueType
+    }
     public interface IService
     {
 

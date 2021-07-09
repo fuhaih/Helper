@@ -2600,24 +2600,16 @@ namespace Helpers
         /// <param name="strTableName"></param>
         /// <param name="dtData"></param>
         public static void SqlBulkCopyInsert(string connectStr,string strTableName, DataTable dtData)
-        { 
-            try
+        {  //SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.CheckConstraints表示触发触发器和约束
+            using (SqlBulkCopy sqlRevdBulkCopy = new SqlBulkCopy(connectStr, SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.CheckConstraints))//引用SqlBulkCopy  
             {
-                //SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.CheckConstraints表示触发触发器和约束
-                using (SqlBulkCopy sqlRevdBulkCopy = new SqlBulkCopy(connectStr, SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.CheckConstraints))//引用SqlBulkCopy  
-                {
-                    sqlRevdBulkCopy.DestinationTableName = strTableName;//数据库中对应的表名  
+                sqlRevdBulkCopy.DestinationTableName = strTableName;//数据库中对应的表名  
 
-                    sqlRevdBulkCopy.NotifyAfter = dtData.Rows.Count;//有几行数据  
+                sqlRevdBulkCopy.NotifyAfter = dtData.Rows.Count;//有几行数据  
 
-                    sqlRevdBulkCopy.WriteToServer(dtData);//数据导入数据库  
+                sqlRevdBulkCopy.WriteToServer(dtData);//数据导入数据库  
 
-                    sqlRevdBulkCopy.Close();//关闭连接  
-                }
-            }
-            catch (Exception ex)
-            {
-                //ex.WriteErrorStackToLocal();
+                sqlRevdBulkCopy.Close();//关闭连接  
             }
         }
 

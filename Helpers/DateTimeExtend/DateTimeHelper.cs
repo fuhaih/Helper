@@ -26,8 +26,7 @@ namespace Helpers.DateTimeExtend
         /// <returns></returns>
         public static DateTime NearQuarter(this DateTime time)
         {
-            time = time.AddMinutes(7.5);
-            time = time.Date.AddMinutes(time.Minute);
+            time = time.NearMinutes(15);
             return time;
         }
         /// <summary>

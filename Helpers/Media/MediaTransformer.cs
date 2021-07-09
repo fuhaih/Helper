@@ -10,10 +10,12 @@ namespace Helpers.Media
     public class MediaTransformer :IDisposable
     {
         public Stream OriginStream;
+
         public MediaTransformer(string filename)
         {
             OriginStream = File.OpenRead(filename);
         }
+
         public MediaTransformer(Stream stream)
         {
             OriginStream = stream;
