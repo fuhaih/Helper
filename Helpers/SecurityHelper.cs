@@ -39,7 +39,13 @@ namespace Helpers
             /**
              * 每个字节8位，可以表示为两个四位
              * 1111 1111
+             * 
+             * 常用数值类型转换为byte数组可以使用BitConverter.GetBytes()方法
+             * Int32/float会转换为长度为4的byte数组，因为一个byte是8位长度,而Int32和float类型的存储长度都是32位
+             * 也可以直接使用下面方法来把byte转换为16进制字符串
+             * BitConverter.ToString(bytes).Replace("-", " ");
              */
+
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < bytes.Length; i++)
             {
@@ -47,12 +53,15 @@ namespace Helpers
             }
             return sb.ToString();
         }
-
+         
         public static byte[] HexDecode(this string str)
         {
+            //
             byte[] result = new byte[str.Length / 2];
             for (int i = 0; i < str.Length; i += 2)
             {
+                //
+                //可以直接使用Convert.ToByte(str.Substring(i, 2), 16);方法吧16进制字符串转换为byte类型
                 int value = Convert.ToInt32(str.Substring(i, 2), 16);
                 result[i / 2] = Convert.ToByte(value);
             }
