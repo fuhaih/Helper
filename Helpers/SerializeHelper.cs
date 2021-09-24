@@ -226,6 +226,10 @@ namespace Helpers
 
         #region xml序列化
 
+        /**
+         * 
+         */
+
         /// <summary>
         /// 将一个对象序列化并写入xml文件中
         /// </summary>
@@ -238,9 +242,6 @@ namespace Helpers
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
                 serializer.Serialize(stream, t);
-            }
-            catch (Exception ex)
-            {
             }
             finally
             {
@@ -258,8 +259,16 @@ namespace Helpers
         public static T XmlDeserializeTo<T>(string path)
         {
             FileStream stream = new FileStream(path, FileMode.Open);
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            return (T)serializer.Deserialize(stream);
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                return (T)serializer.Deserialize(stream);
+            }
+            finally
+            {
+                stream.Close();
+                stream.Dispose();
+            }
         }
 
         #endregion

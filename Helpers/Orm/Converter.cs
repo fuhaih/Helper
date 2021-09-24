@@ -13,7 +13,7 @@ namespace Helpers.Orm
 {
     public class Converter
     {
-        public IEnumerable<T> Convert<T>(DataTable table)
+        public static IEnumerable<T> Convert<T>(DataTable table)
         {
             var map = GetMapFunc<T>(table.Columns);
             foreach (DataRow row in table.Rows)
@@ -22,7 +22,7 @@ namespace Helpers.Orm
             }
         }
 
-        public IEnumerable<T> Excute<T>(string connectStr, string commandStr)
+        public static IEnumerable<T> Excute<T>(string connectStr, string commandStr)
         {
             // List<T> result = new List<T>();
             using (SqlConnection con = new SqlConnection(connectStr))
@@ -40,6 +40,43 @@ namespace Helpers.Orm
             }          
         }
 
+        public async Task<IEnumerable<T>> Execute<T>(string connectStr, string commandStr, params SqlParameter[] parameters)
+        {
+            SqlConnection connection = new SqlConnection(connectStr);
+            await connection.OpenAsync();
+            SqlCommand command = new SqlCommand(commandStr, connection);
+            command.Parameters.Clear();
+            foreach (var item in parameters)
+            {
+                command.Parameters.Add(item);
+            }
+            //CommandBehavior.CloseConnection 定义reader close的行为，当reader close时关闭连接connection
+            var reader = await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+            var datas = ToList<T>(reader);
+            return datas;
+        }
+        public static IEnumerable<T> ToList<T>(IDataReader dataReader, bool autoClose = true)
+        {
+            try
+            {
+                List<T> result = new List<T>();
+                Func<IDataReader, T> func = GetMapFunc<T>(dataReader);
+                while (dataReader.Read())
+                {
+                    result.Add(func(dataReader));
+                }
+                return result;
+            }
+            finally
+            {
+                if (autoClose)
+                {
+                    dataReader.Dispose();
+                    dataReader.Close();
+                }
+            }
+
+        }
         /**GetMapFunc得出的结果是
          * (row)=>new T{
          *     propname = row[propname]==system.dbnull.value?defult(T):convertot(row[propname])
@@ -47,7 +84,7 @@ namespace Helpers.Orm
          * 
          */
 
-        private Func<DataRow, T> GetMapFunc<T>(DataColumnCollection Columns)
+        private static Func<DataRow, T> GetMapFunc<T>(DataColumnCollection Columns)
         {
             var exps = new List<Expression>();
 
@@ -80,7 +117,7 @@ namespace Helpers.Orm
             return func;
         }
 
-        private Func<IDataReader, T> GetMapFunc<T>(IDataReader dataReader)
+        private static Func<IDataReader, T> GetMapFunc<T>(IDataReader dataReader)
         {
             var exps = new List<Expression>();
 

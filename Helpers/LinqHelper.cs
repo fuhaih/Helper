@@ -294,8 +294,8 @@ namespace Helpers
         /// <typeparam name="T"></typeparam>
         /// <param name="trees"></param>
         /// <param name="ChildMember">子序列</param>
-        /// <param name="ValueMember">标识</param>
-        /// <param name="ParentMember">父标识</param>
+        /// <param name="ValueMember">标识,相当于ID</param>
+        /// <param name="ParentMember">父标识，指向父节点的ID</param>
         /// <returns></returns>
         public static List<T> GetTree<T>(this List<T> trees, Expression<Func<T, List<T>>> ChildMember, Func<T, object> ValueMember, Func<T, object> ParentMember)
         {
